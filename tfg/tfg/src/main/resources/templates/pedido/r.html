@@ -1,0 +1,30 @@
+<div class="container">
+    <button class="btn btn-outline-primary" onclick="window.location.href='/pedido/c'">Añadir Pedido</button>
+    <h1>Listado de Pedidos</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Nº Pedido</th>
+            <!--<th>Precio €</th>-->
+            <th>Editar</th>
+            <th>Borrar</th>
+        </thead>
+
+        <tr th:each="pedido : ${pedidos}">
+            
+            <td th:text="${pedido.numPedido}" />
+            
+            <td>
+                <button th:onclick="|window.location.href='/pedido/u?id=${pedido.id}'|">
+                    <img src="/img/lapiz.png" height="20" width="20">
+                </button>
+            </td>
+
+            <td>
+                <form action="/pedido/d" method="post">
+                    <input type="hidden" name="id" th:value="${pedido.id}">
+                    <input alt="basura" type="image" src="/img/basura.png" height="20" width="20"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
