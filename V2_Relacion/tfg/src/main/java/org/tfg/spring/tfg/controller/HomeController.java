@@ -16,18 +16,17 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-    @Autowired
+	@Autowired
 	private UsuarioService usuarioService;
 
-    @GetMapping("/")
-    public String home(
-        ModelMap m
-    ) {
-        m.put("view","home/home");
-        return "_t/frame";
-    }
+	@GetMapping("/")
+	public String home(
+			ModelMap m) {
+		m.put("view", "home/home");
+		return "_t/frame";
+	}
 
-    @GetMapping("/info")
+	@GetMapping("/info")
 	public String info(HttpSession s, ModelMap m) {
 
 		String mensaje = s.getAttribute("_mensaje") != null ? (String) s.getAttribute("_mensaje")
@@ -49,58 +48,60 @@ public class HomeController {
 
 	@GetMapping("/Registro")
 	public String Registro(
-		ModelMap m
-	) {
-		//m.put("view","home/Registro");
+			ModelMap m) {
+		// m.put("view","home/Registro");
 		return "redirect:/usuario/c";
 	}
 
-	/*@PostMapping("/Registro")
-	public String RegistroPost(
-		@RequestParam("nombre") String nombre,
-		@RequestParam("dni") String dni,
-		@RequestParam("mail") String mail,
-		@RequestParam("contraseña") String contraseña,
-		HttpSession s,
-		ModelMap m
-	) throws DangerException {
-		try {
-			Usuario usuario = usuarioService.save(nombre, dni, mail, contraseña);
-			s.setAttribute("usuario", usuario);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			PRG.error("Usuario o contraseña incorrectos");
-		}
-		return "_t/frame";
-	}
-*/
+	/*
+	 * @PostMapping("/Registro")
+	 * public String RegistroPost(
+	 * 
+	 * @RequestParam("nombre") String nombre,
+	 * 
+	 * @RequestParam("dni") String dni,
+	 * 
+	 * @RequestParam("mail") String mail,
+	 * 
+	 * @RequestParam("contraseña") String contraseña,
+	 * HttpSession s,
+	 * ModelMap m
+	 * ) throws DangerException {
+	 * try {
+	 * Usuario usuario = usuarioService.save(nombre, dni, mail, contraseña);
+	 * s.setAttribute("usuario", usuario);
+	 * }
+	 * catch (Exception e) {
+	 * e.printStackTrace();
+	 * PRG.error("Usuario o contraseña incorrectos");
+	 * }
+	 * return "_t/frame";
+	 * }
+	 */
 	@GetMapping("/init")
-    public String crearAdmin() {
+	public String crearAdmin() {
 		usuarioService.save(null, "-1", null, "admin", null);
 		usuarioService.setAdmin("-1");
 		return "redirect:/";
-    }
+	}
 
-    @GetMapping("/login")
+	@GetMapping("/login")
 	public String login(
-		ModelMap m
-	) {
-		m.put("view","home/login");
+			ModelMap m) {
+		m.put("view", "home/login");
 		return "_t/frame";
 	}
+
 	@PostMapping("/login")
 	public String loginPost(
-		@RequestParam("nombre") String nombre,
-		@RequestParam("contraseña") String contraseña,
-		HttpSession s,
-		ModelMap m
-	) throws DangerException {
+			@RequestParam("nombre") String nombre,
+			@RequestParam("contraseña") String contraseña,
+			HttpSession s,
+			ModelMap m) throws DangerException {
 		try {
-			Usuario usuario = usuarioService.login(nombre,contraseña);
+			Usuario usuario = usuarioService.login(nombre, contraseña);
 			s.setAttribute("usuario", usuario);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			PRG.error("Usuario o contraseña incorrectos");
 		}
@@ -109,11 +110,10 @@ public class HomeController {
 
 	@GetMapping("/logout")
 	public String logout(
-		HttpSession s
-	) {
-		//s.setAttribute("usuario", null);
+			HttpSession s) {
+		// s.setAttribute("usuario", null);
 		s.invalidate();
 		return "redirect:/";
 	}
-	
+
 }
