@@ -1,36 +1,33 @@
-<div class="container">
-  
-    <h1>Nuevo Usuario</h1>
+<div class="container d-flex justify-content-center align-items-center" style="height: 60vh;">
+    <main class="form-signin">
+        <form action="/signup" method="post">
+            <img class="mb-4" src="/img/logoP.png" alt="" width="100" height="100">
+            <h1 class="h3 mb-3 fw-normal">Registro Usuarios</h1>
 
-    <form action="/usuario/c" method="post">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="id-nombre" placeholder="Nombre" name="nombre">
+                <label for="id-nombre">Nombre</label>
+            </div>
 
-        <label for="id-nombre">Nombre</label>
-        <input id="id-nombre" type="text" name="nombre"/>
-        <br/>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="id-dni" placeholder="Dni" name="dni">
+                <label for="id-dni">Dni</label>
+            </div>
 
-        <label for="id-dni">Dni</label>
-        <input id="id-dni" type="text" name="dni"/>
-        <br/>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="id-mail" placeholder="Correo electrónico" name="mail">
+                <label for="id-mail">Correo electrónico</label>
+            </div>
 
-        <label for="id-mail">Correo electrónico</label> <!-- Agregado -->
-        <input id="id-mail" type="email" name="mail"/> <!-- Agregado -->
-        <br/>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="id-contraseña" placeholder="Contraseña" name="contraseña">
+                <label for="id-contraseña">Contraseña</label>
+            </div>
 
-        <label for="id-contraseña">Contraseña</label> <!-- Agregado -->
-        <input id="id-contraseña" type="password" name="contraseña"/> <!-- Agregado -->
-        <br/>
+            <button class="w-100 btn btn-lg btn-primary btn-sm" type="submit">Registrarse</button>
+            <button class="w-100 btn btn-lg btn-secondary btn-sm" onclick="window.location.href='/'; return false;">Cancelar</button>
 
-        <label for="id-idtipousu">Tipo de Usuario</label>
-        <select name="idtipousu">
-            <option 
-                th:each="tipousu:${tipousues}" 
-                th:text="${tipousu.nombre}" 
-                th:value="${tipousu.id}" 
-            />
-        </select>
-        <br><br>
-
-        <input type="submit">
-        <button onclick="window.location.href='/'">Cancelar</button>
-    </form>
+            <p class="mt-5 mb-3 text-body-secondary" style="width: 40vh;">&copy; 2017–2024</p>
+        </form>
+    </main>
 </div>

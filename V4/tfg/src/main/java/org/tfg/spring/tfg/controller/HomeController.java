@@ -47,16 +47,16 @@ public class HomeController {
 		return "/_t/frame";
 	}
 
-	@GetMapping("/Registro")
-	public String Registro(
+	@GetMapping("/signup")
+	public String signup(
 		ModelMap m
 	) {
-		//m.put("view","home/Registro");
+		//m.put("view","home/signup");
 		return "redirect:/usuario/c";
 	}
 
-	/*@PostMapping("/Registro")
-	public String RegistroPost(
+	/*@PostMapping("/signup")
+	public String signupPost(
 		@RequestParam("nombre") String nombre,
 		@RequestParam("dni") String dni,
 		@RequestParam("mail") String mail,
