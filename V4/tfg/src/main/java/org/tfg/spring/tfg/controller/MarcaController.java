@@ -2,14 +2,17 @@ package org.tfg.spring.tfg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
 import org.tfg.spring.tfg.service.MarcaService;
+import org.tfg.spring.tfg.service.ModeloService;
 
 @RequestMapping("/marca")
 @Controller
@@ -17,7 +20,8 @@ public class MarcaController {
 
     @Autowired
     private MarcaService marcaService;
-    
+    @Autowired
+    private ModeloService modeloService;
 
     @GetMapping("r")
     public String r(
@@ -31,17 +35,17 @@ public class MarcaController {
     public String c(
             ModelMap m) {
         m.put("marcas", marcaService.findAll());
+        m.put("modelos", modeloService.findAll());
         m.put("view", "marca/c");
         return "_t/frame";
     }
 
     @PostMapping("c")
-    public String cPost(  
-        @RequestParam("nombre") String nombre
-         ) 
-         throws DangerException {
+    public String cPost(
+            @RequestParam("nombre") String nombre, @RequestParam("modeloId") Model modeloId)
+            throws DangerException {
         try {
-            marcaService.save(nombre);
+            marcaService.save(nombre, modeloId);
         } catch (Exception e) {
             PRG.error("La Marca " + nombre + " ya existe", "/marca/c");
         }
@@ -60,8 +64,7 @@ public class MarcaController {
     @PostMapping("u")
     public String updatePost(
             @RequestParam("id") Long idMarca,
-            @RequestParam("nombre") String nombre
-    ) throws DangerException {
+            @RequestParam("nombre") String nombre) throws DangerException {
         try {
             marcaService.update(idMarca, nombre);
         } catch (Exception e) {
@@ -72,15 +75,13 @@ public class MarcaController {
 
     @PostMapping("d")
     public String delete(
-        @RequestParam("id") Long idMarca
-    ) throws DangerException {
+            @RequestParam("id") Long idMarca) throws DangerException {
         try {
             marcaService.delete(idMarca);
-        }
-        catch (Exception e) {
-            PRG.error(e.getMessage(),"/marca/r");
+        } catch (Exception e) {
+            PRG.error(e.getMessage(), "/marca/r");
         }
         return "redirect:/marca/r";
     }
-    
+
 }

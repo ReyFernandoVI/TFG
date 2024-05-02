@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
-import org.tfg.spring.tfg.service.MarcaService;
+
 import org.tfg.spring.tfg.service.ModeloService;
 
 @RequestMapping("/modelo")
@@ -18,7 +18,6 @@ public class ModeloController {
 
     @Autowired
     private ModeloService modeloService;
-    
 
     @GetMapping("r")
     public String r(
@@ -37,10 +36,9 @@ public class ModeloController {
     }
 
     @PostMapping("c")
-    public String cPost(  
-        @RequestParam("nombre") String nombre
-         ) 
-         throws DangerException {
+    public String cPost(
+            @RequestParam("nombre") String nombre)
+            throws DangerException {
         try {
             modeloService.save(nombre);
         } catch (Exception e) {
@@ -61,8 +59,7 @@ public class ModeloController {
     @PostMapping("u")
     public String updatePost(
             @RequestParam("id") Long idModelo,
-            @RequestParam("nombre") String nombre
-    ) throws DangerException {
+            @RequestParam("nombre") String nombre) throws DangerException {
         try {
             modeloService.update(idModelo, nombre);
         } catch (Exception e) {
@@ -73,16 +70,13 @@ public class ModeloController {
 
     @PostMapping("d")
     public String delete(
-        @RequestParam("id") Long idModelo
-    ) throws DangerException {
+            @RequestParam("id") Long idModelo) throws DangerException {
         try {
             modeloService.delete(idModelo);
-        }
-        catch (Exception e) {
-            PRG.error(e.getMessage(),"/modelo/r");
+        } catch (Exception e) {
+            PRG.error(e.getMessage(), "/modelo/r");
         }
         return "redirect:/modelo/r";
     }
-    
-}
 
+}

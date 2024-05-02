@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tfg.spring.tfg.exception.DangerException;
@@ -13,17 +12,16 @@ import org.tfg.spring.tfg.helper.PRG;
 import org.tfg.spring.tfg.service.MarcaService;
 import org.tfg.spring.tfg.service.ZapatillaService;
 
-
 @RequestMapping("/zapatilla")
 @Controller
 public class ZapatillaController {
-    
+
     @Autowired
     private ZapatillaService zapatillaService;
 
     @Autowired
     private MarcaService marcaService;
-    
+
     @GetMapping("r")
     public String r(
             ModelMap m) {
@@ -42,13 +40,12 @@ public class ZapatillaController {
     }
 
     @PostMapping("c")
-    public String cPost(  
-        @RequestParam("nombre") String nombre, 
-        @RequestParam("precio") Integer precio,
-         @RequestParam("color") String color,
-         @RequestParam("talla") String talla
-         ) 
-         throws DangerException {
+    public String cPost(
+            @RequestParam("nombre") String nombre,
+            @RequestParam("precio") Integer precio,
+            @RequestParam("color") String color,
+            @RequestParam("talla") String talla)
+            throws DangerException {
         try {
             zapatillaService.save(nombre, precio, color, talla);
         } catch (Exception e) {
@@ -72,8 +69,7 @@ public class ZapatillaController {
             @RequestParam("nombre") String nombre,
             @RequestParam("precio") Integer precio,
             @RequestParam("color") String color,
-            @RequestParam("talla") String talla
-    ) throws DangerException {
+            @RequestParam("talla") String talla) throws DangerException {
         try {
             zapatillaService.update(idZapatilla, nombre, precio, color, talla);
         } catch (Exception e) {
@@ -84,35 +80,30 @@ public class ZapatillaController {
 
     @PostMapping("d")
     public String delete(
-        @RequestParam("id") Long idZapatilla
-    ) throws DangerException {
+            @RequestParam("id") Long idZapatilla) throws DangerException {
         try {
             zapatillaService.delete(idZapatilla);
-        }
-        catch (Exception e) {
-            PRG.error(e.getMessage(),"/zapatilla/r");
+        } catch (Exception e) {
+            PRG.error(e.getMessage(), "/zapatilla/r");
         }
         return "redirect:/zapatilla/r";
     }
 
     @GetMapping("asignarMarcaZapatilla")
     public String asignarMarcaZapatilla(
-        @RequestParam("id") Long id,
-        ModelMap m
-    ) {
-        m.put("zapatilla",zapatillaService.findById(id));
+            @RequestParam("id") Long id,
+            ModelMap m) {
+        m.put("zapatilla", zapatillaService.findById(id));
         m.put("marcas", marcaService.findAll());
-        m.put("view","zapatilla/asignarMarcaZapatilla");
+        m.put("view", "zapatilla/asignarMarcaZapatilla");
         return "_t/frame";
     }
 
     @PostMapping("asignarMarcaZapatilla")
     public String asignarMarcaZapatillaPost(
-        @RequestParam("idZapatilla") Long idZapatilla,
-        @RequestParam("idMarca") Long idMarca
-    )
-    {
-        zapatillaService.asignarMarcaZapatilla(idZapatilla,idMarca);
+            @RequestParam("idZapatilla") Long idZapatilla,
+            @RequestParam("idMarca") Long idMarca) {
+        zapatillaService.asignarMarcaZapatilla(idZapatilla, idMarca);
         return "redirect:/zapatilla/r";
     }
 
