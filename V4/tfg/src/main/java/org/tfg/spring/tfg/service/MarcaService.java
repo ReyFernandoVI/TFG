@@ -2,7 +2,6 @@ package org.tfg.spring.tfg.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.tfg.spring.tfg.domain.Marca;
 import org.tfg.spring.tfg.domain.Modelo;
 import org.tfg.spring.tfg.repository.MarcaRepository;
@@ -24,8 +23,8 @@ public class MarcaService {
         return marcaRepository.findAll();
     }
 
-    public Marca save(String nombre, Model modeloId) {
-        Marca marca = new Marca(nombre, modeloId);
+    public Marca save(String nombre, Modelo modelo) {
+        Marca marca = new Marca(nombre, modelo);
         return marcaRepository.save(marca);
     }
 
@@ -34,13 +33,10 @@ public class MarcaService {
     }
 
     public Marca update(Long idMarca, String nombre) {
-        Optional<Marca> optionalMarca = marcaRepository.findById(idMarca);
-        if (optionalMarca.isPresent()) {
-            Marca marca = optionalMarca.get();
-            marca.setNombre(nombre);
-            return marcaRepository.save(marca);
-        }
-        throw new RuntimeException("Marca con ID " + idMarca + " no encontrada");
+        Marca marca = marcaRepository.findById(idMarca)
+                .orElseThrow(() -> new RuntimeException("Marca no encontrada"));
+        marca.setNombre(nombre);
+        return marcaRepository.save(marca);
     }
 
     public void delete(Long idMarca) {

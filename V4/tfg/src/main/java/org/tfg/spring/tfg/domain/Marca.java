@@ -22,17 +22,14 @@ public class Marca {
     private String nombre;
 
     @ManyToOne
-    private Modelo modelo; // Cambia 'long' a 'Modelo'
+    private Modelo modelo; // Corregir el tipo de relación a Modelo
 
     public Marca() {
         // Constructor vacío necesario para JPA
     }
 
-    public Marca(String nombre, Model modeloId) {
+    public Marca(String nombre, Modelo modelo) {
         this.nombre = nombre;
-        this.modelo = (Modelo) modeloId;
+        this.modelo = modelo;
     }
-
-    // Getters y setters (generados por Lombok @Data)
-
 }
