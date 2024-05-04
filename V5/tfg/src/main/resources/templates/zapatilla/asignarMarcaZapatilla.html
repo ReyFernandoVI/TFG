@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Asignar Marca a Zapatilla <th:block th:text="${zapatilla.nombre}"></th:block>
+    </h1>
+    <form action="/zapatilla/asignarMarcaZapatilla" method="post">
+
+        <input type="hidden" name="idZapatilla" th:value="${zapatilla.id}"/>
+        
+        <fieldset>
+            <legend>Marcas disponibles</legend>
+            <select name="idMarca">
+                <option th:each="marca:${marcas}" th:text="|${marca.nombre}|"
+                    th:value="${marca.id}" />
+            </select>
+        
+        </fieldset>
+
+        <input type="submit" />
+
+    </form>
+</div>
