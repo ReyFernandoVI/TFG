@@ -35,6 +35,30 @@ public class HomeController {
         return "_t/frame";
     }
 
+	@GetMapping("/pricing")
+    public String pricing(
+        ModelMap m
+    ) {
+        m.put("view","home/pricing");
+        return "_t/frame";
+    }
+
+	@GetMapping("/features")
+    public String features(
+        ModelMap m
+    ) {
+        m.put("view","home/features");
+        return "_t/frame";
+    }
+
+	@GetMapping("/faqs")
+    public String faqs(
+        ModelMap m
+    ) {
+        m.put("view","home/faqs");
+        return "_t/frame";
+    }
+
     @GetMapping("/info")
 	public String info(HttpSession s, ModelMap m) {
 
