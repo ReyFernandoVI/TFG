@@ -59,6 +59,14 @@ public class HomeController {
         return "_t/frame";
     }
 
+	@GetMapping("/about")
+    public String about(
+        ModelMap m
+    ) {
+        m.put("view","home/about");
+        return "_t/frame";
+    }
+
     @GetMapping("/info")
 	public String info(HttpSession s, ModelMap m) {
 
