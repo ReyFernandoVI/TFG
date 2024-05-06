@@ -66,12 +66,12 @@ public class UsuarioController {
     }
 
     @PostMapping("u")
-    public String updatePost(@RequestParam("idUsuario") Long idUsuario,
+    public String updatePost(@RequestParam("id") Long id,
                              @RequestParam("nombre") String nombre,
-                             @RequestParam("Dni") String Dni,
+                             @RequestParam("dni") String dni,
                              @RequestParam("mail") String mail) {
         try {
-            usuarioService.update(idUsuario, nombre, Dni, mail);
+            usuarioService.update(id, nombre, dni, mail);
         } catch (Exception e) {
             try {
                 PRG.error("El usuario no pudo ser actualizado", "/usuario/r");
