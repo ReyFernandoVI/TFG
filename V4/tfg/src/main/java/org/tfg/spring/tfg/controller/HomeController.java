@@ -67,6 +67,30 @@ public class HomeController {
         return "_t/frame";
     }
 
+	@GetMapping("/news")
+    public String news(
+        ModelMap m
+    ) {
+        m.put("view","home/news");
+        return "_t/frame";
+    }
+
+	@GetMapping("/catalogue")
+    public String catalogue(
+        ModelMap m
+    ) {
+        m.put("view","home/catalogue");
+        return "_t/frame";
+    }
+
+	@GetMapping("/vipzone")
+    public String vipzone(
+        ModelMap m
+    ) {
+        m.put("view","home/vipzone");
+        return "_t/frame";
+    }
+
     @GetMapping("/info")
 	public String info(HttpSession s, ModelMap m) {
 
