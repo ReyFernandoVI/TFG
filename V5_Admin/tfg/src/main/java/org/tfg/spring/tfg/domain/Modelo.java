@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Entity
@@ -21,6 +22,8 @@ public class Modelo {
    /*  @OneToMany(mappedBy = "marcaZapatilla")
     private Collection<Marca> marcasZapatillas;*/
 
+   @ManyToOne
+    private Marca marca; 
 
     public Modelo(){
 
@@ -28,8 +31,9 @@ public class Modelo {
 
     }
 
-    public Modelo(String nombre){
+    public Modelo(String nombre,Marca marca){
         this.nombre = nombre;
+        this.marca=marca;
         //this.marcasZapatillas = new ArrayList<>();
     }
 

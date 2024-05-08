@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tfg.spring.tfg.domain.Marca;
 import org.tfg.spring.tfg.domain.Modelo;
 import org.tfg.spring.tfg.repository.ModeloRepository;
 
@@ -16,8 +17,8 @@ public class ModeloService {
     public List<Modelo> findAll() {
         return modeloRepository.findAll();
     }
-    public Modelo save(String nombre) {
-        Modelo modelo = new Modelo(nombre);
+    public Modelo save(String nombre,Marca marcaId) {
+        Modelo modelo = new Modelo(nombre,marcaId);
         return modeloRepository.save(modelo);
      }
     public Modelo findById(Long idModelo) {

@@ -24,8 +24,8 @@ public class MarcaService {
         return marcaRepository.findAll();
     }
 
-    public Marca save(String nombre, Model modeloId) {
-        Marca marca = new Marca(nombre, modeloId);
+    public Marca save(String nombre) {
+        Marca marca = new Marca(nombre);
         return marcaRepository.save(marca);
     }
 

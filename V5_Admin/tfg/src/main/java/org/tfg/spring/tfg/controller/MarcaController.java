@@ -42,10 +42,10 @@ public class MarcaController {
 
     @PostMapping("c")
     public String cPost(
-            @RequestParam("nombre") String nombre, @RequestParam("modeloId") Model modeloId)
+            @RequestParam("nombre") String nombre)
             throws DangerException {
         try {
-            marcaService.save(nombre, modeloId);
+            marcaService.save(nombre);
         } catch (Exception e) {
             PRG.error("La Marca " + nombre + " ya existe", "/marca/c");
         }

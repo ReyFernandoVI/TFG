@@ -7,6 +7,16 @@
         <label for="id-nombre">Nombre</label>
         <input id="id-nombre" type="text" name="nombre" />
         <br />
+        <div>
+            <label for="id-marcas">Seleccion una marca:</label>
+            <select id="id-marcas" name="marcaId" required>
+                <option 
+                th:each="marca:${marcas}"
+                th:text="${marca.nombre}"
+                th:value="${marca.id}"
+                />
+            </select>
+        </div>
 
         <input type="submit" />
     </form>

@@ -6,16 +6,7 @@
             <label for="id-nombre">Nombre:</label>
             <input id="id-nombre" type="text" name="nombre" required />
         </div>
-        <div>
-            <label for="id-modelo">Modelo:</label>
-            <select id="id-modelo" name="modeloId" required>
-                <option 
-                th:each="modelo:${modelos}"
-                th:text="${modelo.nombre}"
-                th:value="${modelo.id}"
-                />
-            </select>
-        </div>
+       
         <div>
             <button type="submit">Guardar</button>
             <button type="button" onclick="window.location.href='/'">Cancelar</button>

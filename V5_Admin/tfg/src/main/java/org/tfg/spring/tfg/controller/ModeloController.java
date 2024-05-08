@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.tfg.spring.tfg.domain.Marca;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
-
+import org.tfg.spring.tfg.service.MarcaService;
 import org.tfg.spring.tfg.service.ModeloService;
 
 @RequestMapping("/modelo")
@@ -18,11 +19,14 @@ public class ModeloController {
 
     @Autowired
     private ModeloService modeloService;
+    @Autowired
+    private MarcaService  marcaService;
 
     @GetMapping("r")
     public String r(
             ModelMap m) {
         m.put("modelos", modeloService.findAll());
+        m.put("marcas", marcaService.findAll());
         m.put("view", "modelo/r");
         return "_t/frame";
     }
@@ -31,16 +35,17 @@ public class ModeloController {
     public String c(
             ModelMap m) {
         m.put("modelos", modeloService.findAll());
+        m.put("marcas", marcaService.findAll());
         m.put("view", "modelo/c");
         return "_t/frame";
     }
 
     @PostMapping("c")
     public String cPost(
-            @RequestParam("nombre") String nombre)
+            @RequestParam("nombre") String nombre, @RequestParam("marcaId") Marca marcaId)
             throws DangerException {
         try {
-            modeloService.save(nombre);
+            modeloService.save(nombre,marcaId);
         } catch (Exception e) {
             PRG.error("El Modelo " + nombre + " ya existe", "/modelo/c");
         }

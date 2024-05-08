@@ -28,9 +28,9 @@ public class Marca {
         // Constructor vacío necesario para JPA
     }
 
-    public Marca(String nombre, Model modeloId) {
+    public Marca(String nombre) {
         this.nombre = nombre;
-        this.modelo = (Modelo) modeloId;
+     
     }
 
     // Getters y setters (generados por Lombok @Data)
