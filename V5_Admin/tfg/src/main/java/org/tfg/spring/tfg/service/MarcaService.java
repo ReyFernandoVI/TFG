@@ -29,25 +29,19 @@ public class MarcaService {
         return marcaRepository.save(marca);
     }
 
-    public Optional<Marca> findById(Long idMarca) {
-        return marcaRepository.findById(idMarca);
+    public Marca findById(Long idMarca) {
+        return marcaRepository.findById(idMarca).get();
     }
 
-    public Marca update(Long idMarca, String nombre) {
-        Optional<Marca> optionalMarca = marcaRepository.findById(idMarca);
-        if (optionalMarca.isPresent()) {
-            Marca marca = optionalMarca.get();
-            marca.setNombre(nombre);
-            return marcaRepository.save(marca);
+    public void update(Long idMarca, String nombre) {
+        Marca marca = marcaRepository.findById(idMarca).get();
+        marca.setId(idMarca);
+        marca.setNombre(nombre);
+         marcaRepository.save(marca);
         }
-        throw new RuntimeException("Marca con ID " + idMarca + " no encontrada");
-    }
+       
 
     public void delete(Long idMarca) {
-        if (marcaRepository.existsById(idMarca)) {
-            marcaRepository.deleteById(idMarca);
-        } else {
-            throw new RuntimeException("Marca con ID " + idMarca + " no encontrada");
-        }
+      marcaRepository.delete(marcaRepository.getReferenceById(idMarca));
     }
 }
