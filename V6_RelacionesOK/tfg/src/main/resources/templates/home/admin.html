@@ -1,0 +1,183 @@
+<div class="b-example-divider"></div>
+<div class="container text-center py-4">
+  <button class="btn btn-outline-primary" onclick="window.location.href='/tipousu/r'">Tipo de usuario</button>
+  <button class="btn btn-outline-primary" onclick="window.location.href='/usuario/r'">Usuarios</button>
+  <button class="btn btn-outline-primary" onclick="window.location.href='/zapatilla/r'">Zapatillas</button>
+  <button class="btn btn-outline-primary" onclick="window.location.href='/marca/r'">Marcas</button>
+  <button class="btn btn-outline-primary" onclick="window.location.href='/pedido/r'">Pedidos</button>
+  <button class="btn btn-outline-primary" onclick="window.location.href='/modelo/r'">Modelos</button>
+</div>
+<div class="b-example-divider"></div>
+<div class="container">
+    <button class="btn btn-outline-primary" onclick="window.location.href='/usuario/c'">Añadir Usuario</button>
+    <h1>Lista de usuarios</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Nombre</th>
+            <th>Dni</th>
+            <th>Tipo de usuario</th>
+            <th>Correo electrónico</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </thead>
+        <tbody> <!-- Agregado: tbody para contener las filas de la tabla -->
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.dni}"></td>
+                <td th:text="${usuario.tipousu?.nombre}"></td>  <!-- Corregido: cerrar la etiqueta td -->
+                <td th:text="${usuario.mail}"></td>
+                <td>
+                    <button th:onclick="|window.location.href='/usuario/u?id=${usuario.id}'|">
+                        <img src="/img/lapiz.png" height="20" width="20">
+                    </button>
+                </td>
+                <td>
+                    <form action="/usuario/d" method="post">
+                        <input type="hidden" name="id" th:value="${usuario.id}">
+                        <button type="submit">
+                            <img src="/img/basura.png" alt="basura" height="20" width="20"/>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="b-example-divider"></div>
+<div class="container">
+    <button class="btn btn-outline-primary" onclick="window.location.href='/zapatilla/c'">Añadir Zapatilla</button>
+    <h1>Lista de Zapatillas</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Asignar Marca</th>
+            <th>Precio €</th>
+            <th>Color</th>
+            <th>Talla</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </thead>
+
+        <tr th:each="zapatilla : ${zapatillas}">
+            
+            <td th:text="${zapatilla.nombre}" />
+
+            <td th:text="|${zapatilla.marcaZapatillas?.nombre} (${zapatilla.marcaZapatillas?.nombre})|"/>
+
+            <td>
+                <a th:href="|/zapatilla/asignarMarcaZapatilla?id=${zapatilla.id}|">Asignar</a>
+            </td>
+            
+            <td th:text="${zapatilla.precio}" />
+            
+            <td th:text="${zapatilla.color}" />
+            
+            <td th:text="${zapatilla.talla}" />
+
+            <td>
+                <button th:onclick="|window.location.href='/zapatilla/u?id=${zapatilla.id}'|">
+                    <img src="/img/lapiz.png" height="20" width="20">
+                </button>
+            </td>
+
+            <td>
+                <form action="/zapatilla/d" method="post">
+                    <input type="hidden" name="id" th:value="${zapatilla.id}">
+                    <input alt="basura" type="image" src="/img/basura.png" height="20" width="20"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="b-example-divider"></div>
+<div class="container">
+    <button class="btn btn-outline-primary" onclick="window.location.href='/marca/c'">Añadir Marca</button>
+    <h1>Lista de Marcas</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Nombre</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </thead>
+
+        <tr th:each="marca : ${marcas}">
+            
+            <td th:text="${marca.nombre}" />
+            
+            <td>
+                <button th:onclick="|window.location.href='/marca/u?id=${marca.id}'|">
+                    <img src="/img/lapiz.png" height="20" width="20">
+                </button>
+            </td>
+
+            <td>
+                <form action="/marca/d" method="post">
+                    <input type="hidden" name="id" th:value="${marca.id}">
+                    <input alt="basura" type="image" src="/img/basura.png" height="20" width="20"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="b-example-divider"></div>
+<div class="container">
+    <button class="btn btn-outline-primary" onclick="window.location.href='/pedido/c'">Añadir Pedido</button>
+    <h1>Listado de Pedidos</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Nº Pedido</th>
+            <!--<th>Precio €</th>-->
+            <th>Editar</th>
+            <th>Borrar</th>
+        </thead>
+
+        <tr th:each="pedido : ${pedidos}">
+            
+            <td th:text="${pedido.numPedido}" />
+            
+            <td>
+                <button th:onclick="|window.location.href='/pedido/u?id=${pedido.id}'|">
+                    <img src="/img/lapiz.png" height="20" width="20">
+                </button>
+            </td>
+
+            <td>
+                <form action="/pedido/d" method="post">
+                    <input type="hidden" name="id" th:value="${pedido.id}">
+                    <input alt="basura" type="image" src="/img/basura.png" height="20" width="20"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="b-example-divider"></div>
+<div class="container">
+    <button class="btn btn-outline-primary" onclick="window.location.href='/modelo/c'">Añadir Modelo</button>
+    <h1>Lista de Modelos</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>Nombre</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </thead>
+
+        <tr th:each="modelo : ${modelos}">
+            
+            <td th:text="${modelo.nombre}" />
+            
+            <td>
+                <button th:onclick="|window.location.href='/modelo/u?id=${modelo.id}'|">
+                    <img src="/img/lapiz.png" height="20" width="20">
+                </button>
+            </td>
+
+            <td>
+                <form action="/modelo/d" method="post">
+                    <input type="hidden" name="id" th:value="${modelo.id}">
+                    <input alt="basura" type="image" src="/img/basura.png" height="20" width="20"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>

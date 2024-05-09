@@ -1,0 +1,42 @@
+<div class="container">
+
+    <h1>Nueva Zapatilla</h1>
+
+    <form action="/zapatilla/c" method="post">
+
+        <label for="id-nombre">Nombre</label>
+        <input id="id-nombre" type="text" name="nombre" />
+        <br />
+
+        <label for="id-marcas">Seleccion una marca:</label>
+            <select id="id-marcas" name="idMarca" required>
+                <option 
+                th:each="marca:${marcas}"
+                th:text="${marca.nombre}"
+                th:value="${marca.id}"
+                ></option>
+            </select>
+        </br>
+
+        <label for="id-precio">Precio</label>
+        <input id="id-precio" type="number" name="precio" />
+        <br />
+
+        <label for="id-color">Color</label>
+        <input id="id-color" type="text" name="color" />
+        <br />
+
+        <label for="id-talla">Talla</label>
+        <input id="id-talla" type="text" name="talla" />
+        <br />
+
+        <label for="id-stock">Stock</label>
+        <input id="id-stock" type="text" name="stock" />
+        <br />
+
+        </fieldset>
+
+        <input type="submit" />
+    </form>
+    <button onclick="window.location.href='/'">Cancelar</button>
+</div>
