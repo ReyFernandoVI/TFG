@@ -12,13 +12,10 @@ import java.util.Optional;
 
 @Service
 public class MarcaService {
-
-    private final MarcaRepository marcaRepository;
-
     @Autowired
-    public MarcaService(MarcaRepository marcaRepository) {
-        this.marcaRepository = marcaRepository;
-    }
+    private  MarcaRepository marcaRepository ;
+
+
 
     public List<Marca> findAll() {
         return marcaRepository.findAll();
