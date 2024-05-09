@@ -1,37 +1,31 @@
-<div class="b-example-divider"  style= "margin-bottom: 5px;"></div>
+<div class="b-example-divider"></div>
+<div class="container">
 
-<div class="container d-flex justify-content-center align-items-center">
-  <div class="form-container">
-    <main class="form-signin">
-      <form action="/usuario/c" method="post">
-        <img class="mb-4" src="/img/logoP.png" alt="" width="100" height="100">
-        <h1 class="h3 mb-3 fw-normal">Registro Usuarios</h1>
+  <h1>Nuevo Usuario</h1>
+  <form action="/usuario/c" method="post">
+    <label for="id-nombre">Nombre</label>
+    <input id="id-nombre" type="text" name="nombre"/>
+    <br/>
+    <label for="id-dni">Dni</label>
+    <input id="id-dni" type="text" name="dni"/>
+    <br/>
+    <label for="id-mail">Correo electrónico</label> <!-- Agregado -->
+    <input id="id-mail" type="email" name="mail"/> <!-- Agregado -->
+    <br/>
+    <label for="id-contraseña">Contraseña</label> <!-- Agregado -->
+    <input id="id-contraseña" type="password" name="contraseña"/> <!-- Agregado -->
+    <br/>
+    <label for="id-idtipousu">Tipo de Usuario</label>
+        <select name="idtipousu">
+            <option 
+                th:each="tipousu:${tipousues}" 
+                th:text="${tipousu.nombre}" 
+                th:value="${tipousu.id}" 
+            />
+        </select>
+        <br><br>
 
-        <div class="form-floating">
-          <input type="text" class="form-control" id="id-nombre" placeholder="Nombre" name="nombre">
-          <label for="id-nombre">Nombre</label>
-        </div>
-
-        <div class="form-floating">
-          <input type="text" class="form-control" id="id-dni" placeholder="Dni" name="dni">
-          <label for="id-dni">Dni</label>
-        </div>
-
-        <div class="form-floating">
-          <input type="email" class="form-control" id="id-mail" placeholder="Correo electrónico" name="mail">
-          <label for="id-mail">Correo electrónico</label>
-        </div>
-
-        <div class="form-floating">
-          <input type="password" class="form-control" id="id-contraseña" placeholder="Contraseña" name="contraseña">
-          <label for="id-contraseña">Contraseña</label>
-        </div>
-
-        <button class="w-100 btn btn-lg btn-primary btn-sm" type="submit">Registrarse</button>
-        <button class="w-100 btn btn-lg btn-secondary btn-sm" onclick="window.location.href='/'; return false;">Cancelar</button>
-
-        <p class="mt-5 mb-3 text-body-secondary" style="width: 40vh;">&copy; 2017–2024</p>
-      </form>
-    </main>
-  </div>
+        <input type="submit">
+        <button onclick="window.location.href='/'">Cancelar</button>
+    </form>
 </div>

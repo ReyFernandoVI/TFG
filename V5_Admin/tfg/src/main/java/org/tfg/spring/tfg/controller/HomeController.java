@@ -91,6 +91,14 @@ public class HomeController {
         return "_t/frame";
     }
 
+	@GetMapping("/signup")
+    public String signup(
+        ModelMap m
+    ) {
+        m.put("view","home/signup");
+        return "_t/frame";
+    }
+
     @GetMapping("/info")
 	public String info(HttpSession s, ModelMap m) {
 
@@ -111,34 +119,6 @@ public class HomeController {
 		return "/_t/frame";
 	}
 
-	@GetMapping("/signup")
-	public String signup(
-		ModelMap m
-	) {
-		//m.put("view","home/signup");
-		return "redirect:/usuario/c";
-	}
-
-	/*@PostMapping("/signup")
-	public String signupPost(
-		@RequestParam("nombre") String nombre,
-		@RequestParam("dni") String dni,
-		@RequestParam("mail") String mail,
-		@RequestParam("contraseña") String contraseña,
-		HttpSession s,
-		ModelMap m
-	) throws DangerException {
-		try {
-			Usuario usuario = usuarioService.save(nombre, dni, mail, contraseña);
-			s.setAttribute("usuario", usuario);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			PRG.error("Usuario o contraseña incorrectos");
-		}
-		return "_t/frame";
-	}
-*/
 	@GetMapping("/init")
     public String crearAdmin() {
 		usuarioService.save("admin", null, null, "admin");
