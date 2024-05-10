@@ -4,6 +4,7 @@
     <table class="table table-striped">
         <thead>
             <th>Nombre</th>
+            <th>ModelosQPertenece</th>
             <th>Editar</th>
             <th>Borrar</th>
         </thead>
@@ -12,6 +13,11 @@
             
             <td th:text="${marca.nombre}" />
             
+            <td >
+           <th:block th:each="marcas:${marca.modelos}"th:text="${marcas.nombre}">
+           </th:block>
+            </td>
+           
             <td>
                 <button th:onclick="|window.location.href='/marca/u?id=${marca.id}'|">
                     <img src="/img/lapiz.png" height="20" width="20">
