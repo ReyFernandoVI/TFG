@@ -5,6 +5,7 @@
         <thead>
             <th>Nombre</th>
             <th>Marca</th>
+            <th>Modelo</th>
             <th>Precio €</th>
             <th>Color</th>
             <th>Talla</th>
@@ -18,6 +19,8 @@
             <td th:text="${zapatilla.nombre}" />
 
             <td th:text="|${zapatilla.marcas?.nombre}"/>
+
+            <td th:text="|${zapatilla.modelo?.nombre}"/>
 
             <td th:text="${zapatilla.precio}" />
             

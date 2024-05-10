@@ -18,8 +18,18 @@
             </select>
         </br>
 
+        <label for="id-modelo">Selecciona una modelo:</label>
+            <select id="id-modelo" name="idModelo" required>
+                <option 
+                th:each="modelo:${modelos}"
+                th:text="${modelo.nombre}"
+                th:value="${modelo.id}"
+                ></option>
+            </select>
+        </br>
+
         <label for="id-precio">Precio</label>
-        <input id="id-precio" type="number" name="precio" />
+        <input id="id-precio" type="text" name="precio" />
         <br />
 
         <label for="id-color">Color</label>

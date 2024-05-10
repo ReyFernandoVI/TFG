@@ -9,11 +9,11 @@
           </a>        
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="margin-left: -60px;">
-            <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="/news" class="nav-link px-2 text-white">News</a></li>
-            <li><a href="/catalogue" class="nav-link px-2 text-white">Catalogue</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Price comparison</a></li>
-            <li><a href="/vipzone" class="nav-link px-2 text-white">VIP Zone</a></li>
+            <li><a href="/" class="nav-link px-2 text-secondary">Ibertrade</a></li>
+            <li><a href="/news" class="nav-link px-2 text-white">Noticias</a></li>
+            <li><a href="/catalogue" class="nav-link px-2 text-white">Catalogo</a></li>
+            <!--li><a href="#" class="nav-link px-2 text-white">Price comparison</a></li-->
+            <li><a href="/vipzone" class="nav-link px-2 text-white">Zona Vip</a></li>
             <li><a href="/admin" class="nav-link px-2 text-white">Admin</a></li>
           </ul>
         </div>
@@ -21,10 +21,10 @@
 
       <div class="text-end col-lg-auto mb-2 justify-content-end mb-md-0" style="margin-left: 280px;"> <!-- Ajusta el valor del margen izquierdo según sea necesario -->
         <span class="text-secondary" th:if="${session.usuario!=null}" th:text="|Hi ${session.usuario.nombre} /   |"/>
-        <a th:if="${session.usuario!=null}" href="/logout">LOGOUT</a>
+        <a th:if="${session.usuario!=null}" href="/logout">Cerrar Sesión</a>
     
-        <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuario==null}" style="margin-right: 40px;" onclick="window.location.href='/login'">Login</button>
-        <button type="button" class="btn btn-warning" th:if="${session.usuario==null}" onclick="window.location.href='/signup'">Sign up</button>
+        <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuario==null}" style="margin-right: 40px;" onclick="window.location.href='/login'">Iniciar Sesión</button>
+        <button type="button" class="btn btn-warning" th:if="${session.usuario==null}" onclick="window.location.href='/signup'">Registrarse</button>
     </div>    
   
     </div>

@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
 import org.tfg.spring.tfg.service.MarcaService;
+import org.tfg.spring.tfg.service.ModeloService;
 import org.tfg.spring.tfg.service.ZapatillaService;
 
 @RequestMapping("/zapatilla")
 @Controller
 public class ZapatillaController {
+
+    @Autowired
+    private ModeloService modeloService;
 
     @Autowired
     private ZapatillaService zapatillaService;
@@ -35,6 +39,7 @@ public class ZapatillaController {
             ModelMap m) {
         m.put("zapatillas", zapatillaService.findAll());
         m.put("marcas", marcaService.findAll());
+        m.put("modelos", modeloService.findAll());
         m.put("view", "zapatilla/c");
         return "_t/frame";
     }
@@ -46,11 +51,12 @@ public class ZapatillaController {
             @RequestParam("color") String color,
             @RequestParam("talla") String talla,
             @RequestParam("stock") Integer stock,
-            @RequestParam("idMarca") Long idMarca
+            @RequestParam("idMarca") Long idMarca,
+            @RequestParam("idModelo") Long idModelo
             )
             throws DangerException {
         try {
-            zapatillaService.save(nombre, precio, color, talla, stock, idMarca);
+            zapatillaService.save(nombre, precio, color, talla, stock, idMarca, idModelo);
         } catch (Exception e) {
             PRG.error("El Producto " + nombre + " ya existe", "/zapatilla/c");
         }
@@ -63,6 +69,7 @@ public class ZapatillaController {
             ModelMap m) {
         m.put("zapatilla", zapatillaService.findById(idZapatilla));
         m.put("marcas", marcaService.findAll());
+        m.put("modelos", modeloService.findAll());
         m.put("view", "zapatilla/u");
         return "_t/frame";
     }
@@ -75,10 +82,11 @@ public class ZapatillaController {
             @RequestParam("color") String color,
             @RequestParam("talla") String talla,
             @RequestParam("stock") Integer stock,
-            @RequestParam("idMarca") Long idMarca
+            @RequestParam("idMarca") Long idMarca,
+            @RequestParam("idModelo") Long idModelo
             ) throws DangerException {
         try {
-            zapatillaService.update(idZapatilla, nombre, precio, color, talla, stock, idMarca);
+            zapatillaService.update(idZapatilla, nombre, precio, color, talla, stock, idMarca, idModelo);
         } catch (Exception e) {
             PRG.error("El Producto" + nombre + " ya está registrado", "/zapatilla/r");
         }

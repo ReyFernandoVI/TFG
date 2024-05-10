@@ -1,6 +1,6 @@
 package org.tfg.spring.tfg.domain;
 
-import java.util.ArrayList;
+
 import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

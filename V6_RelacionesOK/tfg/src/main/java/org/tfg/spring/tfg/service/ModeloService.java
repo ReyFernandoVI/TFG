@@ -17,8 +17,8 @@ public class ModeloService {
     public List<Modelo> findAll() {
         return modeloRepository.findAll();
     }
-    public void save(String nombre,Marca marcaId) {
-        Modelo modelo = new Modelo(nombre,marcaId);
+    public void save(String nombre,Marca idMarca) {
+        Modelo modelo = new Modelo(nombre,idMarca);
         modeloRepository.save(modelo);
      }
     public Modelo findById(Long idModelo) {

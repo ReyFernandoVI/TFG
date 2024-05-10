@@ -31,6 +31,8 @@ public class Zapatilla {
     @ManyToOne
     private Marca marcas;//SELECT MARCA PARA CREAR ZAPATILLA
 
+    @ManyToOne
+    private Modelo modelo;
     
     // ==================
 
