@@ -1,7 +1,7 @@
 <div class="b-example-divider"></div>
 
 <div class="container d-flex justify-content-center align-items-center vh-20">
-    <main class="form-signin">
+    <main class="form-signin bg-body rounded shadow-sm">
       <form action="/signup" method="post">
         <img class="mb-4" src="/img/logoP.png" alt="" width="100" height="100">
         <h3 class="mb-3">Registro Usuarios</h3>
@@ -33,3 +33,52 @@
       </form>
     </main>
 </div>
+
+<!-- JavaScript para validar el formulario -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const form = document.querySelector('form');
+      const nombreInput = document.getElementById('id-nombre');
+      const dniInput = document.getElementById('id-dni');
+      const emailInput = document.getElementById('id-mail');
+      const contraseñaInput = document.getElementById('id-contraseña');
+
+      form.addEventListener('submit', function (event) {
+          if (!validarNombre()) {
+              event.preventDefault();
+              alert('Por favor, introduce un nombre válido.');
+          } else if (!validarDni()) {
+              event.preventDefault();
+              alert('Por favor, introduce un DNI válido.');
+          } else if (!validarEmail()) {
+              event.preventDefault();
+              alert('Por favor, introduce un correo electrónico válido.');
+          } else if (!validarContraseña()) {
+              event.preventDefault();
+              alert('Por favor, introduce una contraseña válida.');
+          }
+      });
+
+      function validarNombre() {
+          // Validar si el campo nombre no está vacío
+          return nombreInput.value.trim() !== '';
+      }
+
+      function validarDni() {
+          // Validar si el DNI tiene un formato válido (puedes personalizar la validación según el formato esperado)
+          const dniRegex = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+          return dniRegex.test(dniInput.value);
+      }
+
+      function validarEmail() {
+          // Validar si el correo electrónico tiene un formato válido
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(emailInput.value);
+      }
+
+      function validarContraseña() {
+          // Validar si la contraseña tiene al menos 6 caracteres
+          return contraseñaInput.value.length >= 6;
+      }
+  });
+</script>
