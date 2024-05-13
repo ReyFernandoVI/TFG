@@ -34,5 +34,6 @@ public class ModeloService {
     public void delete(Long idModelo) {
         modeloRepository.delete(modeloRepository.getReferenceById(idModelo));
     }
+   
 
 }

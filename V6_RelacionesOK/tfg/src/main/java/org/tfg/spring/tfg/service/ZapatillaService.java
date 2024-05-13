@@ -21,7 +21,11 @@ public class ZapatillaService {
     @Autowired
     private MarcaRepository marcaRepository;
 
-    public List<Zapatilla> findAll() {
+    public List<Zapatilla> findAll(String palabraClave) {
+        if(palabraClave!=null)
+        {
+            return zapatillaRepository.findAll(palabraClave);
+        }
         return zapatillaRepository.findAll();
     }
     public void save(String nombre,Integer precio,String color, String talla, Integer stock, Long idMarca, Long idModelo) {

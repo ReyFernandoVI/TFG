@@ -26,14 +26,14 @@ public class Modelo {
     private String nombre;
 
    @ManyToOne
-    private Marca marca;
+    private Marca marcas;
     
     @OneToMany(mappedBy = "modelo")
     private List<Zapatilla> zapatillas;
 
     public Modelo(String nombre,Marca marca){
         this.nombre = nombre;
-        this.marca=marca;
+        this.marcas=marca;
         this.zapatillas = new ArrayList<>();
     }
 

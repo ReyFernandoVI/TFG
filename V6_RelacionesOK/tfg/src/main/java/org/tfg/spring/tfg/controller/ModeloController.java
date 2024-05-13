@@ -27,6 +27,7 @@ public class ModeloController {
             ModelMap m) {
         m.put("modelos", modeloService.findAll());
         m.put("marcas", marcaService.findAll());
+        
         m.put("view", "modelo/r");
         return "_t/frame";
     }

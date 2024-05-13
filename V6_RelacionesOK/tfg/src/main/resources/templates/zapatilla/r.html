@@ -1,47 +1,64 @@
 <div class="container">
+    <!-- Botón para añadir zapatilla -->
     <button class="btn btn-outline-primary" onclick="window.location.href='/zapatilla/c'">Añadir Zapatilla</button>
+
+    <!-- Formulario de filtrado -->
+    <form class="form-inline" th:action="@{/zapatilla/r}" method="get">
+        <div class="form-group mb-2">
+            <label for="palabraClave">Filtrar:</label>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Introduce término de búsqueda" required> 
+        </div>
+        <input type="submit" class="btn btn.-info mb-2" value="buscar">
+        <input type="reset" class="btn btn.-secoundary mb-2" value="Borrar">
+
+    </form>
+    <br>
+    <!-- Encabezado de la lista -->
     <h1>Lista de Zapatillas</h1>
+    
+    <!-- Tabla para mostrar las zapatillas -->
     <table class="table table-striped">
         <thead>
-            <th>Nombre</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Precio €</th>
-            <th>Color</th>
-            <th>Talla</th>
-            <th>Stock</th>
-            <th>Editar</th>
-            <th>Borrar</th>
+            <tr>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Precio €</th>
+                <th>Color</th>
+                <th>Talla</th>
+                <th>Stock</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
         </thead>
-
-        <tr th:each="zapatilla : ${zapatillas}">
-            
-            <td th:text="${zapatilla.nombre}" />
-
-            <td th:text="|${zapatilla.marcas?.nombre}"/>
-
-            <td th:text="|${zapatilla.modelo?.nombre}"/>
-
-            <td th:text="${zapatilla.precio}" />
-            
-            <td th:text="${zapatilla.color}" />
-            
-            <td th:text="${zapatilla.talla}" />
-
-            <td th:text="${zapatilla.stock}" />            
-
-            <td>
-                <button th:onclick="|window.location.href='/zapatilla/u?id=${zapatilla.id}'|">
-                    <img src="/img/lapiz.png" height="20" width="20">
-                </button>
-            </td>
-
-            <td>
-                <form action="/zapatilla/d" method="post">
-                    <input type="hidden" name="id" th:value="${zapatilla.id}">
-                    <input alt="basura" type="image" src="/img/basura.png" height="20" width="20"/>
-                </form>
-            </td>
-        </tr>
+        <tbody>
+            <!-- Iterar sobre las zapatillas y mostrar cada una -->
+            <tr th:each="zapatilla : ${zapatillas}">
+                <td th:text="${zapatilla.nombre}"></td>
+                <td th:text="${zapatilla.marcas?.nombre}"></td>
+                <td th:text="${zapatilla.modelo?.nombre}"></td>
+                <td th:text="${zapatilla.precio}"></td>
+                <td th:text="${zapatilla.color}"></td>
+                <td th:text="${zapatilla.talla}"></td>
+                <td th:text="${zapatilla.stock}"></td>
+                <td>
+                    <!-- Botón para editar zapatilla -->
+                    <a th:href="@{/zapatilla/u(id=${zapatilla.id})}" class="btn btn-info" role="button">
+                        <img src="/img/lapiz.png" height="20" width="20" alt="Editar">
+                    </a>
+                </td>
+                <td>
+                    <!-- Formulario para borrar zapatilla -->
+                    <form action="/zapatilla/d" method="post">
+                        <input type="hidden" name="id" th:value="${zapatilla.id}">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de querer borrar esta zapatilla?');">
+                            <img src="/img/basura.png" height="20" width="20" alt="Borrar">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </div>

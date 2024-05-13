@@ -1,7 +1,9 @@
 package org.tfg.spring.tfg.domain;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,8 +29,9 @@ public class Marca {
     @Column(unique = true)
     private String nombre;
 
-    @ManyToOne
-    private Modelo modelo; // Cambia 'long' a 'Modelo'
+    @JsonIgnore
+    @OneToMany(mappedBy = "marcas")
+    private List<Modelo> modelos; 
 
     @JsonIgnore
     @OneToMany(mappedBy = "marcas")
@@ -37,6 +40,7 @@ public class Marca {
 
     public Marca(String nombre) {
         this.nombre = nombre;
+        this.modelos=new ArrayList<>();
     }
 
     // Getters y setters (generados por Lombok @Data)

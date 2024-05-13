@@ -1,6 +1,7 @@
 package org.tfg.spring.tfg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.tfg.spring.tfg.helper.PRG;
 import org.tfg.spring.tfg.service.MarcaService;
 import org.tfg.spring.tfg.service.ModeloService;
 import org.tfg.spring.tfg.service.ZapatillaService;
+
 
 @RequestMapping("/zapatilla")
 @Controller
@@ -28,8 +30,9 @@ public class ZapatillaController {
 
     @GetMapping("r")
     public String r(
-            ModelMap m) {
-        m.put("zapatillas", zapatillaService.findAll());
+            ModelMap m,@Param("PalabraClave")String palabraClave) {
+        m.put("zapatillas", zapatillaService.findAll(palabraClave));
+        m.put("palabraClave",palabraClave);
         m.put("view", "zapatilla/r");
         return "_t/frame";
     }
@@ -37,7 +40,7 @@ public class ZapatillaController {
     @GetMapping("c")
     public String c(
             ModelMap m) {
-        m.put("zapatillas", zapatillaService.findAll());
+    
         m.put("marcas", marcaService.findAll());
         m.put("modelos", modeloService.findAll());
         m.put("view", "zapatilla/c");

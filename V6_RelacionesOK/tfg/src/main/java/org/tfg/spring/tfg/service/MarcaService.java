@@ -3,6 +3,7 @@ package org.tfg.spring.tfg.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tfg.spring.tfg.domain.Marca;
+import org.tfg.spring.tfg.domain.Modelo;
 import org.tfg.spring.tfg.repository.MarcaRepository;
 
 import java.util.List;
@@ -38,4 +39,5 @@ public class MarcaService {
     public void delete(Long idMarca) {
         marcaRepository.delete(marcaRepository.getReferenceById(idMarca));
     }
+   
 }
