@@ -67,7 +67,7 @@ public class MarcaController {
 
     @PostMapping("u")
     public String updatePost(
-            @RequestParam("id") Long idMarca,
+            @RequestParam("idMarca") Long idMarca,
             @RequestParam("nombre") String nombre) throws DangerException {
         try {
             marcaService.update(idMarca, nombre);
@@ -86,6 +86,14 @@ public class MarcaController {
             PRG.error(e.getMessage(), "/marca/r");
         }
         return "redirect:/marca/r";
+    }
+    @GetMapping("listaModelo")
+    public String listaModelo(
+            @RequestParam("id") Long idMarca,
+            ModelMap m) {
+        m.put("marca", marcaService.findById(idMarca));
+        m.put("view", "marca/listaModelo");
+        return "_t/frame";
     }
 
 }
