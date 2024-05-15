@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.tfg.spring.tfg.domain.Usuario;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
+import org.tfg.spring.tfg.service.MailService;
 import org.tfg.spring.tfg.service.UsuarioService;
 import org.tfg.spring.tfg.service.ZapatillaService;
 
@@ -18,10 +19,20 @@ import jakarta.servlet.http.HttpSession;
 public class HomeController {
 
     @Autowired
+<<<<<<< HEAD:V6_RelacionesOK_15-05-24/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
+    private ZapatillaService zapatillaService;
+
+    @Autowired
+	private UsuarioService usuarioService;
+=======
     private UsuarioService usuarioService;
     
     @Autowired
     private ZapatillaService zapatillaService;
+>>>>>>> 583d7efe08629a64628190addde7089381c31b2b:V6_RelacionesOK/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
+
+    @Autowired
+    private MailService mailService;
 
     @GetMapping("/")
     public String home(ModelMap m) {
@@ -65,7 +76,11 @@ public class HomeController {
         return "_t/frame";
     }
 
+<<<<<<< HEAD:V6_RelacionesOK_15-05-24/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
+	@GetMapping("/catalogue")
+=======
     @GetMapping("/catalogue")
+>>>>>>> 583d7efe08629a64628190addde7089381c31b2b:V6_RelacionesOK/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
     public String catalogue(ModelMap m) {
         String palabraClave = ""; // Aquí puedes proporcionar una palabra clave válida para la búsqueda de zapatillas
         m.put("zapatillas", zapatillaService.findAll(palabraClave));
@@ -123,10 +138,22 @@ public class HomeController {
             usuarioService.save(nombre, dni ,mail, contraseña);
         } catch (Exception e) {
             try {
+<<<<<<< HEAD:V6_RelacionesOK_15-05-24/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
+                Usuario usuario = usuarioService.save(nombre, dni ,mail, contraseña);
+                mailService.sendActivationEmail(usuario);
+            } catch (Exception e) {
+                try {
+                    PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
+                } catch (DangerException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+=======
                 PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
             } catch (DangerException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
+>>>>>>> 583d7efe08629a64628190addde7089381c31b2b:V6_RelacionesOK/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
             }
         }
         return "redirect:/";

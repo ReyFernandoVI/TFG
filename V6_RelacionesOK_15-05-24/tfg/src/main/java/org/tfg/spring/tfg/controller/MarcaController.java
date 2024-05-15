@@ -96,4 +96,13 @@ public class MarcaController {
         return "_t/frame";
     }
 
+    @GetMapping("listaModelo")
+    public String listaModelo(
+            @RequestParam("id") Long idMarca,
+            ModelMap m) {
+        m.put("marca", marcaService.findById(idMarca));
+        m.put("view", "marca/listaModelo");
+        return "_t/frame";
+    }
+
 }

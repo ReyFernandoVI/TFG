@@ -7,9 +7,8 @@
         <label for="id-nombre">Nombre</label>
         <input id="id-nombre" type="text" name="nombre" />
         <br />
-
         <label for="id-marcas">Seleccion una marca:</label>
-            <select id="id-marcas" name="idMarca" required>
+            <select id="id-marcas" name="idMarca" required th:onchange="changeModelo([[(${modelos})]])" >
                 <option 
                 th:each="marca:${marcas}"
                 th:text="${marca.nombre}"
@@ -20,11 +19,6 @@
 
         <label for="id-modelo">Selecciona una modelo:</label>
             <select id="id-modelo" name="idModelo" required>
-                <option 
-                th:each="modelo:${modelos}"
-                th:text="${modelo.nombre}"
-                th:value="${modelo.id}"
-                ></option>
             </select>
         </br>
 
@@ -49,4 +43,29 @@
         <input type="submit" />
     </form>
     <button onclick="window.location.href='/'">Cancelar</button>
+    <script>
+        function changeModelo(allModelos){
+
+            
+            const marcaSeleccionada = document.getElementById("id-marcas").value;
+            console.log(marcaSeleccionada);
+            if(!marcaSeleccionada){
+                return;
+            }
+            
+            const modelos = allModelos.filter(m => m.marcas.id === Number(marcaSeleccionada)) ?? []; 
+            const selectModelos = document.getElementById("id-modelo");
+
+            while (selectModelos.firstChild) {
+                selectModelos.removeChild(selectModelos.lastChild);
+            }
+
+            for(let modelo of modelos){
+                const option = document.createElement('option');
+                option.value = modelo.id;
+                option.innerHTML = modelo.nombre
+                selectModelos.appendChild(option);
+            }
+        }
+    </script>
 </div>

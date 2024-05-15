@@ -3,6 +3,8 @@ package org.tfg.spring.tfg.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,9 +28,11 @@ public class Modelo {
     private String nombre;
 
    @ManyToOne
+   @JsonIgnoreProperties(value = {"modelos"})
     private Marca marcas;
     
     @OneToMany(mappedBy = "modelo")
+    @JsonIgnoreProperties(value = {"modelo"})
     private List<Zapatilla> zapatillas;
 
     public Modelo(String nombre,Marca marca){
