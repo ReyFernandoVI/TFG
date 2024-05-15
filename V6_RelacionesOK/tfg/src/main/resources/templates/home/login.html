@@ -21,32 +21,3 @@
         </form>
     </main>
 </div>
-
-<!-- JavaScript para validar el formulario -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form');
-        const nombreInput = document.getElementById('id-nombre');
-        const contraseñaInput = document.getElementById('id-contraseña');
-
-        form.addEventListener('submit', function (event) {
-            if (!validarNombre()) {
-                event.preventDefault();
-                alert('Por favor, introduce un nombre de usuario válido.');
-            } else if (!validarContraseña()) {
-                event.preventDefault();
-                alert('Por favor, introduce una contraseña válida.');
-            }
-        });
-
-        function validarNombre() {
-            // Validar si el nombre de usuario tiene al menos 3 caracteres
-            return nombreInput.value.length >= 3;
-        }
-
-        function validarContraseña() {
-            // Validar si la contraseña tiene al menos 6 caracteres
-            return contraseñaInput.value.length >= 6;
-        }
-    });
-</script>
