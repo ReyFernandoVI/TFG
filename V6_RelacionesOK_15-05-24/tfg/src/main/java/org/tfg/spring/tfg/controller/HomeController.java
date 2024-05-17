@@ -19,68 +19,71 @@ import jakarta.servlet.http.HttpSession;
 public class HomeController {
 
     @Autowired
-<<<<<<< HEAD:V6_RelacionesOK_15-05-24/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
     private ZapatillaService zapatillaService;
 
     @Autowired
 	private UsuarioService usuarioService;
-=======
-    private UsuarioService usuarioService;
-    
-    @Autowired
-    private ZapatillaService zapatillaService;
->>>>>>> 583d7efe08629a64628190addde7089381c31b2b:V6_RelacionesOK/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
 
     @Autowired
     private MailService mailService;
 
     @GetMapping("/")
-    public String home(ModelMap m) {
+    public String home(
+        ModelMap m
+    ) {
         m.put("view","home/home");
         return "_t/frame";
     }
 
-    @GetMapping("/admin")
-    public String admin(ModelMap m) {
+	@GetMapping("/admin")
+    public String admin(
+        ModelMap m
+    ) {
         m.put("view","home/admin");
         return "_t/frame";
     }
 
-    @GetMapping("/pricing")
-    public String pricing(ModelMap m) {
+	@GetMapping("/pricing")
+    public String pricing(
+        ModelMap m
+    ) {
         m.put("view","home/pricing");
         return "_t/frame";
     }
 
-    @GetMapping("/features")
-    public String features(ModelMap m) {
+	@GetMapping("/features")
+    public String features(
+        ModelMap m
+    ) {
         m.put("view","home/features");
         return "_t/frame";
     }
 
-    @GetMapping("/faqs")
-    public String faqs(ModelMap m) {
+	@GetMapping("/faqs")
+    public String faqs(
+        ModelMap m
+    ) {
         m.put("view","home/faqs");
         return "_t/frame";
     }
 
-    @GetMapping("/about")
-    public String about(ModelMap m) {
+	@GetMapping("/about")
+    public String about(
+        ModelMap m
+    ) {
         m.put("view","home/about");
         return "_t/frame";
     }
 
-    @GetMapping("/news")
-    public String news(ModelMap m) {
+	@GetMapping("/news")
+    public String news(
+        ModelMap m
+    ) {
         m.put("view","home/news");
         return "_t/frame";
     }
 
-<<<<<<< HEAD:V6_RelacionesOK_15-05-24/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
 	@GetMapping("/catalogue")
-=======
-    @GetMapping("/catalogue")
->>>>>>> 583d7efe08629a64628190addde7089381c31b2b:V6_RelacionesOK/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
     public String catalogue(ModelMap m) {
         String palabraClave = ""; // Aquí puedes proporcionar una palabra clave válida para la búsqueda de zapatillas
         m.put("zapatillas", zapatillaService.findAll(palabraClave));
@@ -88,57 +91,57 @@ public class HomeController {
         return "_t/frame";
     }
 
-    @GetMapping("/vipzone")
-    public String vipzone(ModelMap m) {
+	@GetMapping("/vipzone")
+    public String vipzone(
+        ModelMap m
+    ) {
         m.put("view","home/vipzone");
         return "_t/frame";
     }
 
     @GetMapping("/info")
-    public String info(HttpSession s, ModelMap m) {
+	public String info(HttpSession s, ModelMap m) {
 
-        String mensaje = s.getAttribute("_mensaje") != null ? (String) s.getAttribute("_mensaje")
-                : "Pulsa para volver a home";
-        String severity = s.getAttribute("_severity") != null ? (String) s.getAttribute("_severity") : "info";
-        String link = s.getAttribute("_link") != null ? (String) s.getAttribute("_link") : "/";
+		String mensaje = s.getAttribute("_mensaje") != null ? (String) s.getAttribute("_mensaje")
+				: "Pulsa para volver a home";
+		String severity = s.getAttribute("_severity") != null ? (String) s.getAttribute("_severity") : "info";
+		String link = s.getAttribute("_link") != null ? (String) s.getAttribute("_link") : "/";
 
-        s.removeAttribute("_mensaje");
-        s.removeAttribute("_severity");
-        s.removeAttribute("_link");
+		s.removeAttribute("_mensaje");
+		s.removeAttribute("_severity");
+		s.removeAttribute("_link");
 
-        m.put("mensaje", mensaje);
-        m.put("severity", severity);
-        m.put("link", link);
+		m.put("mensaje", mensaje);
+		m.put("severity", severity);
+		m.put("link", link);
 
-        m.put("view", "/_t/info");
-        return "/_t/frame";
-    }
+		m.put("view", "/_t/info");
+		return "/_t/frame";
+	}
 
-    @GetMapping("/init")
+	@GetMapping("/init")
     public String crearAdmin() {
-        usuarioService.save("admin", null, null, "admin");
-        usuarioService.setAdmin("admin");
-        return "redirect:/";
+		usuarioService.save("admin", null, null, "admin");
+		usuarioService.setAdmin("admin");
+		return "redirect:/";
     }
 
     @GetMapping("/signup")
-    public String signup(ModelMap m) {
+    public String signup(
+        ModelMap m
+    ) {
         m.put("view","home/signup");
         return "_t/frame";
     }
 
     @PostMapping("/signup")
     public String signupPost(
-            @RequestParam("nombre") String nombre,
-            @RequestParam("dni") String dni,
-            @RequestParam("mail") String mail,
-            @RequestParam("contraseña") String contraseña,
-            HttpSession s){
-        try {
-            usuarioService.save(nombre, dni ,mail, contraseña);
-        } catch (Exception e) {
+        @RequestParam("nombre") String nombre,
+        @RequestParam("dni") String dni,
+        @RequestParam("mail") String mail,
+        @RequestParam("contraseña") String contraseña,
+        HttpSession s){
             try {
-<<<<<<< HEAD:V6_RelacionesOK_15-05-24/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
                 Usuario usuario = usuarioService.save(nombre, dni ,mail, contraseña);
                 mailService.sendActivationEmail(usuario);
             } catch (Exception e) {
@@ -148,44 +151,42 @@ public class HomeController {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-=======
-                PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
-            } catch (DangerException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
->>>>>>> 583d7efe08629a64628190addde7089381c31b2b:V6_RelacionesOK/tfg/src/main/java/org/tfg/spring/tfg/controller/HomeController.java
             }
+            return "redirect:/";
         }
-        return "redirect:/";
-    }
 
     @GetMapping("/login")
-    public String login(ModelMap m) {
-        m.put("view","home/login");
-        return "_t/frame";
-    }
+	public String login(
+		ModelMap m
+	) {
+		m.put("view","home/login");
+		return "_t/frame";
+	}
+	@PostMapping("/login")
+	public String loginPost(
+		@RequestParam("nombre") String nombre,
+		@RequestParam("contraseña") String contraseña,
+		HttpSession s,
+		ModelMap m
+	) throws DangerException {
+		try {
+			Usuario usuario = usuarioService.login(nombre,contraseña);
+			s.setAttribute("usuario", usuario);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			PRG.error("Usuario o contraseña incorrectos");
+		}
+		return "redirect:/";
+	}
 
-    @PostMapping("/login")
-    public String loginPost(
-            @RequestParam("nombre") String nombre,
-            @RequestParam("contraseña") String contraseña,
-            HttpSession s,
-            ModelMap m
-    ) throws DangerException {
-        try {
-            Usuario usuario = usuarioService.login(nombre,contraseña);
-            s.setAttribute("usuario", usuario);
-        } catch (Exception e) {
-            e.printStackTrace();
-            PRG.error("Usuario o contraseña incorrectos");
-        }
-        return "redirect:/";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession s) {
-        //s.setAttribute("usuario", null);
-        s.invalidate();
-        return "redirect:/";
-    }
+	@GetMapping("/logout")
+	public String logout(
+		HttpSession s
+	) {
+		//s.setAttribute("usuario", null);
+		s.invalidate();
+		return "redirect:/";
+	}
+	
 }
