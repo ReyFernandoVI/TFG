@@ -2,7 +2,7 @@
 
     <h1>Nueva Zapatilla</h1>
 
-    <form action="/zapatilla/c" method="post">
+    <form action="/zapatilla/c" method="post" enctype="multipart/form-data">
 
         <label for="id-nombre">Nombre</label>
         <input id="id-nombre" type="text" name="nombre" />
@@ -36,6 +36,10 @@
 
         <label for="id-stock">Stock</label>
         <input id="id-stock" type="text" name="stock" />
+        <br />
+
+        <label for="id-imagen">Imagen</label>
+        <input id="id-imagen" type="file" name="imagenZapatilla" accept="img/*" />
         <br />
 
         </fieldset>

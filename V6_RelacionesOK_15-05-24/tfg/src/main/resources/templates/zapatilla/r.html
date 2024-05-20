@@ -29,6 +29,7 @@
                 <th>Color</th>
                 <th>Talla</th>
                 <th>Stock</th>
+                <th>Imagen</th>
                 <th>Editar</th>
                 <th>Borrar</th>
             </tr>
@@ -43,6 +44,11 @@
                 <td th:text="${zapatilla.color}"></td>
                 <td th:text="${zapatilla.talla}"></td>
                 <td th:text="${zapatilla.stock}"></td>
+                <td>
+                    <form action="zapatilla/r" enctype="multipart/form-data">
+                        <img th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}" width="300"> 
+                    </form>
+                </td>
                 <td>
                     <!-- Botón para editar zapatilla -->
                     <a th:href="@{/zapatilla/u(id=${zapatilla.id})}" class="btn btn-info" role="button">

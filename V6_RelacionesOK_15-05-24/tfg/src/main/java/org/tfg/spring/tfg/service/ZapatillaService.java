@@ -28,10 +28,11 @@ public class ZapatillaService {
         }
         return zapatillaRepository.findAll();
     }
-    public void save(String nombre,Integer precio,String color, String talla, Integer stock, Long idMarca, Long idModelo) {
+    public void save(String nombre,Integer precio,String color, String talla, Integer stock, Long idMarca, Long idModelo, String nombreImagen) {
         Zapatilla zapatilla = new Zapatilla(nombre, precio, color, talla, stock);
         zapatilla.setMarcas(marcaRepository.getReferenceById(idMarca));
         zapatilla.setModelo(modeloRepository.getReferenceById(idModelo));
+        zapatilla.setImagen(nombreImagen);
         zapatillaRepository.save(zapatilla);
      }
     public Zapatilla findById(Long idZapatilla) {

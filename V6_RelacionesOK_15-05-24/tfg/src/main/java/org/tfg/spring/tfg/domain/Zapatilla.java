@@ -33,6 +33,8 @@ public class Zapatilla {
 
     @ManyToOne
     private Modelo modelo;
+
+    private String imagen;
     
     // ==================
 

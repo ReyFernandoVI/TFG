@@ -1,5 +1,10 @@
 package org.tfg.spring.tfg.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -8,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
 import org.tfg.spring.tfg.service.MarcaService;
@@ -27,6 +33,8 @@ public class ZapatillaController {
 
     @Autowired
     private MarcaService marcaService;
+
+    private static final String LOAD_DIR = "src\\main\\resources\\static\\img";
 
     @GetMapping("r")
     public String r(
@@ -55,15 +63,25 @@ public class ZapatillaController {
             @RequestParam("talla") String talla,
             @RequestParam("stock") Integer stock,
             @RequestParam("idMarca") Long idMarca,
-            @RequestParam("idModelo") Long idModelo
-            )
-            throws DangerException {
+            @RequestParam("idModelo") Long idModelo,
+            @RequestParam("imagenZapatilla") MultipartFile imagenZapatilla
+            ) throws DangerException
+             {if(!imagenZapatilla.isEmpty()){
         try {
-            zapatillaService.save(nombre, precio, color, talla, stock, idMarca, idModelo);
+            
+            String imageName = imagenZapatilla.getOriginalFilename();
+            Path destPath = Paths.get(LOAD_DIR, imageName);
+            Files.copy(imagenZapatilla.getInputStream(), destPath, StandardCopyOption.REPLACE_EXISTING);
+            String nombreImagen = imageName.substring(imageName.lastIndexOf("\\") + 1, imageName.lastIndexOf("."));
+            zapatillaService.save(nombre, precio, color, talla, stock, idMarca, idModelo, nombreImagen);
         } catch (Exception e) {
+            e.printStackTrace();
             PRG.error("El Producto " + nombre + " ya existe", "/zapatilla/c");
         }
         return "redirect:/zapatilla/r";
+    }else{
+        return "Image Empty";
+    }
     }
 
     @GetMapping("u")
