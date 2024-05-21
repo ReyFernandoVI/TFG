@@ -11,18 +11,16 @@
     
     <!-- Verificar si la marca y sus modelos no son nulos -->
     <table th:if="${marca != null and marca.modelos != null}">
-        <tbody>
+   
             <tr>
-                <td>Nombre del Modelo</td>
+                <td>Nombre del Modelo:</td>
             </tr>
             <!-- Iterar sobre cada modelo de la marca -->
             <tr th:each="modelo : ${marca.modelos}">
                 <td th:text="${modelo.nombre}"></td>
             </tr>
-        </tbody>
     </table>
     
-    <!-- Incluir un fragmento de vista determinado por la variable 'view' -->
-    <div th:include="${view}"></div>
+    
 </body>
 </html>
