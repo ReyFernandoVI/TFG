@@ -1,0 +1,24 @@
+<div class="container">
+
+    <h1>Nuevo Pedido</h1>
+
+    <form action="/pedido/c" method="post">
+
+        <label for="id-numPedido">Nº Pedido</label>
+        <input id="id-numPedido" type="text" name="numPedido" />
+        <br />
+
+        <label for="id-fechCompra">Fech Compra</label>
+        <input id="id-fechCompra" type="date" name="fechCompra" />
+        <br />
+
+        <label for="id-precioPedido">Precio Pedido</label>
+        <input id="id-precioPedido" type="text" name="precioPedido" />
+        <br />
+        
+        </fieldset>
+
+        <input type="submit" />
+    </form>
+    <button onclick="window.location.href='/'">Cancelar</button>
+</div>
