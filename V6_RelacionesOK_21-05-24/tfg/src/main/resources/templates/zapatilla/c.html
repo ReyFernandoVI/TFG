@@ -9,6 +9,7 @@
         <br />
         <label for="id-marcas">Seleccion una marca:</label>
             <select id="id-marcas" name="idMarca" required th:onchange="changeModelo([[(${modelos})]])" >
+                <option>--Marcas--</option>
                 <option 
                 th:each="marca:${marcas}"
                 th:text="${marca.nombre}"
@@ -19,6 +20,7 @@
 
         <label for="id-modelo">Selecciona una modelo:</label>
             <select id="id-modelo" name="idModelo" required>
+                <option>--Modelos--</option>
             </select>
         </br>
 

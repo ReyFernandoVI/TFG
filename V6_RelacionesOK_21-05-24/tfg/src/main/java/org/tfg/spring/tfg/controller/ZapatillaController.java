@@ -78,7 +78,7 @@ public class ZapatillaController {
             e.printStackTrace();
             PRG.error("El Producto " + nombre + " ya existe", "/zapatilla/c");
         }
-        return "redirect:/zapatilla/r";
+        return "redirect:/admin";
     }else{
         return "Image Empty";
     }
