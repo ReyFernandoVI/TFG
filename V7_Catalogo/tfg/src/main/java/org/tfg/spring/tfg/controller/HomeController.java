@@ -87,6 +87,18 @@ public class HomeController {
         return "_t/frame";
     }
 
+    @GetMapping("/pay")
+    public String pay(ModelMap m) {
+        m.put("view", "home/pay");
+        return "_t/frame";
+    }
+
+    @GetMapping("/shoes")
+    public String shoes(ModelMap m) {
+        m.put("view", "home/shoes");
+        return "_t/frame";
+    }
+
     @GetMapping("/info")
     public String info(HttpSession s, ModelMap m) {
 
