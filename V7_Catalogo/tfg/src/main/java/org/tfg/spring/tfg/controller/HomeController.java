@@ -6,6 +6,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.tfg.spring.tfg.domain.Marca;
+import org.tfg.spring.tfg.domain.Modelo;
 import org.tfg.spring.tfg.domain.Usuario;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
@@ -14,6 +17,8 @@ import org.tfg.spring.tfg.service.UsuarioService;
 import org.tfg.spring.tfg.service.ZapatillaService;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class HomeController {
@@ -99,6 +104,30 @@ public class HomeController {
         return "_t/frame";
     }
 
+    /*@GetMapping("/mostrarProducto")
+    public String mostrarProducto(ModelMap m) {
+        m.put("view", "home/mostrarProducto");
+        return "_t/frame";
+    }*/
+
+   /*  @PostMapping("/mostrarProducto")
+    public String mostrarProductoPost(
+        @RequestParam("nombre") String nombre,
+            @RequestParam("precio") Integer precio,
+            @RequestParam("color") String color,
+            @RequestParam("talla") String talla,
+            @RequestParam("stock") Integer stock,
+            @RequestParam("idMarca") Long idMarca,
+            @RequestParam("idModelo") Long idModelo,
+            @RequestParam("imagenZapatilla") MultipartFile imagenZapatilla
+    ) throws DangerException{
+        
+        //TODO: process POST request
+        
+        return ;
+    }*/
+    
+
     @GetMapping("/info")
     public String info(HttpSession s, ModelMap m) {
 
@@ -180,4 +209,6 @@ public class HomeController {
         s.invalidate();
         return "redirect:/";
     }
+
+
 }

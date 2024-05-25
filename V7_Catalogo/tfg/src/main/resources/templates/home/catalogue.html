@@ -120,7 +120,7 @@
                 <div class="card-body">
                   <h5 class="card-title" th:text="${zapatilla.nombre}">Nombre de la zapatilla</h5>
                   <p class="card-text" th:text="'Marca: ' + ${zapatilla.marcas?.nombre} + ', Modelo: ' + ${zapatilla.modelo?.nombre} + ', Precio: ' + ${zapatilla.precio} + '€, Color: ' + ${zapatilla.color} + ', Talla: ' + ${zapatilla.talla} + ', Stock: ' + ${zapatilla.stock}"></p>
-                  <a href="#" class="btn btn-primary">View details</a>
+                  <a th:href="@{/mostrarProducto(id=${zapatilla.id})}" class="btn btn-primary">Ver Producto</a>
                 </div>
               </div>
             </div>

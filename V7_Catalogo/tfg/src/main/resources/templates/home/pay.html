@@ -1,50 +1,60 @@
 <main class="container">
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="/img/logoP.png" alt="" width="100" height="100">
-      <h2>Checkout form</h2>
+      <h2>Pay form</h2>
       <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
     </div>
   
-    <div class="row g-5 justify-content-center">
-      <div class="col-md-5 col-lg-4 order-md-last">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <div class="col-md-5 col-lg-4 order-md-last">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-pill">3</span>
-        </h4>
-        <ul class="list-group mb-3">
+          <span class="badge bg-primary rounded-pill">1</span> <!-- Aquí deberías mostrar la cantidad de productos -->
+      </h4>
+      <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Product name</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$12</span>
+              <div>
+                  <h6 class="my-0">Product name:</h6>
+                  <small class="text-body-secondary">Brief description</small>
+              </div>
+              <span class="text-body-secondary" th:text="${nombre}"></span> <!-- Aquí muestra el nombre del producto -->
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Second product</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$8</span>
+              <div>
+                  <h6 class="my-0">Price:</h6>
+                  <small class="text-body-secondary">Brief description</small>
+              </div>
+              <span class="text-body-secondary" th:text="${precio}"></span> <!-- Aquí muestra el precio del producto -->
+          </li>
+          <!-- Agrega más elementos de lista para mostrar otros detalles del producto, como color, talla, etc. -->
+          <!-- Por ejemplo: -->
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                  <h6 class="my-0">Color:</h6>
+                  <small class="text-body-secondary">Brief description</small>
+              </div>
+              <span class="text-body-secondary" th:text="${color}"></span> <!-- Aquí muestra el color del producto -->
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Third item</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$5</span>
+              <div>
+                  <h6 class="my-0">Size:</h6>
+                  <small class="text-body-secondary">Brief description</small>
+              </div>
+              <span class="text-body-secondary" th:text="${talla}"></span> <!-- Aquí muestra la talla del producto -->
           </li>
+          <!-- Agrega más elementos de lista según sea necesario para otros detalles del producto -->
           <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-            <div class="text-success">
-              <h6 class="my-0">Promo code</h6>
-              <small>EXAMPLECODE</small>
-            </div>
-            <span class="text-success">−$5</span>
+              <div class="text-success">
+                  <h6 class="my-0">Promo code:</h6>
+                  <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">−$5</span>
           </li>
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
+              <span>Total (USD)</span>
+              <strong th:text="${precio}"></strong> <!-- Aquí muestra el precio del producto nuevamente como total -->
           </li>
-        </ul>
+      </ul>
+  </div>
   
         <form class="card p-2">
           <div class="input-group">
