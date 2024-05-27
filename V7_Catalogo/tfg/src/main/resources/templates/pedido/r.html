@@ -3,34 +3,46 @@
     <h1>Listado de Pedidos</h1>
     <table class="table table-striped">
         <thead>
-            <th>Nº Pedido</th>
-            <th>Fecha Pedido</th>
-            <th>Precio €</th>
-            <th>Editar</th>
-            <th>Borrar</th>
+            <tr>
+                <th>Nº Pedido</th>
+                <th>Fecha Pedido</th>
+                <th>Nombre Zapatilla</th>
+                <th>Modelo Zapatilla</th>
+                <th>Marca Zapatilla</th>
+                <th>Precio Unidad (€)</th>
+                <th> Unidad </th>
+                <th>Precio total (€)</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
         </thead>
-
-        <tr th:each="pedido : ${pedidos}">
-            
-            <td th:text="${pedido.numPedido}" />
-
-            <td th:text="${pedido.fechCompra}" />
-
-            <td th:text="${pedido.precioPedido}" />
-
-            
-            <td>
-                <button th:onclick="|window.location.href='/pedido/u?id=${pedido.id}'|">
-                    <img src="/img/lapiz.png" height="20" width="20">
-                </button>
-            </td>
-
-            <td>
-                <form action="/pedido/d" method="post">
-                    <input type="hidden" name="id" th:value="${pedido.id}">
-                    <input alt="basura" type="image" src="/img/basura.png" height="20" width="20"/>
-                </form>
-            </td>
-        </tr>
+        <tbody>
+            <tr th:each="pedido : ${pedidos}">
+                <td th:text="${pedido.numPedido}"></td>
+                <td th:text="${pedido.fechCompra}"></td>
+                <td th:text="${pedido.nombreZapatilla}"></td>
+                <td th:text="${pedido.modeloZapatilla}"></td>
+                <td th:text="${pedido.marcaZapatilla}"></td>
+                <td th:text="${pedido.precioUnidad}"></td>
+                <td th:text="${pedido.cantidad}"></td>
+                <td th:text="${pedido.precioTotal}"></td>
+               
+                <td>
+                    <button th:onclick="|window.location.href='/pedido/u?id=${pedido.id}'|">
+                        <img src="/img/lapiz.png" height="20" width="20">
+                    </button>
+                </td>
+                <td>
+                    <form action="/pedido/d" method="post">
+                        <input type="hidden" name="id" th:value="${pedido.id}">
+                        <input alt="basura" type="image" src="/img/basura.png" height="20" width="20"/>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
     </table>
+    <div class="totales">
+        <p><strong>Cantidad Total de Pedidos: </strong><span th:text="${cantidadTotal}"></span></p>
+       
+    </div>
 </div>

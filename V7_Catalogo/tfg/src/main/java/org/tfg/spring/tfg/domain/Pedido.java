@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,23 +21,33 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Integer numPedido; // Cambia el tipo de dato a int para el número aleatorio
-                            // Cambia el tipo de dato a String para la ID del producto
-
+    private Integer numPedido;
+    private String nombreZapatilla;
+    private String modeloZapatilla;
+    private String marcaZapatilla;
+    private double precioUnidad;
+    private double precioTotal;
     private LocalDate fechCompra;
+    private double cantidad;
 
-    private double precioPedido;// Para que podamos introducir numeros decimales con . Ej: 328.20€ 
 
-    public Pedido(Integer numPedido, LocalDate fechCompra, double precioPedido) {
-        this.numPedido = generateRandomNumber();; // Genera el número aleatorio al crear el Pedido
+
+    public Pedido(String nombreZapatilla, String modeloZapatilla, String marcaZapatilla, double precioUnidad, LocalDate fechCompra,double precioTotal, double cantidad) {
+
+        this.nombreZapatilla = nombreZapatilla;
+        this.modeloZapatilla = modeloZapatilla;
+        this.marcaZapatilla = marcaZapatilla;
+        this.precioUnidad = precioUnidad;
         this.fechCompra = fechCompra;
-        this.precioPedido = precioPedido;
+        this.precioTotal=precioTotal;
+        this.numPedido = generateRandomNumber();
+        this.cantidad=cantidad;
     }
 
-    // Método para generar un número aleatorio entre 0 y 100000
+   
+
     private int generateRandomNumber() {
         Random random = new Random();
-        return random.nextInt(100001); // El límite superior es exclusivo, por eso se usa 100001
+        return random.nextInt(100001); 
     }
 }

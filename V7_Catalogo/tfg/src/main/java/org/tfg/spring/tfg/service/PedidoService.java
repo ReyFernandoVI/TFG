@@ -4,27 +4,25 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 import org.tfg.spring.tfg.domain.Pedido;
 import org.tfg.spring.tfg.repository.PedidoRepository;
 
 @Service
 public class PedidoService {
-    
+    double precioTotal = 0;
     @Autowired
     private PedidoRepository pedidoRepository;
-    
-    
 
     public List<Pedido> findAll() {
         return pedidoRepository.findAll();
     }
 
-    public Pedido save(Integer numPedido, LocalDate fechCompra, double precioPedido) {
-        Pedido pedido = new Pedido(numPedido, fechCompra, precioPedido);
-        return pedidoRepository.save(pedido); // Modificado
-        //return pedidoRepository.save(pedido);
+    public Pedido save( String nombreZapatilla, String modeloZapatilla, String marcaZapatilla, double precioUnidad, LocalDate fechCompra,double precioTotal,double cantidad) {
+        Pedido pedido = new Pedido(nombreZapatilla, modeloZapatilla, marcaZapatilla, precioUnidad, fechCompra,precioTotal,cantidad);
+       
+      
+        return pedidoRepository.save(pedido);
     }
 
     public Pedido findById(Long idPedido) {
@@ -45,4 +43,14 @@ public class PedidoService {
     public List<Pedido> findByNumPedido(Integer numPedido) {
         return pedidoRepository.findByNumPedido(numPedido);
     }
+
+    // Método para calcular el precio total
+ 
+    public double calcularCantidadPrecio(double precioUnidad,Integer cantidadZapatilla)
+    {
+        double precioUnidadTotal=precioUnidad*cantidadZapatilla;
+        return precioUnidadTotal;
+    }
+
+  
 }
