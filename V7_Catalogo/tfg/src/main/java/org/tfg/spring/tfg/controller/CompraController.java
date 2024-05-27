@@ -26,24 +26,20 @@ public class CompraController {
 
     @PostMapping("/pay")
     public String procesarPago(
-        @RequestParam("id") Long idZapatilla,
-        @RequestParam("nombre") String nombre,
-        @RequestParam("precio") Integer precio,
-        @RequestParam("color") String color,
-        @RequestParam("talla") String talla,
-        @RequestParam("stock") Integer stock,
-        @RequestParam("idMarca") Long idMarca,
-        @RequestParam("idModelo") Long idModelo,
+        @RequestParam("idZapatilla") Long idZapatilla,
+        @RequestParam("cantidad") int cantidad,
         ModelMap m) {
-        // Aquí puedes procesar el pago y realizar cualquier otra lógica necesaria
-        m.addAttribute("id", idZapatilla);
-        m.addAttribute("nombre", nombre);
-        m.addAttribute("precio", precio);
-        m.addAttribute("color", color);
-        m.addAttribute("talla", talla);
-        m.addAttribute("stock", stock);
-        m.addAttribute("idMarca", idMarca);
-        m.addAttribute("idModelo", idModelo);
-        return "checkout"; // Página de confirmación de pago
-    }
+// Aquí puedes obtener los detalles de la zapatilla desde tu base de datos usando el idZapatilla
+        Zapatilla zapatilla = zapatillaService.findById(idZapatilla);
+        System.out.println(zapatilla.getNombre());
+// Agregar los detalles de la zapatilla y la cantidad al modelo
+        m.put("zapatilla", zapatilla);
+        m.put("cantidad", cantidad);
+
+// Calcular el total
+        double total = zapatilla.getPrecio() * cantidad;
+        m.put("total", total);
+        m.put("view", "home/pay");
+        return "_t/frame";
+}
 }
