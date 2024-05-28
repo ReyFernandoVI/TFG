@@ -6,22 +6,28 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.tfg.spring.tfg.domain.Marca;
-import org.tfg.spring.tfg.domain.Modelo;
+
 import org.tfg.spring.tfg.domain.Usuario;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
 import org.tfg.spring.tfg.service.MailService;
+import org.tfg.spring.tfg.service.MarcaService;
+import org.tfg.spring.tfg.service.ModeloService;
 import org.tfg.spring.tfg.service.UsuarioService;
 import org.tfg.spring.tfg.service.ZapatillaService;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private MarcaService marcaService;
+
+    @Autowired
+    private ModeloService modeloService;
 
     @Autowired
     private ZapatillaService zapatillaService;
@@ -35,6 +41,8 @@ public class HomeController {
     @GetMapping("/")
     public String home(ModelMap m) {
         m.put("view", "home/home");
+        marcaService.init();
+        modeloService.init();
         return "_t/frame";
     }
 

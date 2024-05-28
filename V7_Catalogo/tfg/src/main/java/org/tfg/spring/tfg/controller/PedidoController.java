@@ -47,7 +47,7 @@ public class PedidoController {
         @RequestParam("cantidadZapatilla") Integer cantidad
     ) throws DangerException {
         try {
-            List<Pedido> pedidos = pedidoService.findAll();
+            //List<Pedido> pedidos = pedidoService.findAll();
          double precioUnidadTotal=pedidoService.calcularCantidadPrecio(precioUnidad, cantidad);
     
             // Guardar el pedido con el precioTotal actualizado

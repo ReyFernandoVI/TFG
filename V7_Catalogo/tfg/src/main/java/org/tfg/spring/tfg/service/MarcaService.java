@@ -3,9 +3,9 @@ package org.tfg.spring.tfg.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tfg.spring.tfg.domain.Marca;
-import org.tfg.spring.tfg.domain.Modelo;
 import org.tfg.spring.tfg.repository.MarcaRepository;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -29,6 +29,10 @@ public class MarcaService {
         return marcaRepository.findById(idMarca).get();
     }
 
+    public List<Marca> findByNombre(String nombre) {
+        return marcaRepository.findByNombre(nombre);
+    }
+
     public void update(Long idMarca, String nombre) {
         Marca marca = marcaRepository.findById(idMarca).get();
         marca.setId(idMarca);
@@ -38,6 +42,19 @@ public class MarcaService {
 
     public void delete(Long idMarca) {
         marcaRepository.delete(marcaRepository.getReferenceById(idMarca));
+    }
+
+    public void init(){
+        if(marcaRepository.count() == 0){
+            List<Marca> marcasIni = Arrays.asList(
+
+                new Marca("Nike"),
+                new Marca("Adidas"),
+                new Marca("Puma"),
+                new Marca("Yezzy")
+            );
+            marcaRepository.saveAll(marcasIni);
+        }
     }
    
 }

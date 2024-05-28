@@ -27,7 +27,6 @@ public class LoginHelper {
 
 
      public static boolean isRolOK(String rolRequerido, HttpSession s) {
-        boolean respuesta = false;
         String rolActual = "anon";
 
         if (s.getAttribute("usuario") != null) {
