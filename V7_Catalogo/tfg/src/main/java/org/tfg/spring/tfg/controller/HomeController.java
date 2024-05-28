@@ -167,7 +167,8 @@ public class HomeController {
             @RequestParam("dni") String dni,
             @RequestParam("mail") String mail,
             @RequestParam("contraseña") String contraseña,
-            HttpSession s) {
+            HttpSession s,
+            ModelMap m) {
         try {
             Usuario usuario = usuarioService.save(nombre, dni, mail, contraseña);
             mailService.sendActivationEmail(usuario);
@@ -179,7 +180,8 @@ public class HomeController {
                 e1.printStackTrace();
             }
         }
-        return "redirect:/";
+        m.put("view", "home/home");
+        return "_t/frame";
     }
 
     @GetMapping("/login")
@@ -198,10 +200,10 @@ public class HomeController {
             Usuario usuario = usuarioService.login(nombre, contraseña);
             s.setAttribute("usuario", usuario);
         } catch (Exception e) {
-            e.printStackTrace();
             PRG.error("Usuario o contraseña incorrectos");
         }
-        return "redirect:/";
+        m.put("view", "home/home");
+        return "_t/frame";
     }
 
     @GetMapping("/logout")

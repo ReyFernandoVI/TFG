@@ -20,7 +20,7 @@ public class CompraController {
     public String mostrarProducto(@RequestParam("id") Long idZapatilla, ModelMap m) {
         Zapatilla zapatilla = zapatillaService.findById(idZapatilla);
         m.put("view", "home/mostrarProducto");
-        m.addAttribute(zapatilla);
+        m.put("zapatilla",zapatilla);
         return "_t/frame";
     }
 

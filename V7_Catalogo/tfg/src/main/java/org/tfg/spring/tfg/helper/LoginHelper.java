@@ -4,7 +4,7 @@ import org.tfg.spring.tfg.domain.Usuario;
 
 import jakarta.servlet.http.HttpSession;
 
-public class H {
+public class LoginHelper {
 
     private static int rolIndex(String rol) {
         int index = 0;
