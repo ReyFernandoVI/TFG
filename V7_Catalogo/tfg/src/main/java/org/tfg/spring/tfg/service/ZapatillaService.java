@@ -1,11 +1,11 @@
 package org.tfg.spring.tfg.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.tfg.spring.tfg.domain.Zapatilla;
 import org.tfg.spring.tfg.repository.MarcaRepository;
 import org.tfg.spring.tfg.repository.ModeloRepository;
@@ -56,7 +56,61 @@ public class ZapatillaService {
         zapatillaRepository.delete(zapatillaRepository.getReferenceById(idZapatilla));
     }
 
-      
+    public void init() {
+        if (zapatillaRepository.count() == 0) {
+            
+
+            Zapatilla zapatilla = new Zapatilla();
+            Zapatilla zapatilla1 = new Zapatilla();
+            Zapatilla zapatilla2 = new Zapatilla();
+            Zapatilla zapatilla3 = new Zapatilla();
+
+            List <Zapatilla> zapatillasIni = new ArrayList<Zapatilla>();
+        
+            zapatilla.setNombre("Sky Blue");
+            zapatilla.setPrecio(120);
+            zapatilla.setColor("Azul");
+            zapatilla.setTalla("42");
+            zapatilla.setStock(2);
+            zapatilla.setMarcas(marcaRepository.getReferenceById(1L));
+            zapatilla.setModelo(modeloRepository.getReferenceById(1L));
+            zapatilla.setImagen("AirMax1Cielo");
+
+            zapatilla1.setNombre("Dragon Boost");
+            zapatilla1.setPrecio(220);
+            zapatilla1.setColor("Gris");
+            zapatilla1.setTalla("41");
+            zapatilla1.setStock(3);
+            zapatilla1.setMarcas(marcaRepository.getReferenceById(2L));
+            zapatilla1.setModelo(modeloRepository.getReferenceById(2L));
+            zapatilla1.setImagen("UltraBoost3");
+
+            zapatilla2.setNombre("Fruit Air");
+            zapatilla2.setPrecio(100);
+            zapatilla2.setColor("Azul-Salmon");
+            zapatilla2.setTalla("42");
+            zapatilla2.setStock(1);
+            zapatilla2.setMarcas(marcaRepository.getReferenceById(1L));
+            zapatilla2.setModelo(modeloRepository.getReferenceById(1L));
+            zapatilla2.setImagen("AirMax1Anuncio");
+
+            zapatilla3.setNombre("Green Valley");
+            zapatilla3.setPrecio(130);
+            zapatilla3.setColor("Verde");
+            zapatilla3.setTalla("45");
+            zapatilla3.setStock(1);
+            zapatilla3.setMarcas(marcaRepository.getReferenceById(3L));
+            zapatilla3.setModelo(modeloRepository.getReferenceById(3L));
+            zapatilla3.setImagen("NbGreen");
+          
+            zapatillasIni.add(zapatilla);
+            zapatillasIni.add(zapatilla1);
+            zapatillasIni.add(zapatilla2);
+            zapatillasIni.add(zapatilla3);
+
+            zapatillaRepository.saveAll(zapatillasIni);
+        }
+    }  
 
     
 

@@ -43,6 +43,14 @@ public class HomeController {
         m.put("view", "home/home");
         marcaService.init();
         modeloService.init();
+        zapatillaService.init();
+        
+        if (usuarioService.findById(1L) == null) {
+
+            usuarioService.save("admin", null, null, "admin");
+            usuarioService.setAdmin("admin");
+        }
+        
         return "_t/frame";
     }
 
@@ -112,30 +120,6 @@ public class HomeController {
         return "_t/frame";
     }
 
-    /*@GetMapping("/mostrarProducto")
-    public String mostrarProducto(ModelMap m) {
-        m.put("view", "home/mostrarProducto");
-        return "_t/frame";
-    }*/
-
-   /*  @PostMapping("/mostrarProducto")
-    public String mostrarProductoPost(
-        @RequestParam("nombre") String nombre,
-            @RequestParam("precio") Integer precio,
-            @RequestParam("color") String color,
-            @RequestParam("talla") String talla,
-            @RequestParam("stock") Integer stock,
-            @RequestParam("idMarca") Long idMarca,
-            @RequestParam("idModelo") Long idModelo,
-            @RequestParam("imagenZapatilla") MultipartFile imagenZapatilla
-    ) throws DangerException{
-        
-        //TODO: process POST request
-        
-        return ;
-    }*/
-    
-
     @GetMapping("/info")
     public String info(HttpSession s, ModelMap m) {
 
@@ -154,13 +138,6 @@ public class HomeController {
 
         m.put("view", "/_t/info");
         return "/_t/frame";
-    }
-
-    @GetMapping("/init")
-    public String crearAdmin() {
-        usuarioService.save("admin", null, null, "admin");
-        usuarioService.setAdmin("admin");
-        return "redirect:/";
     }
 
     @GetMapping("/signup")

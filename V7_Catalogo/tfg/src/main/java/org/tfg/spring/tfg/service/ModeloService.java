@@ -48,13 +48,13 @@ public class ModeloService {
         if (modeloRepository.count() == 0) {
             Marca Nike = marcaRepository.findById(1L).orElse(null); // Asumiendo que Nike tiene ID 1
             Marca Adidas = marcaRepository.findById(2L).orElse(null); // Asumiendo que Adidas tiene ID 2
-            Marca Puma = marcaRepository.findById(3L).orElse(null); // Asumiendo que Adidas tiene ID 2
+            Marca nb = marcaRepository.findById(3L).orElse(null); // Asumiendo que Adidas tiene ID 2
             Marca Yeezy = marcaRepository.findById(4L).orElse(null); // Asumiendo que Adidas tiene ID 2
 
             List<Modelo> modelosIni = Arrays.asList(
                 new Modelo("AirMax", Nike),
                 new Modelo("UltraBoost", Adidas),
-                new Modelo("RSX", Puma),
+                new Modelo("550", nb),
                 new Modelo("Beluga", Yeezy)
                 // Agrega más modelos si es necesario
             );

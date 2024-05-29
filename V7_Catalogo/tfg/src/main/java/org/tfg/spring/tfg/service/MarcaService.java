@@ -50,7 +50,7 @@ public class MarcaService {
 
                 new Marca("Nike"),
                 new Marca("Adidas"),
-                new Marca("Puma"),
+                new Marca("Nb"),
                 new Marca("Yezzy")
             );
             marcaRepository.saveAll(marcasIni);

@@ -14,13 +14,13 @@
             <li><a href="/catalogue" class="nav-link px-2 text-white">Catálogo</a></li>
             <!--li><a href="/vipzone" class="nav-link px-2 text-white">Zona Vip</a></li-->
             <li><a href="/shoes" class="nav-link px-2 text-white">Vista Zapatilla</a></li>
-            <li><a href="/pay" class="nav-link px-2 text-white">Vista Pedido</a></li>
+            <!--<li><a href="/pay" class="nav-link px-2 text-white">Vista Pedido</a></li>-->
             <li th:if="${session.usuario != null and session.usuario.admin}" ><a href="/admin" class="nav-link px-2 text-white">Admin</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="text-end col-lg-auto mb-2 justify-content-end mb-md-0" style="margin-left: 280px;">
+      <div class="text-end col-lg-auto mb-2 justify-content-end mb-md-0" style="margin-left: 380px;">
         <span class="text-secondary" th:if="${session.usuario!=null}" th:text="|Hi ${session.usuario.nombre} /   |"></span>
         <a th:if="${session.usuario!=null}" href="/logout">Cerrar Sesión</a>
         <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuario==null}" style="margin-right: 40px;" onclick="window.location.href='/login'">Iniciar Sesión</button>
