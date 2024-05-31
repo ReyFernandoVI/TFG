@@ -30,7 +30,7 @@ public class ModeloService {
         return modeloRepository.findById(idModelo).get();
     }
 
-    public List<Modelo> findByNombre(String nombre) {
+    public Modelo findByNombre(String nombre) {
         return modeloRepository.findByNombre(nombre);
     }
 

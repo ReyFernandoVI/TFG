@@ -3,6 +3,7 @@ package org.tfg.spring.tfg.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class ZapatillaService {
         }
         return zapatillaRepository.findAll();
     }
-    public void save(String nombre,Integer precio,String color, String talla, Integer stock, Long idMarca, Long idModelo, String nombreImagen) {
+    public void save(String nombre,double precio,String color, String talla, Integer stock, Long idMarca, Long idModelo, String nombreImagen) {
         Zapatilla zapatilla = new Zapatilla(nombre, precio, color, talla, stock);
         zapatilla.setMarcas(marcaRepository.getReferenceById(idMarca));
         zapatilla.setModelo(modeloRepository.getReferenceById(idModelo));
@@ -40,8 +41,24 @@ public class ZapatillaService {
     public Zapatilla findById(Long idZapatilla) {
         return zapatillaRepository.findById(idZapatilla).get();
     }
+    public Long findIdModelo(String nombre)
+    {
+      return modeloRepository.findByNombre(nombre).getId();
+    }
+    public Long findIdMarca(String nombre)
+    {
+      return marcaRepository.findByNombre(nombre).getId();
+    }
+    public Optional<Zapatilla> findByName(String nombreZapatilla) {
+        // Suponiendo que tienes un repositorio `zapatillaRepository` con un método `findByName`
+        return zapatillaRepository.findByNombre(nombreZapatilla);
+    }
 
-    public void update(Long idZapatilla, String nombre, Integer precio,String color, String talla, Integer stock, Long idMarca, Long idModelo) {
+    public void updateStock(Zapatilla zapatilla, int cantidad) {
+        zapatilla.setStock(zapatilla.getStock() + cantidad);
+        zapatillaRepository.save(zapatilla);
+    }
+    public void update(Long idZapatilla, String nombre, double precio,String color, String talla, Integer stock, Long idMarca, Long idModelo) {
         Zapatilla zapatilla = zapatillaRepository.findById(idZapatilla).get();
         zapatilla.setNombre(nombre);
         zapatilla.setPrecio(precio);

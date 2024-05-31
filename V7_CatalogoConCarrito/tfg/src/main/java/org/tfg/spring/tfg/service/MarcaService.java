@@ -29,7 +29,7 @@ public class MarcaService {
         return marcaRepository.findById(idMarca).get();
     }
 
-    public List<Marca> findByNombre(String nombre) {
+    public Marca findByNombre(String nombre) {
         return marcaRepository.findByNombre(nombre);
     }
 

@@ -1,6 +1,5 @@
 package org.tfg.spring.tfg.domain;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,10 +16,10 @@ public class Zapatilla {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+  
     private String nombre;
 
-    private Integer precio;
+    private double precio;
 
     private String color;
 
@@ -38,7 +37,7 @@ public class Zapatilla {
     
     // ==================
 
-    public Zapatilla(String nombre,Integer precio,String color, String talla, Integer stock) {
+    public Zapatilla(String nombre,double precio,String color, String talla, Integer stock) {
         this.nombre = nombre;
         this.precio = precio;
         this.color = color;

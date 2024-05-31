@@ -58,7 +58,7 @@ public class ZapatillaController {
     @PostMapping("c")
     public String cPost(
             @RequestParam("nombre") String nombre,
-            @RequestParam("precio") Integer precio,
+            @RequestParam("precio") double precio,
             @RequestParam("color") String color,
             @RequestParam("talla") String talla,
             @RequestParam("stock") Integer stock,
@@ -99,7 +99,7 @@ public class ZapatillaController {
     public String updatePost(
             @RequestParam("idZapatilla") Long idZapatilla,
             @RequestParam("nombre") String nombre,
-            @RequestParam("precio") Integer precio,
+            @RequestParam("precio") double precio,
             @RequestParam("color") String color,
             @RequestParam("talla") String talla,
             @RequestParam("stock") Integer stock,

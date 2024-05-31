@@ -18,8 +18,8 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    public Pedido save( String nombreZapatilla, String modeloZapatilla, String marcaZapatilla, double precioUnidad, LocalDate fechCompra,double precioTotal,double cantidad) {
-        Pedido pedido = new Pedido(nombreZapatilla, modeloZapatilla, marcaZapatilla, precioUnidad, fechCompra,precioTotal,cantidad);
+    public Pedido save( String nombreZapatilla, String modeloZapatilla, String marcaZapatilla, double precioUnidad, LocalDate fechCompra,double precioTotal,Integer stock,String color,String talla,String Imagen) {
+        Pedido pedido = new Pedido(nombreZapatilla, modeloZapatilla, marcaZapatilla, precioUnidad, fechCompra,precioTotal,stock,color,talla,Imagen);
        
       
         return pedidoRepository.save(pedido);

@@ -3,6 +3,7 @@ package org.tfg.spring.tfg.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +23,5 @@ public interface ZapatillaRepository extends JpaRepository<Zapatilla, Long> {
            "OR m.nombre LIKE %:palabraClave% " + 
            "OR s.nombre LIKE %:palabraClave%") 
     List<Zapatilla> findAll(@Param("palabraClave") String palabraClave);
-    
+    Optional<Zapatilla> findByNombre(String nombreZapatilla);
 }

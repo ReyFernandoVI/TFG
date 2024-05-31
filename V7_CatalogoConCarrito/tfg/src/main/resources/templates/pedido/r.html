@@ -9,6 +9,9 @@
                 <th>Nombre Zapatilla</th>
                 <th>Modelo Zapatilla</th>
                 <th>Marca Zapatilla</th>
+                <th>color</th>
+                <th>talla</th>
+                <th>Imagen</th>
                 <th>Precio Unidad (€)</th>
                 <th> Unidad </th>
                 <th>Precio total (€)</th>
@@ -23,8 +26,15 @@
                 <td th:text="${pedido.nombreZapatilla}"></td>
                 <td th:text="${pedido.modeloZapatilla}"></td>
                 <td th:text="${pedido.marcaZapatilla}"></td>
+                <td th:text="${pedido.color}"></td>
+                <td th:text="${pedido.talla}"></td>
+                <td>
+                    <form action="zapatilla/r" enctype="multipart/form-data">
+                        <img th:src="@{'/img/' + ${pedido.imagen} + '.png'}" width="300"> 
+                    </form>
+                </td>
                 <td th:text="${pedido.precioUnidad}"></td>
-                <td th:text="${pedido.cantidad}"></td>
+                <td th:text="${pedido.stock}"></td>
                 <td th:text="${pedido.precioTotal}"></td>
                
                 <td>

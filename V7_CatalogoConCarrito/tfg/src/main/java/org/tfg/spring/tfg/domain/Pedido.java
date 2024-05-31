@@ -28,11 +28,18 @@ public class Pedido {
     private double precioUnidad;
     private double precioTotal;
     private LocalDate fechCompra;
-    private double cantidad;
+    private Integer stock;
+    
+    private String color;
+
+    private String talla;
+
+
+    private String imagen;
 
 
 
-    public Pedido(String nombreZapatilla, String modeloZapatilla, String marcaZapatilla, double precioUnidad, LocalDate fechCompra,double precioTotal, double cantidad) {
+    public Pedido(String nombreZapatilla, String modeloZapatilla, String marcaZapatilla, double precioUnidad, LocalDate fechCompra,double precioTotal, Integer stock,String color,String talla,String Image) {
 
         this.nombreZapatilla = nombreZapatilla;
         this.modeloZapatilla = modeloZapatilla;
@@ -41,7 +48,10 @@ public class Pedido {
         this.fechCompra = fechCompra;
         this.precioTotal=precioTotal;
         this.numPedido = generateRandomNumber();
-        this.cantidad=cantidad;
+        this.stock=stock;
+        this.color=color;
+        this.talla=talla;
+        
     }
 
    
