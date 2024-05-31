@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.tfg.spring.tfg.domain.Usuario;
 import org.tfg.spring.tfg.repository.UsuarioRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class UsuarioService {
     
@@ -73,6 +75,12 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.getByNombre(nombre);
         usuario.setAdmin(true);
         usuarioRepository.save(usuario);
+    }
+
+    public Usuario getAuthUser(HttpSession s){
+        Usuario usuario = (Usuario) s.getAttribute("usuario");
+
+        return null != usuario ?usuario: null;
     }
 
    

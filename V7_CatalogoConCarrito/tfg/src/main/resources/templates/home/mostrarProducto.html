@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,6 +14,7 @@
     <!-- Custom styles for this template -->
     <link href="/css/heroic-features.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navigation -->
     <div>
@@ -36,8 +38,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <a href="#"> 
-                            <img class="img-fluid rounded" th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}" alt="Imagen de Zapatilla">
+                        <a href="#">
+                            <img class="img-fluid rounded" th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}"
+                                alt="Imagen de Zapatilla">
                         </a>
                     </div>
                     <div class="col-lg-6">
@@ -70,12 +73,14 @@
                                 </li>-->
                                 <li class="list-group-item">
                                     <h6>
-                                        Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off" min="1" max="5" value="1">
+                                        Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
+                                            min="1" max="5" value="1">
                                     </h6>
                                 </li>
                             </ul>
                             <br>
-                            <button type="submit" class="btn btn-success">Añadir al Carrito</button>
+                            <button type="button" class="btn btn-success"
+                                th:onclick="addZapatilla([[(${zapatilla})]])">Añadir al Carrito</button>
                             <a href="/catalogue" type="button" class="btn btn-danger">Volver</a>
                         </form>
                     </div>
@@ -89,5 +94,31 @@
     <div>
         <!-- Include your footer content here -->
     </div>
+    <script>
+
+        const BASE_URL = window.location.origin;
+        const API_URL = `${BASE_URL}/api/carritos`;
+
+        function addZapatilla(zapatilla) {
+            if (!zapatilla) {
+                return;
+            }
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('POST', `${API_URL}/update`, true)
+            xhttp.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+            xhttp.send(JSON.stringify(zapatilla));
+
+            xhttp.onload = function () {
+
+                if ([200, 201].includes(xhttp.status)) {
+                    alert("Guardado correctamente");
+                    window.location.href = `${BASE_URL}/catalogue`;
+                } else {
+                    alert("Error al proseguir con la compra");
+                }
+            }
+        }
+    </script>
 </body>
+
 </html>
