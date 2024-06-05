@@ -26,12 +26,15 @@ public class CarritoController {
         return carritoService.findCarritoByUsuarioId(s);
     }
 
+<<<<<<< Updated upstream:V7_CatalogoConCarrito/tfg/src/main/java/org/tfg/spring/tfg/controller/CarritoController.java
     @GetMapping("/carritos/item-count")
     public int getCarritoItemCount(HttpSession s) {
         Carrito carrito = carritoService.findCarritoByUsuarioId(s);
         return carrito.getZapatillas().size();
     }
     
+=======
+>>>>>>> Stashed changes:V7_Catalogo/tfg/src/main/java/org/tfg/spring/tfg/controller/CarritoController.java
     @PostMapping("/carritos/update")
     public Carrito postMethodName(@RequestBody Zapatilla zapatilla, HttpSession s) {
         return carritoService.updateSaveCrarito(zapatilla, s);

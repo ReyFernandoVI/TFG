@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Pedido</title>
+    <style>
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1em;
+        }
+        .quantity-controls button {
+            width: 30px;
+            height: 30px;
+        }
+        .quantity-controls input {
+            width: 50px;
+            text-align: center;
+            font-size: 1.2em;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nuevo Pedido</h1>
+        <form action="/pedido/c" method="post">
+            <label for="id-fechCompra">Fecha Compra</label>
+            <input id="id-fechCompra" type="date" name="fechCompra" />
+            <br />
+
+            <label for="id-nombreZapatilla">Nombre Zapatilla</label>
+            <input id="id-nombreZapatilla" type="text" name="nombreZapatilla" />
+            <br />
+
+            <label for="id-modeloZapatilla">Modelo Zapatilla</label>
+            <input id="id-modeloZapatilla" type="text" name="modeloZapatilla" />
+            <br />
+
+            <label for="id-marcaZapatilla">Marca Zapatilla</label>
+            <input id="id-marcaZapatilla" type="text" name="marcaZapatilla" />
+            <br />
+
+            <label for="id-precioUnidad">Precio Unidad (€)</label>
+            <input id="id-precioUnidad" type="number" step="0.01" name="precioUnidad" />
+            <br />
+
+            <label for="id-cantidadZapatilla">Cantidad Zapatillas</label>
+            <div class="quantity-controls">
+                <button type="button" onclick="decrement()">-</button>
+                <input id="id-cantidadZapatilla" type="number" step="1" name="cantidadZapatilla" value="1" min="1" />
+                <button type="button" onclick="increment()">+</button>
+            </div>
+
+            <input type="submit" value="Guardar Pedido" />
+        </form>
+        <button onclick="window.location.href='/pedido/r'">Cancelar</button>
+    </div>
+
+    <script>
+        function increment() {
+            const input = document.getElementById('id-cantidadZapatilla');
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decrement() {
+            const input = document.getElementById('id-cantidadZapatilla');
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+    </script>
+</body>
+</html>
