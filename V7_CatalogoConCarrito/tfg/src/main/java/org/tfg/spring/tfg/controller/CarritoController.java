@@ -26,6 +26,12 @@ public class CarritoController {
         return carritoService.findCarritoByUsuarioId(s);
     }
 
+    @GetMapping("/carritos/item-count")
+    public int getCarritoItemCount(HttpSession s) {
+        Carrito carrito = carritoService.findCarritoByUsuarioId(s);
+        return carrito.getZapatillas().size();
+    }
+    
     @PostMapping("/carritos/update")
     public Carrito postMethodName(@RequestBody Zapatilla zapatilla, HttpSession s) {
         return carritoService.updateSaveCrarito(zapatilla, s);
