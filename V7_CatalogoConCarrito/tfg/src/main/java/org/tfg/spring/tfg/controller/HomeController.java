@@ -18,8 +18,6 @@ import org.tfg.spring.tfg.service.ZapatillaService;
 
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
 public class HomeController {
 
@@ -39,18 +37,19 @@ public class HomeController {
     private MailService mailService;
 
     @GetMapping("/")
-    public String home(ModelMap m) {
+    public String home(HttpSession session, ModelMap m) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        m.put("usuario", usuario);
         m.put("view", "home/home");
         marcaService.init();
         modeloService.init();
         zapatillaService.init();
-        
+    
         if (usuarioService.findById(1L) == null) {
-
-            usuarioService.save("admin", null, null, "admin");
+            usuarioService.save("admin", null, null, "admin", false);
             usuarioService.setAdmin("admin");
         }
-        
+    
         return "_t/frame";
     }
 
@@ -122,7 +121,6 @@ public class HomeController {
 
     @GetMapping("/info")
     public String info(HttpSession s, ModelMap m) {
-
         String mensaje = s.getAttribute("_mensaje") != null ? (String) s.getAttribute("_mensaje")
                 : "Pulsa para volver a home";
         String severity = s.getAttribute("_severity") != null ? (String) s.getAttribute("_severity") : "info";
@@ -155,13 +153,12 @@ public class HomeController {
             HttpSession s,
             ModelMap m) {
         try {
-            Usuario usuario = usuarioService.save(nombre, dni, mail, contraseña);
+            Usuario usuario = usuarioService.save(nombre, dni, mail, contraseña, false);
             mailService.sendActivationEmail(usuario);
         } catch (Exception e) {
             try {
                 PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
             } catch (DangerException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         }
@@ -196,6 +193,4 @@ public class HomeController {
         s.invalidate();
         return "redirect:/";
     }
-
-
 }

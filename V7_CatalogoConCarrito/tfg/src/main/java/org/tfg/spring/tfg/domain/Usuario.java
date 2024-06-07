@@ -1,7 +1,6 @@
 package org.tfg.spring.tfg.domain;
 
 import java.time.LocalDate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,11 +30,13 @@ public class Usuario {
 
     private Boolean admin;
 
-    
+    private Boolean vip; // Agrega el campo para el usuario VIP
+
     // ==================
 
     public Usuario() {
         this.admin = false;
+        this.vip = false; // Establece vip como false por defecto
     }
 
     public Usuario(String nombre, String dni, String mail, String contraseña) {
@@ -43,7 +44,8 @@ public class Usuario {
         this.dni = dni;
         this.mail = mail;
         this.contraseña = contraseña;
-        this.fechaAlta = LocalDate.now();// Establece la fecha de alta como la fecha actual al crear el usuario
-        this.admin = false; 
+        this.fechaAlta = LocalDate.now(); // Establece la fecha de alta como la fecha actual al crear el usuario
+        this.admin = false;
+        this.vip = false; // Establece vip como false por defecto
     }
 }

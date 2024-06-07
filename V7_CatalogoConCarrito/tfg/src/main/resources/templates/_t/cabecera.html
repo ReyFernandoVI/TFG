@@ -28,8 +28,11 @@
           </svg>
           Carrito
         </button>
-        <span th:if="${session.usuario!=null}" class="admin-greeting"
+        <span th:if="${session.usuario!=null}" class="admin-greeting"        
           th:classappend="${session.usuario.admin} ? 'admin-greeting' : ''">
+           <!-- Indicador VIP -->
+          <span th:if="${session.usuario != null and session.usuario.vip}" class="vip-indicator">VIP&nbsp;
+          </span>
           <i class="fas fa-user-shield" th:if="${session.usuario.admin}" style="margin-right: 5px;"></i>
           <span th:text="|Bienvenido ${session.usuario.nombre} |"></span>
         </span>
@@ -47,6 +50,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     const BASE_URL = window.location.origin;
     const API_URL = `${BASE_URL}/api/carritos/item-count`;
+    const USER_INFO_URL = `${BASE_URL}/api/usuario/info`; // Ruta para obtener información del usuario
 
     fetch(API_URL)
       .then(response => {
@@ -74,6 +78,35 @@
         if (cartCountElement) {
           cartCountElement.style.display = 'none';
         }
+      });
+
+    fetch(USER_INFO_URL) // Obtener información del usuario (incluyendo si es VIP)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const isAdmin = data.admin;
+        const isVip = data.vip;
+
+        if (isAdmin || isVip) {
+          const adminGreeting = document.querySelector('.admin-greeting');
+          const logoutButton = document.querySelector('.btn-outline-light.me-2');
+          const crownIcon = '<i class="fas fa-crown" style="margin-right: 5px; color: blue;"></i>';
+
+          if (adminGreeting) {
+            adminGreeting.innerHTML = crownIcon + adminGreeting.innerHTML;
+          }
+
+          if (logoutButton) {
+            logoutButton.classList.add('btn-primary'); // Cambia el color del botón
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error al obtener la información del usuario:', error);
       });
   });
 </script>

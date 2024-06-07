@@ -12,8 +12,6 @@ import org.tfg.spring.tfg.service.CarritoService;
 
 import jakarta.servlet.http.HttpSession;
 
-
-
 @RestController
 @RequestMapping("/api")
 public class CarritoController {
@@ -26,15 +24,16 @@ public class CarritoController {
         return carritoService.findCarritoByUsuarioId(s);
     }
 
-<<<<<<< Updated upstream:V7_CatalogoConCarrito/tfg/src/main/java/org/tfg/spring/tfg/controller/CarritoController.java
     @GetMapping("/carritos/item-count")
     public int getCarritoItemCount(HttpSession s) {
         Carrito carrito = carritoService.findCarritoByUsuarioId(s);
-        return carrito.getZapatillas().size();
+        if (carrito != null) {
+            return carrito.getZapatillas().size();
+        } else {
+            return 0; // O cualquier otro valor que desees retornar cuando el carrito sea null
+        }
     }
     
-=======
->>>>>>> Stashed changes:V7_Catalogo/tfg/src/main/java/org/tfg/spring/tfg/controller/CarritoController.java
     @PostMapping("/carritos/update")
     public Carrito postMethodName(@RequestBody Zapatilla zapatilla, HttpSession s) {
         return carritoService.updateSaveCrarito(zapatilla, s);
@@ -49,5 +48,4 @@ public class CarritoController {
     public void cancelarCompra(HttpSession s) {
         carritoService.cancelarCompra(s);
     }
-    
 }

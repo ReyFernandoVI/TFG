@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UsuarioService {
-    
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -24,16 +24,16 @@ public class UsuarioService {
     public List<Usuario> findByNombre(String nombre) {
         return usuarioRepository.findByNombre(nombre);
     }
-    
-    public Usuario save(String nombre, String dni,String mail, String contraseña) {
-        
+
+    public Usuario save(String nombre, String dni, String mail, String contraseña, Boolean vip) {
         Usuario usuario = new Usuario(nombre, dni, mail, contraseña);
         usuario.setNombre(nombre);
         usuario.setDni(dni);
         usuario.setMail(mail);
         String contraseñaCodificada = new BCryptPasswordEncoder().encode(contraseña);
         usuario.setContraseña(contraseñaCodificada);
-        usuario.setFechaAlta(LocalDate.now()); // Establece la fecha de alta como la fecha actual
+        usuario.setFechaAlta(LocalDate.now());
+        usuario.setVip(vip);
         return usuarioRepository.save(usuario);
     }
 
@@ -55,10 +55,8 @@ public class UsuarioService {
         usuarioRepository.deleteById(idUsuario);
     }
 
-    
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // Método login
     public Usuario login(String nombre, String contraseña) throws Exception {
         Usuario usuario = usuarioRepository.getByNombre(nombre);
         if (usuario == null) {
@@ -67,7 +65,6 @@ public class UsuarioService {
         if (!passwordEncoder.matches(contraseña, usuario.getContraseña())) {
             throw new Exception("La contraseña para el Usuario " + nombre + " es incorrecta");
         }
-    
         return usuario;
     }
 
@@ -77,11 +74,8 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
-    public Usuario getAuthUser(HttpSession s){
+    public Usuario getAuthUser(HttpSession s) {
         Usuario usuario = (Usuario) s.getAttribute("usuario");
-
-        return null != usuario ?usuario: null;
+        return usuario != null ? usuario : null;
     }
-
-   
 }

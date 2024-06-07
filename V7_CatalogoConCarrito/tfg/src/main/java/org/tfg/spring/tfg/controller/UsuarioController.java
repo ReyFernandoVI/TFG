@@ -20,7 +20,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    
     @GetMapping("r")
     public String r(ModelMap m) {
         m.put("usuarios", usuarioService.findAll());
@@ -35,23 +34,27 @@ public class UsuarioController {
     }
 
     @PostMapping("c")
-    public String cPost(@RequestParam("nombre") String nombre,
-                        @RequestParam("dni") String dni,
-                        @RequestParam("mail") String mail,
-                        @RequestParam("contraseña") String contraseña,
-                        HttpSession s) {
-        try {
-            usuarioService.save(nombre, dni ,mail, contraseña);
-        } catch (Exception e) {
-            try {
-                PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
-            } catch (DangerException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+public String cPost(@RequestParam("nombre") String nombre,
+                    @RequestParam("dni") String dni,
+                    @RequestParam("mail") String mail,
+                    @RequestParam("contraseña") String contraseña,
+                    @RequestParam(value = "vip", required = false) Boolean vip,
+                    HttpSession s) {
+    try {
+        if (vip == null) {
+            vip = false;
         }
-        return "redirect:/usuario/r";
+        usuarioService.save(nombre, dni, mail, contraseña, vip);
+    } catch (Exception e) {
+        try {
+            PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
+        } catch (DangerException e1) {
+            e1.printStackTrace();
+        }
     }
+    return "redirect:/usuario/r";
+}
+
 
     @GetMapping("u")
     public String update(@RequestParam("id") Long idUsuario, ModelMap m) {
@@ -64,14 +67,17 @@ public class UsuarioController {
     public String updatePost(@RequestParam("id") Long id,
                              @RequestParam("nombre") String nombre,
                              @RequestParam("dni") String dni,
-                             @RequestParam("mail") String mail) {
+                             @RequestParam("mail") String mail,
+                             @RequestParam(value = "vip", required = false) Boolean vip) {
         try {
-            usuarioService.update(id, nombre, dni, mail);
+            if (vip == null) {
+                vip = false;
+            }
+            usuarioService.update(id, nombre, dni, mail, vip);
         } catch (Exception e) {
             try {
                 PRG.error("El usuario no pudo ser actualizado", "/usuario/r");
             } catch (DangerException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         }
@@ -86,7 +92,6 @@ public class UsuarioController {
             try {
                 PRG.error("No se puede borrar el usuario", "/usuario/r");
             } catch (DangerException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         }
