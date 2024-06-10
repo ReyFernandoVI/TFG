@@ -36,11 +36,15 @@ public class PedidoController {
    // Declaración de precioTotal como atributo de la clase
    @Autowired
    private ZapatillaService zapatillaService;
+
    @Autowired
    private MarcaService marcaService;
+
    @Autowired
    private ModeloService modeloService;
+
    private static final String LOAD_DIR = "src\\main\\resources\\static\\img";
+   
     @GetMapping("r")
     public String r(ModelMap m) {
         List<Pedido> pedidos = pedidoService.findAll();

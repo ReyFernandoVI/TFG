@@ -10,7 +10,9 @@ import org.tfg.spring.tfg.repository.PedidoRepository;
 
 @Service
 public class PedidoService {
+
     double precioTotal = 0;
+
     @Autowired
     private PedidoRepository pedidoRepository;
 
@@ -18,9 +20,9 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    public Pedido save( String nombreZapatilla, String modeloZapatilla, String marcaZapatilla, double precioUnidad, LocalDate fechCompra,double precioTotal,Integer stock,String color,String talla,String Imagen) {
-        Pedido pedido = new Pedido(nombreZapatilla, modeloZapatilla, marcaZapatilla, precioUnidad, fechCompra,precioTotal,stock,color,talla,Imagen);
-       
+    public Pedido save( String nombreZapatilla, String modeloZapatilla, String marcaZapatilla, double precioUnidad, LocalDate fechCompra,double precioTotal,Integer stock,String color,String talla,String nombreImagen) {
+        Pedido pedido = new Pedido(nombreZapatilla, modeloZapatilla, marcaZapatilla, precioUnidad, fechCompra,precioTotal,stock,color,talla,nombreImagen);
+        pedido.setImagen(nombreImagen);
       
         return pedidoRepository.save(pedido);
     }
