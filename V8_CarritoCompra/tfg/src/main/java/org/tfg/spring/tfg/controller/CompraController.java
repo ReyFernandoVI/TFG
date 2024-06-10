@@ -55,7 +55,7 @@ public class CompraController {
         public String getResumen(HttpSession s, ModelMap m) {
                 m.put("view", "carrito/resumen");
                 Carrito carrito = carritoService.findCarritoByUsuarioId(s);
-                m.put("zapatillas",null != carrito ?carrito.getZapatillas() : null);
+                m.put("carritoZapatillas",null != carrito && !carrito.getCarritoZapatillas().isEmpty() ?carrito.getCarritoZapatillas() : null);
                 return "_t/frame";
         }
 

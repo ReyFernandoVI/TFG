@@ -1,8 +1,13 @@
 package org.tfg.spring.tfg.domain;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.tfg.spring.tfg.domain.vm.ZapatillaCantidad;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,14 +25,15 @@ public class Carrito{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<Zapatilla> zapatillas = new ArrayList<>();
+    @OneToMany(mappedBy = "carrito")
+    
+    private List<CarritoZapatillas> carritoZapatillas = new ArrayList<>();
 
     @ManyToOne
     private Usuario usuario; 
 
     private Boolean isBought;
 
-    private Instant fechaCompra;
+    private LocalDate fechaCompra;
 
 }

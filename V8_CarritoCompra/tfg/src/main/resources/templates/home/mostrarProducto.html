@@ -74,7 +74,7 @@
                                 <li class="list-group-item">
                                     <h6>
                                         Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
-                                            min="1" max="5" value="1">
+                                            min="1" th:max="${zapatilla.stock}" value="1">
                                     </h6>
                                 </li>
                             </ul>
@@ -103,10 +103,15 @@
             if (!zapatilla) {
                 return;
             }
+            const cantidadProducto = document.getElementById("cantidad").value;
             const xhttp = new XMLHttpRequest();
             xhttp.open('POST', `${API_URL}/update`, true)
             xhttp.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
-            xhttp.send(JSON.stringify(zapatilla));
+            const data = {
+                zapatilla,
+                cantidad: null !== cantidadProducto && undefined !== cantidadProducto? cantidadProducto: 1
+            };
+            xhttp.send(JSON.stringify(data));
 
             xhttp.onload = function () {
 
