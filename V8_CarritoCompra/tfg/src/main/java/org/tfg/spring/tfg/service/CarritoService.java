@@ -15,12 +15,16 @@ import org.tfg.spring.tfg.domain.Zapatilla;
 import org.tfg.spring.tfg.domain.vm.ZapatillaCantidad;
 import org.tfg.spring.tfg.repository.CarritoRepository;
 import org.tfg.spring.tfg.repository.CarritoZapatillasRepository;
+import org.tfg.spring.tfg.repository.ZapatillaRepository;
 
 import jakarta.servlet.http.HttpSession;
 
 @Service
 @Transactional
 public class CarritoService {
+
+    @Autowired
+    private ZapatillaRepository zapatillaRepository;
 
     @Autowired
     private CarritoRepository carritoRepository;
@@ -96,6 +100,18 @@ public class CarritoService {
         Carrito carrito = getCarritoIfExist(s);
 
         if(null == carrito) return;
+
+        for (CarritoZapatillas item : carrito.getCarritoZapatillas()) {
+            Zapatilla zapatilla = item.getZapatilla();
+            int cantidadComprada = item.getCantidad();
+            if (zapatilla.getStock() >= cantidadComprada) {
+                zapatilla.setStock(zapatilla.getStock() - cantidadComprada);
+                zapatillaRepository.save(zapatilla);
+            } else {
+                // Manejar caso cuando no hay suficiente stock, lanzar una excepción o similar
+                throw new IllegalArgumentException("No hay suficiente stock para " + zapatilla.getNombre());
+            }
+        }
 
         carrito.setIsBought(true);
         carritoRepository.save(carrito);
