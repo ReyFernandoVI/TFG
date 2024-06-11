@@ -3,7 +3,7 @@ package org.tfg.spring.tfg.service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.tfg.spring.tfg.domain.Carrito;
 import org.tfg.spring.tfg.domain.CarritoZapatillas;
 import org.tfg.spring.tfg.domain.Usuario;
 import org.tfg.spring.tfg.domain.Zapatilla;
-import org.tfg.spring.tfg.domain.vm.ZapatillaCantidad;
+import org.tfg.spring.tfg.domain.viewmodel.ZapatillaCantidad;
 import org.tfg.spring.tfg.repository.CarritoRepository;
 import org.tfg.spring.tfg.repository.CarritoZapatillasRepository;
 import org.tfg.spring.tfg.repository.ZapatillaRepository;
