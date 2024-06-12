@@ -29,11 +29,12 @@
           </svg>
           Carrito
         </button>
-        <span th:if="${session.usuario!=null}" class="admin-greeting"
-          th:classappend="${session.usuario.admin} ? 'admin-greeting' : ''"
-          th:classappend="${session.usuario.vip} ? 'vip-greeting' : ''"> <!-- Agregar clase vip-greeting si el usuario es VIP -->
-          <i class="fas fa-user-shield" th:if="${session.usuario.admin}" style="margin-right: 5px;"></i>
-          <span th:text="|Bienvenido ${session.usuario.nombre} |"></span>
+        <!--USUARIOS VIP-->
+        <span th:if="${session.usuario != null}" class="admin-greeting" th:classappend="${session.usuario.admin} ? 'admin-greeting' : '' 
+                    + ' ' + 
+                    ${session.usuario.vip} ? 'vip-greeting' : ''"> 
+        <i class="fas fa-user-shield" th:if="${session.usuario.admin}" style="margin-right: 5px;"></i>
+        <span th:text="|Bienvenido ${session.usuario.nombre} |"></span>
         </span>
         <a th:if="${session.usuario!=null}" href="/logout"
           th:class="${session.usuario.admin} ? 'admin-style' : ''" class="btn btn-outline-light me-2">Cerrar Sesión</a>
