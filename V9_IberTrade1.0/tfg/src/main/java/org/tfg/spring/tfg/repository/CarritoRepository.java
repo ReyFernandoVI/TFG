@@ -10,4 +10,5 @@ import org.tfg.spring.tfg.domain.Carrito;
 public interface CarritoRepository extends JpaRepository<Carrito, Long>{
     
     public Optional<Carrito> findFirstByUsuarioIdAndIsBoughtFalse(Long usuarioId);
+    void deleteByUsuarioId(Long usuarioId);
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.tfg.spring.tfg.domain.Usuario;
+import org.tfg.spring.tfg.repository.CarritoRepository;
 import org.tfg.spring.tfg.repository.UsuarioRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -16,6 +17,9 @@ public class UsuarioService {
     
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private CarritoRepository carritoRepository;
 
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
@@ -53,6 +57,7 @@ public class UsuarioService {
 
     public void delete(Long idUsuario) {
         usuarioRepository.deleteById(idUsuario);
+        carritoRepository.deleteByUsuarioId(idUsuario);
     }
 
     

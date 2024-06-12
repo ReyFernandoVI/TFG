@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
+import org.tfg.spring.tfg.service.CarritoService;
 import org.tfg.spring.tfg.service.UsuarioService;
 
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +20,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private CarritoService carritoService;
 
     
     @GetMapping("r")
@@ -79,9 +83,9 @@ public class UsuarioController {
     }
 
     @PostMapping("d")
-    public String delete(@RequestParam("id") Long idusuario) {
+    public String delete(@RequestParam("id") Long idUsuario) {
         try {
-            usuarioService.delete(idusuario);
+            usuarioService.delete(idUsuario);
         } catch (Exception e) {
             try {
                 PRG.error("No se puede borrar el usuario", "/usuario/r");
