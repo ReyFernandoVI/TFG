@@ -164,17 +164,19 @@
           
             <div th:each="zapatilla : ${zapatillas}" class="col-lg-4">
               <div class="card h-100">
-                <img class="card-img-top" th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}" alt="Card image cap">
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title" th:text="${zapatilla.nombre}">Nombre de la zapatilla</h5>
-                  <p class="card-text flex-grow-1" th:text="'Marca: ' + ${zapatilla.marcas?.nombre} + ', Modelo: ' + ${zapatilla.modelo?.nombre} + ', Precio: ' + ${zapatilla.precio} + '€, Color: ' + ${zapatilla.color} + ', Talla: ' + ${zapatilla.talla} + ', Stock: ' + ${zapatilla.stock}"></p>
-                  
-                  <div class="mt-auto">
-                    <a th:href="@{/mostrarProducto(id=${zapatilla.id})}" class="btn btn-primary mb-2">Ver Producto</a>
+                  <img class="card-img-top" th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}" alt="Card image cap">
+                  <div class="card-body d-flex flex-column">
+                      <h5 class="card-title" th:text="${zapatilla.nombre}">Nombre de la zapatilla</h5>
+                      <p class="card-text flex-grow-1" th:text="'Marca: ' + ${zapatilla.marcas?.nombre} + ', Modelo: ' + ${zapatilla.modelo?.nombre} + ', Precio: ' + ${zapatilla.precio} + '€, Color: ' + ${zapatilla.color} + ', Talla: ' + ${zapatilla.talla} + ', Stock: ' + ${zapatilla.stock}"></p>
+                      
+                      <div class="mt-auto">
+                          <a th:if="${zapatilla.stock == 0 or zapatilla.stock == null}" class="btn btn-danger mb-2">Sin Stock</a>
+                          <a th:unless="${zapatilla.stock == 0 or zapatilla.stock == null}" th:href="@{/mostrarProducto(id=${zapatilla.id})}" class="btn btn-primary mb-2">Ver Producto</a>
+                      </div>
                   </div>
-                </div>
               </div>
-            </div>
+          </div>
+          
           
             <!-- Add more marketing content as needed -->
           </div><!-- /.row -->
