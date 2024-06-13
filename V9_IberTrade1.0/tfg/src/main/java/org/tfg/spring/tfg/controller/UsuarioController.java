@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tfg.spring.tfg.exception.DangerException;
 import org.tfg.spring.tfg.helper.PRG;
-import org.tfg.spring.tfg.service.CarritoService;
 import org.tfg.spring.tfg.service.UsuarioService;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,10 +19,6 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-
-    @Autowired
-    private CarritoService carritoService;
-
     
     @GetMapping("r")
     public String r(ModelMap m) {
@@ -96,4 +91,19 @@ public class UsuarioController {
         }
         return "redirect:/usuario/r";
     }
+
+    @PostMapping("setAdmin")
+public String setAdmin(@RequestParam("nombre") String nombre) {
+    try {
+        usuarioService.setAdmin(nombre);
+    } catch (Exception e) {
+        try {
+            PRG.error("Error al establecer como administrador", "/usuario/r");
+        } catch (DangerException e1) {
+            e1.printStackTrace();
+        }
+    }
+    return "redirect:/usuario/r";
+}
+
 }

@@ -16,16 +16,12 @@
     <input id="id-contraseña" type="password" name="contraseña"/> <!-- Agregado -->
     <br/>
     <label for="id-idtipousu">Tipo de Usuario</label>
-        <select name="idtipousu">
-            <option 
-                th:each="tipousu:${tipousues}" 
-                th:text="${tipousu.nombre}" 
-                th:value="${tipousu.id}" 
-            />
-        </select>
-        <br><br>
+    <select name="idtipousu">
+      <option th:each="tipousu:${tipousues}" th:text="${tipousu.nombre}" th:value="${tipousu.id}" />
+    </select>
+    <br><br>
 
-        <input type="submit">
-        <button onclick="window.location.href='/'">Cancelar</button>
-    </form>
+    <input type="submit">
+    <button onclick="window.location.href='/'">Cancelar</button>
+  </form>
 </div>

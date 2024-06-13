@@ -88,5 +88,18 @@ public class UsuarioService {
         return null != usuario ?usuario: null;
     }
 
+    public void setVip(String nombre) {
+        Usuario usuario = usuarioRepository.getByNombre(nombre);
+        if (usuario != null) {
+            usuario.setVip(true); // Establece vip en true
+            usuarioRepository.save(usuario); // Guarda el usuario actualizado
+        }
+    }
+
+    public void save(Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    }
+    
    
 }

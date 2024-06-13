@@ -26,21 +26,23 @@ public class Usuario {
     @Column(unique = true)
     private String dni;
 
-    private String mail; // Agrega el campo para el correo electrónico
+    private String mail; 
 
-    private String contraseña; // Agrega el campo para la contraseña
+    private String contraseña; 
 
-    private LocalDate fechaAlta; // Agrega el campo para la fecha de alta
+    private LocalDate fechaAlta; 
 
     private Boolean admin;
+
+    private Boolean vip; // Nuevo atributo VIP
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Carrito> carritos;
     
-    // ==================
-
+    // Constructor y métodos actualizados
     public Usuario() {
         this.admin = false;
+        this.vip = false; // Inicializado como no VIP
     }
 
     public Usuario(String nombre, String dni, String mail, String contraseña) {
@@ -48,7 +50,10 @@ public class Usuario {
         this.dni = dni;
         this.mail = mail;
         this.contraseña = contraseña;
-        this.fechaAlta = LocalDate.now();// Establece la fecha de alta como la fecha actual al crear el usuario
+        this.fechaAlta = LocalDate.now();
         this.admin = false; 
+        this.vip = false; // Inicializado como no VIP
     }
+
+    // Getters y setters
 }

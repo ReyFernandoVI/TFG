@@ -65,6 +65,12 @@ public class MailService {
     }
 
     @Async
+    public void sendActivationVipEmail(Usuario usuario) {
+        sendEmailFromTemplate(usuario, "mail/mailRegistroVip", "IBERTRADE: Bienvenido a la familia de forma VIP");
+    }
+
+
+    @Async
     public void sendSaleConfirmEmail(Usuario usuario) {
         sendEmailFromTemplate(usuario, "mail/mailCompra", "IBERTRADE: Detalles de la Compra");
     }
