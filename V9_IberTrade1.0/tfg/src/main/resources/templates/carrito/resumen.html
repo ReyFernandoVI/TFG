@@ -1,100 +1,251 @@
 <div class="container">
-    <h1>Lista de Zapatillas</h1>
-    
-    <table class="table table-striped" th:if="${null != carritoZapatillas}">
-        <thead>
-            <tr>
-                <th>Cantidad</th>
-                <th>Nombre</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Precio €</th>
-                <th>Color</th>
-                <th>Talla</th>
-                <th>Imagen</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Iterar sobre las zapatillas y mostrar cada una -->
-            <tr th:each="carritoZapatilla : ${carritoZapatillas}">
-                <input type="hidden" th:value="${carritoZapatilla.id}" name="carritoZapatillasId">
-                <input type="hidden" th:value="${carritoZapatilla.carrito?.id}" name="carritoId">
-                <td th:text="${carritoZapatilla.cantidad}"></td>
-                <td th:text="${carritoZapatilla.zapatilla.nombre}"></td>
-                <td th:text="${carritoZapatilla.zapatilla.marcas?.nombre}"></td>
-                <td th:text="${carritoZapatilla.zapatilla.modelo?.nombre}"></td>
-                <td th:text="${carritoZapatilla.zapatilla.precio}"></td>
-                <td th:text="${carritoZapatilla.zapatilla.color}"></td>
-                <td th:text="${carritoZapatilla.zapatilla.talla}"></td>
-                <td>
-                    <form action="zapatilla/r" enctype="multipart/form-data">
-                        <img th:src="@{'/img/' + ${carritoZapatilla.zapatilla.imagen} + '.png'}" width="300"> 
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div th:unless="${null != carritoZapatillas}" class="alert alert-warning">
-        <span>NO HAY NINGUN PRODUCTO EN EL CARRITO</span>
-    </div>
-    <th:block th:if="${null != carritoZapatillas}">
-        <div class="row justify-content-around">
-            <div class="col-3">
-                <button type="button" class="btn btn-success" onclick="finalizarCompra()">
-                    <span>Finalizar compra</span>
-                </button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-danger" onclick="cancelarCompra()">
-                    <span>Cancelar compra</span>
-                </button>
-            </div>
+    <div class="row">
+        <!-- Columna Izquierda: Formulario de dirección de facturación -->
+        <div class="col-md-4">
+            <h4 class="mb-3">Billing address</h4>
+            <form class="needs-validation" novalidate>
+                <div class="row g-2">
+                    <div class="col-sm-6">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input type="text" class="form-control form-control-sm" id="firstName" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-group input-group-sm has-validation">
+                            <span class="input-group-text">@</span>
+                            <input type="text" class="form-control form-control-sm" id="username" placeholder="Username" required>
+                            <div class="invalid-feedback">
+                                Your username is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
+                        <input type="email" class="form-control form-control-sm" id="email" placeholder="you@example.com">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control form-control-sm" id="address" placeholder="1234 Main St" required>
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <label for="country" class="form-label">Country</label>
+                        <select class="form-select form-select-sm" id="country" required>
+                            <option value="">Choose...</option>
+                            <option>United States</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid country.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="state" class="form-label">State</label>
+                        <select class="form-select form-select-sm" id="state" required>
+                            <option value="">Choose...</option>
+                            <option>California</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please provide a valid state.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="zip" class="form-label">Zip</label>
+                        <input type="text" class="form-control form-control-sm" id="zip" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <hr class="my-2">
+
+                <div class="form-check form-check-sm">
+                    <input type="checkbox" class="form-check-input" id="same-address">
+                    <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
+                </div>
+
+                <div class="form-check form-check-sm">
+                    <input type="checkbox" class="form-check-input" id="save-info">
+                    <label class="form-check-label" for="save-info">Save this information for next time</label>
+                </div> -->
+
+                <hr class="my-2">
+
+                <h4 class="mb-3">Payment</h4>
+
+                <div class="my-2 d-flex justify-content-between">
+                    <div class="form-check form-check-sm">
+                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                        <label class="form-check-label" for="credit">Credit card</label>
+                    </div>
+                    <div class="form-check form-check-sm">
+                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                        <label class="form-check-label" for="debit">Debit card</label>
+                    </div>
+                    <div class="form-check form-check-sm">
+                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                        <label class="form-check-label" for="paypal">PayPal</label>
+                    </div>
+                </div>
+
+                <div class="row gy-2">
+                    <div class="col-md-6">
+                        <label for="cc-name" class="form-label">Name on card</label>
+                        <input type="text" class="form-control form-control-sm" id="cc-name" placeholder="" required>
+                        <small class="text-body-secondary">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                            Name on card is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="cc-number" class="form-label">Credit card number</label>
+                        <input type="text" class="form-control form-control-sm" id="cc-number" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Credit card number is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="cc-expiration" class="form-label">Expiration</label>
+                        <input type="text" class="form-control form-control-sm" id="cc-expiration" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Expiration date required
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="cc-cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control form-control-sm" id="cc-cvv" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Security code required
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button> -->
+            </form>
         </div>
-    </th:block>
-    
-    <script>
-        const BASE_URL = window.location.origin;
-        const API_URL = `${BASE_URL}/api/carritos`;
-    
-        function finalizarCompra() {
-            const xhttp = new XMLHttpRequest();
-            xhttp.open('GET', `${API_URL}/finalize`, true)
-            xhttp.send();
-    
-            xhttp.onload = function () {
-                if ([200, 201].includes(xhttp.status)) {
-                    alert("Compra finalizada correctamente");
-                    window.location.href = `${BASE_URL}/catalogue`;
-                } else {
-                    alert("Error al finalizar la compra");
+
+        <div class="col-md-8 table-responsive">
+            <table class="table table-striped table-sm" th:if="${null != carritoZapatillas}" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Precio €</th>
+                        <th>Color</th>
+                        <th>Talla</th>
+                        <th>Cantidad</th>
+                        <th>Imagen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="carritoZapatilla : ${carritoZapatillas}">
+                        <input type="hidden" th:value="${carritoZapatilla.id}" name="carritoZapatillasId">
+                        <input type="hidden" th:value="${carritoZapatilla.carrito?.id}" name="carritoId">
+                        
+                        <td th:text="${carritoZapatilla.zapatilla.nombre}"></td>
+                        <td th:text="${carritoZapatilla.zapatilla.marcas?.nombre}"></td>
+                        <td th:text="${carritoZapatilla.zapatilla.modelo?.nombre}"></td>
+                        <td th:text="${carritoZapatilla.zapatilla.precio}"></td>
+                        <td th:text="${carritoZapatilla.zapatilla.color}"></td>
+                        <td th:text="${carritoZapatilla.zapatilla.talla}"></td>
+                        <td th:text="${carritoZapatilla.cantidad}"></td>
+                        <td>
+                            <form action="zapatilla/r" enctype="multipart/form-data">
+                                <img th:src="@{'/img/' + ${carritoZapatilla.zapatilla.imagen} + '.png'}" width="50">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+
+            <div th:unless="${null != carritoZapatillas}" class="alert alert-warning">
+                <span>NO HAY NINGUN PRODUCTO EN EL CARRITO</span>
+            </div>
+
+            <th:block th:if="${null != carritoZapatillas}">
+                <div class="row justify-content-around">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-success btn-sm" onclick="finalizarCompra()">
+                            <span>Finalizar compra</span>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="cancelarCompra()">
+                            <span>Cancelar compra</span>
+                        </button>
+                    </div>
+                    <div class="col-12 mt-3"> <!-- Nuevo div para mostrar el precio total -->
+                        <p class="text-center"><strong>Total: <span id="totalPrice">0</span> €</strong></p>
+                    </div>
+                </div>
+            </th:block>
+
+            <script>
+                const BASE_URL = window.location.origin;
+                const API_URL = `${BASE_URL}/api/carritos`;
+            
+                function finalizarCompra() {
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.open('GET', `${API_URL}/finalize`, true)
+                    xhttp.send();
+            
+                    xhttp.onload = function () {
+                        if ([200, 201].includes(xhttp.status)) {
+                            alert("Compra finalizada correctamente");
+                            window.location.href = `${BASE_URL}/catalogue`;
+                        } else {
+                            alert("Error al finalizar la compra");
+                        }
+                    }
                 }
-            }
-        }
-    
-        function cancelarCompra() {
-            const carritoZapatillasIdElements = document.getElementsByName('carritoZapatillasId');
-            const carritoIdElement = document.getElementsByName('carritoId')[0];
-    
-            const carritoZapatillasId = Array.from(carritoZapatillasIdElements).map(element => element.value);
-            const carritoId = carritoIdElement.value;
-    
-            const params = new URLSearchParams();
-            carritoZapatillasId.forEach(id => params.append('carritoZapatillasId', id));
-            params.append('carritoId', carritoId);
-    
-            const xhttp = new XMLHttpRequest();
-            xhttp.open('GET', `${API_URL}/cancel?${params.toString()}`, true);
-            xhttp.send();
-    
-            xhttp.onload = function () {
-                if ([200, 201].includes(xhttp.status)) {
-                    alert("Compra cancelada");
-                    window.location.href = `${BASE_URL}/catalogue`;
-                } else {
-                    alert(xhttp.error);
+            
+                function cancelarCompra() {
+                    const carritoZapatillasIdElements = document.getElementsByName('carritoZapatillasId');
+                    const carritoIdElement = document.getElementsByName('carritoId')[0];
+            
+                    const carritoZapatillasId = Array.from(carritoZapatillasIdElements).map(element => element.value);
+                    const carritoId = carritoIdElement.value;
+            
+                    const params = new URLSearchParams();
+                    carritoZapatillasId.forEach(id => params.append('carritoZapatillasId', id));
+                    params.append('carritoId', carritoId);
+            
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.open('GET', `${API_URL}/cancel?${params.toString()}`, true);
+                    xhttp.send();
+            
+                    xhttp.onload = function () {
+                        if ([200, 201].includes(xhttp.status)) {
+                            alert("Compra cancelada");
+                            window.location.href = `${BASE_URL}/catalogue`;
+                        } else {
+                            alert(xhttp.error);
+                        }
+                    }
                 }
-            }
-        }
-    </script>
-    
+            </script>
+        </div>
+
+    </div>
 </div>
+
