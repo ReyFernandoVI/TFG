@@ -41,7 +41,7 @@
   function validarFormulario(event) {
     // Evitar que el formulario se envíe automáticamente
     event.preventDefault();
-
+    
     // Obtener los valores de los campos
     var nombre = document.getElementById('id-nombre').value;
     var dni = document.getElementById('id-dni').value;
@@ -59,6 +59,20 @@
     }
     if (mail.trim() === '') {
       alert('Por favor, ingrese su correo electrónico.');
+      return;
+    }
+
+    //Minimo 2 Caracteres, Maximo 20. puede contener MAYUSCULAS, MINUSCULAS Y NUMEROS
+    var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+    if (!nombreRegex.test(nombre)) {
+      alert('Por favor, ingrese un nombre válido.');
+      return;
+    }
+
+    // El DNI debe de estar formado por 8 caracteres que estén entre el 0 y el 9, seguidos por un guión "-" y acabados con una letra mayúscula.
+    var dniRegex = /(^([0-9]{8,8}\-[A-Z])|^)$/;
+    if (!dniRegex.test(dni)) {
+      alert('Por favor, ingrese un dni válido.');
       return;
     }
 

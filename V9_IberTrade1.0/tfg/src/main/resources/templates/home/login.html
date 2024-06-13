@@ -21,31 +21,48 @@
         </form>
     </main>
 </div>
-
-<!-- JavaScript para validar el formulario
-
+<!-- JavaScript para validar el formulario -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form');
-        const nombreInput = document.getElementById('id-nombre');
-        const contraseñaInput = document.getElementById('id-contraseña');
+    // Función para validar el formulario
+    function validarFormulario(event) {
+      // Evitar que el formulario se envíe automáticamente
+      event.preventDefault();
+      
+      // Obtener los valores de los campos
+      var nombre = document.getElementById('id-nombre').value;
+      var contraseña = document.getElementById('id-contraseña').value;
+  
+      // Validar que los campos no estén vacíos
+      if (nombre.trim() === '') {
+        alert('Por favor, ingrese su Nombre.');
+        return;
+      }
+      if (contraseña.trim() === '') {
+        alert('Por favor, ingrese su Contraseña.');
+        return;
+      }
+  
+      //Minimo 2 Caracteres, Maximo 20. puede contener MAYUSCULAS, MINUSCULAS Y NUMEROS
+      var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+      if (!nombreRegex.test(nombre)) {
+        alert('Por favor, ingrese un nombre válido.');
+        return;
+      }
+  
+      // Validar requisitos mínimos de contraseña
+      var contraseñaRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
+      if (!contraseñaRegex.test(contraseña)) {
+        alert('La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.');
+        return;
+      }
+  
+      // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
+      document.getElementById('registro-form').submit();
+    }
+  
+    // Agregar el evento de escucha al formulario
+    document.getElementById('registro-form').addEventListener('submit', validarFormulario);
+  </script>
 
-        form.addEventListener('submit', function (event) {
-            if (!validarNombre()) {
-                event.preventDefault();
-                alert('Por favor, introduce un nombre de usuario válido.');
-            } else if (!validarContraseña()) {
-                event.preventDefault();
-                alert('Por favor, introduce una contraseña válida.');
-            }
-        });
 
-        function validarNombre() {
-            // Validar si el nombre de usuario tiene al menos 3 caracteres
-            return nombreInput.value.length >= 3;
-        }
-
-    });
-</script>
--->
 

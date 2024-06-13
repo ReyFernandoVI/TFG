@@ -24,3 +24,32 @@
         });
     </script>
 </div>
+<script>
+  // Función para validar el formulario
+  function validarFormulario(event) {
+    // Evitar que el formulario se envíe automáticamente
+    event.preventDefault();
+    
+    // Obtener los valores de los campos
+    var nombre = document.getElementById('id-nombre').value;
+
+    // Validar que los campos no estén vacíos
+    if (nombre.trim() === '') {
+      alert('Por favor, ingrese su nombre.');
+      return;
+    }
+
+    //Minimo 2 Caracteres, Maximo 20. puede contener MAYUSCULAS, MINUSCULAS Y NUMEROS
+    var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+    if (!nombreRegex.test(nombre)) {
+      alert('Por favor, ingrese un nombre válido.');
+      return;
+    }
+
+    // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
+    document.getElementById('registro-form').submit();
+  }
+
+  // Agregar el evento de escucha al formulario
+  document.getElementById('registro-form').addEventListener('submit', validarFormulario);
+</script>
