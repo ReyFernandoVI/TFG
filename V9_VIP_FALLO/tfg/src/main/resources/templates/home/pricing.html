@@ -18,7 +18,7 @@
             <h4 class="my-0 fw-normal">Gratis</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/mes</small></h1>
+            <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/anual</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Compra y exploración de la página</li>
               <li>Acceso a una amplia gama de productos y servicios</li>
@@ -33,13 +33,13 @@
             <h4 class="my-0 fw-normal">Vip</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$29<small class="text-body-secondary fw-light">/mes</small></h1>
+            <h1 class="card-title pricing-card-title">$29<small class="text-body-secondary fw-light">/anual</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Ofertas exclusivas</li>
               <li>Notificaciones anticipadas de lanzamientos emocionantes</li>
               <li>Acceso completo al blog con contenido exclusivo y perspectivas únicas</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-primary">Contáctanos</button>
+            <button type="button" class="w-100 btn btn-lg btn-primary" onclick="window.location.href='/signupvip'">Acerte VIP</button>
           </div>
         </div>
       </div>
@@ -87,3 +87,21 @@
     </div>
   </main>
 </div>
+<script>
+  function makeVIP() {
+      fetch('/usuario/make-vip', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+          }
+      }).then(response => {
+          if (response.ok) {
+              window.location.href = '/usuario/r';
+          } else {
+              alert('Error al intentar hacer VIP al usuario.');
+          }
+      }).catch(error => {
+          console.error('Error:', error);
+      });
+  }
+</script>

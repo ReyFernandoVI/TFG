@@ -18,8 +18,6 @@ import org.tfg.spring.tfg.service.ZapatillaService;
 
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
 public class HomeController {
 
@@ -44,13 +42,12 @@ public class HomeController {
         marcaService.init();
         modeloService.init();
         zapatillaService.init();
-        
-        if (usuarioService.findById(1L) == null) {
 
+        if (usuarioService.findById(1L) == null) {
             usuarioService.save("admin", null, null, "admin");
             usuarioService.setAdmin("admin");
         }
-        
+
         return "_t/frame";
     }
 
@@ -122,9 +119,7 @@ public class HomeController {
 
     @GetMapping("/info")
     public String info(HttpSession s, ModelMap m) {
-
-        String mensaje = s.getAttribute("_mensaje") != null ? (String) s.getAttribute("_mensaje")
-                : "Pulsa para volver a home";
+        String mensaje = s.getAttribute("_mensaje") != null ? (String) s.getAttribute("_mensaje") : "Pulsa para volver a home";
         String severity = s.getAttribute("_severity") != null ? (String) s.getAttribute("_severity") : "info";
         String link = s.getAttribute("_link") != null ? (String) s.getAttribute("_link") : "/";
 
@@ -146,28 +141,34 @@ public class HomeController {
         return "_t/frame";
     }
 
-    @PostMapping("/signup")
-    public String signupPost(
-            @RequestParam("nombre") String nombre,
-            @RequestParam("dni") String dni,
-            @RequestParam("mail") String mail,
-            @RequestParam("contraseña") String contraseña,
-            HttpSession s,
-            ModelMap m) {
-        try {
-            Usuario usuario = usuarioService.save(nombre, dni, mail, contraseña);
-            mailService.sendActivationEmail(usuario);
-        } catch (Exception e) {
-            try {
-                PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
-            } catch (DangerException e1) {
-                
-                e1.printStackTrace();
-            }
-        }
-        m.put("view", "home/home");
+    @GetMapping("/signupvip")
+    public String signupvip(ModelMap m) {
+        m.put("view", "home/signupvip");
         return "_t/frame";
     }
+
+    @PostMapping("/signupvip")
+public String signupVipPost(
+        @RequestParam("nombre") String nombre,
+        @RequestParam("dni") String dni,
+        @RequestParam("mail") String mail,
+        @RequestParam("contraseña") String contraseña,
+        HttpSession s,
+        ModelMap m) {
+    try {
+        Usuario usuario = usuarioService.save(nombre, dni, mail, contraseña);
+        usuarioService.setVip(nombre); // Marca el usuario como VIP
+        mailService.sendActivationEmail(usuario);
+    } catch (Exception e) {
+        try {
+            PRG.error("El usuario " + nombre + " ya existe", "/usuario/c");
+        } catch (DangerException e1) {
+            e1.printStackTrace();
+        }
+    }
+    m.put("view", "home/home");
+    return "_t/frame";
+}
 
     @GetMapping("/login")
     public String login(ModelMap m) {
@@ -196,6 +197,4 @@ public class HomeController {
         s.invalidate();
         return "redirect:/";
     }
-
-
 }
