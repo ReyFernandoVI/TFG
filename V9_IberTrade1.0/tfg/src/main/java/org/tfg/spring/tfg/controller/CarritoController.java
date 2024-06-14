@@ -82,17 +82,16 @@ public class CarritoController {
         // carritoService.cancelarCompra(s);
     }
 
-    @DeleteMapping("/eliminar/{carritoZapatillaId}")
-    public ResponseEntity<?> deleteZapa(@PathVariable Long carritoZapatillaId) {
-        try {
-            carritoService.deleteZapa(carritoZapatillaId);
-            return ResponseEntity.ok().build();
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar HIJO PUTA la zapatilla del carrito");
-        }
+    @GetMapping("/carritos/delete")
+    public void eliminarZapatillaDelCarro(
+        @RequestParam("carritoZapatillasId") List<Long> carritoZapatillasId,
+        @RequestParam("zapatillaId") Long zapatillaId,
+        HttpSession s) {
+        
+
+        carritoService.eliminarZapatillaDelCarro(carritoZapatillasId, zapatillaId, s);   
+        // carritoService.cancelarCompra(s);
     }
 
-
+    
 }

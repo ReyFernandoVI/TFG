@@ -1,6 +1,7 @@
 package org.tfg.spring.tfg.domain;
 
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,6 @@ public class Carrito{
 
     private Boolean isBought;
 
-    private LocalDate fechaCompra;
+    private Instant fechaCompra;
 
 }

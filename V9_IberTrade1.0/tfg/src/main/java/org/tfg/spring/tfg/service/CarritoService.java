@@ -145,13 +145,21 @@ public class CarritoService {
         return carrito.isPresent()? carrito.get(): null;
     }
 
-    public void deleteZapa(Long carritoZapatillaId) {
-        Optional<CarritoZapatillas> carritoZapatillaOpt = carritoZapatillasRepository.findById(carritoZapatillaId);
-        if (carritoZapatillaOpt.isPresent()) {
-            carritoZapatillasRepository.delete(carritoZapatillaOpt.get());
-        } else {
-            throw new EntityNotFoundException("Registro del carrito no encontrado");
+    // public void eliminarZapatillaDelCarrito(Long zapatillaId, HttpSession session) {
+    //     // Aquí implementa la lógica para eliminar la zapatilla del carrito
+    //     // Por ejemplo:
+    //     CarritoZapatillas zapatilla = carritoZapatillasRepository.findById(zapatillaId).orElse(null);
+    //     if (zapatilla != null) {
+    //         carritoZapatillasRepository.delete(zapatilla);
+    //     }
+    // }
+
+    public void eliminarZapatillaDelCarro( List<Long> carritoZapatillasId,Long zapatillaId,HttpSession s){
+        for (Long zapatilla : carritoZapatillasId) {
+            carritoZapatillasRepository.deleteById(zapatilla);
         }
+        carritoZapatillasRepository.deleteById(zapatillaId);   
     }
 
+    
 }
