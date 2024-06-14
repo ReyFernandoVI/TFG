@@ -95,7 +95,7 @@ public class PedidoController {
                 pedidoService.save(nombreZapatilla, modeloZapatilla, marcaZapatilla, precioUnidad, fechCompra, precioUnidadTotal, cantidad, color, talla, nombreImagen);
 
                 Optional<Zapatilla> zapatillaExistente = zapatillaService.findByName(nombreZapatilla);
-
+                if(fechCompra.equals(LocalDate.now())){
                 if (zapatillaExistente.isPresent()) {
                     Zapatilla zapatilla = zapatillaExistente.get();
                     if (zapatilla.getColor().equals(color) && zapatilla.getTalla().equals(talla)) {
@@ -109,6 +109,7 @@ public class PedidoController {
             } else {
                 PRG.error("Imagen vacía, por favor seleccione una imagen válida", "/pedido/c");
             }
+        }
         } catch (DangerException e) {
             PRG.error("Error al crear el pedido: " + e.getMessage(), "/pedido/c");
         } catch (Exception e) {

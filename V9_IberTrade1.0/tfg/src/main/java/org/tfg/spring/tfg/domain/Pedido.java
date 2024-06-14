@@ -54,7 +54,15 @@ public class Pedido {
         
     }
 
-   
+    public String getEstado() {
+        LocalDate today = LocalDate.now();
+        if (fechCompra.equals(today)) {
+            return "Recibido";
+        } else if (fechCompra.isAfter(today)) {
+            return "En Camino";
+        }
+        return "Desconocido";
+    }
 
     private int generateRandomNumber() {
         Random random = new Random();
