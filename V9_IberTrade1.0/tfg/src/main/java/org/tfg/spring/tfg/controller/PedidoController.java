@@ -103,39 +103,16 @@ public class PedidoController {
                     } else {
                         zapatillaService.save(nombreZapatilla, precioUnidad, color, talla, cantidad, idMarca, idModelo, nombreImagen);
                     }
-                } else {
-                    zapatillaService.save(nombreZapatilla, precioUnidad, color, talla, cantidad, idMarca, idModelo, nombreImagen);
-                }
-            } else {
-                PRG.error("Imagen vacía, por favor seleccione una imagen válida", "/pedido/c");
-            }
+                } 
+                 else {
+                     zapatillaService.save(nombreZapatilla, precioUnidad, color, talla, cantidad, idMarca, idModelo, nombreImagen);
+                 }
+             } 
         }
         } catch (DangerException e) {
             PRG.error("Error al crear el pedido: " + e.getMessage(), "/pedido/c");
         } catch (Exception e) {
             PRG.error("Error inesperado: " + e.getMessage(), "/pedido/c");
-        }
-        return "redirect:/pedido/r";
-    }
-
-    @GetMapping("u")
-    public String update(
-        @RequestParam("id") Long idPedido,
-        ModelMap m
-    ) {
-        m.put("pedido", pedidoService.findById(idPedido));
-        m.put("view", "pedido/u");
-        return "_t/frame";
-    }
-
-    @PostMapping("u")
-    public String updatePost(
-        @RequestParam("id") Long idPedido
-    ) throws DangerException {
-        try {
-            pedidoService.update(idPedido);
-        } catch (Exception e) {
-            PRG.error("Error al actualizar el pedido: " + e.getMessage(), "/pedido/r");
         }
         return "redirect:/pedido/r";
     }

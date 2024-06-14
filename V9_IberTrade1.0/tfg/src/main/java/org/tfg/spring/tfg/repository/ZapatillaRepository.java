@@ -24,4 +24,5 @@ public interface ZapatillaRepository extends JpaRepository<Zapatilla, Long> {
            "OR s.nombre LIKE %:palabraClave%") 
     List<Zapatilla> findAll(@Param("palabraClave") String palabraClave);
     Optional<Zapatilla> findByNombre(String nombreZapatilla);
+    public Optional<Zapatilla> findById(Long idZapatilla);
 }

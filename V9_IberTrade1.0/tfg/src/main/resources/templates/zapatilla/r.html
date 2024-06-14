@@ -1,23 +1,26 @@
 <div class="container">
-    <!-- Botón para añadir zapatilla -->
-    <button class="btn btn-outline-primary" onclick="window.location.href='/zapatilla/c'">Añadir Zapatilla</button>
-    
-        <button class="btn btn-outline-primary" style="margin-left: 430px;" onclick="window.location.href='/usuario/r'">Usuarios</button>
-        <button class="btn btn-outline-primary" onclick="window.location.href='/marca/r'">Marcas</button>
-        <button class="btn btn-outline-primary" onclick="window.location.href='/pedido/r'">Pedidos</button>
-        <button class="btn btn-outline-primary" onclick="window.location.href='/modelo/r'">Modelos</button>
-    <!-- Formulario de filtrado -->
-    <form class="form-inline" th:action="@{/zapatilla/r}" method="get">
+     <!-- Formulario de filtrado -->
+     <form class="form-inline" th:action="@{/zapatilla/r}" method="get">
         <div class="form-group mb-2">
             <label for="palabraClave">Filtrar:</label>
         </div>
         <div class="form-group mx-sm-3 mb-2">
-            <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Introduce término de búsqueda" required> 
+            <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Introduce término de búsqueda" required>
         </div>
-        <input type="submit" class="btn btn.-info mb-2" value="buscar">
-        <input type="reset" class="btn btn.-secoundary mb-2" value="Borrar">
-
+        <div class="form-group mb-2">
+            <input type="submit" class="btn btn-outline-primary mb-2" value="Buscar">
+            <button type="button" class="btn btn-outline-danger mb-2 ml-2" onclick="resetForm()">Borrar</button>
+        </div>
     </form>
+    <br>
+    <!-- Botón para añadir zapatilla -->
+    <button class="btn btn-outline-primary" onclick="window.location.href='/zapatilla/c'">Añadir Zapatilla</button>
+    <button class="btn btn-outline-danger" onclick="window.location.href='/admin'">Volver</button>
+    
+        <button class="btn btn-outline-primary" style="margin-left: 350px;" onclick="window.location.href='/usuario/r'">Usuarios</button>
+        <button class="btn btn-outline-primary" onclick="window.location.href='/marca/r'">Marcas</button>
+        <button class="btn btn-outline-primary" onclick="window.location.href='/pedido/r'">Pedidos</button>
+        <button class="btn btn-outline-primary" onclick="window.location.href='/modelo/r'">Modelos</button>
     <br>
     <!-- Encabezado de la lista -->
     <h1>Lista de Zapatillas</h1>
@@ -76,3 +79,9 @@
         </tbody>
     </table>
 </div>
+ <script>
+    function resetForm() {
+        document.getElementById('palabraClave').value = '';
+        document.querySelector('form').submit();
+    }
+</script> 

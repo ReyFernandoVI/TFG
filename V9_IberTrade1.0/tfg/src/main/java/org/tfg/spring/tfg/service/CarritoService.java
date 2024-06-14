@@ -17,6 +17,7 @@ import org.tfg.spring.tfg.repository.CarritoRepository;
 import org.tfg.spring.tfg.repository.CarritoZapatillasRepository;
 import org.tfg.spring.tfg.repository.ZapatillaRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
 
 @Service
@@ -142,6 +143,15 @@ public class CarritoService {
         Optional<Carrito> carrito = carritoRepository.findFirstByUsuarioIdAndIsBoughtFalse(usuario.getId());
 
         return carrito.isPresent()? carrito.get(): null;
+    }
+
+    public void deleteZapa(Long carritoZapatillaId) {
+        Optional<CarritoZapatillas> carritoZapatillaOpt = carritoZapatillasRepository.findById(carritoZapatillaId);
+        if (carritoZapatillaOpt.isPresent()) {
+            carritoZapatillasRepository.delete(carritoZapatillaOpt.get());
+        } else {
+            throw new EntityNotFoundException("Registro del carrito no encontrado");
+        }
     }
 
 }

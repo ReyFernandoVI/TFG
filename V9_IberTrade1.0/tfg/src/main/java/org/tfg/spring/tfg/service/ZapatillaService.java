@@ -8,9 +8,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tfg.spring.tfg.domain.Zapatilla;
+import org.tfg.spring.tfg.repository.CarritoZapatillasRepository;
 import org.tfg.spring.tfg.repository.MarcaRepository;
 import org.tfg.spring.tfg.repository.ModeloRepository;
 import org.tfg.spring.tfg.repository.ZapatillaRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ZapatillaService {
@@ -23,6 +26,9 @@ public class ZapatillaService {
 
     @Autowired
     private MarcaRepository marcaRepository;
+
+    @Autowired
+    private CarritoZapatillasRepository carritoZapatillasRepository;
 
     public List<Zapatilla> findAll(String palabraClave) {
         if(palabraClave!=null)
@@ -70,8 +76,20 @@ public class ZapatillaService {
         zapatilla.setModelo(modeloRepository.getReferenceById(idModelo));
         zapatillaRepository.save(zapatilla);
     }
-    public void delete(Long idZapatilla) {
-        zapatillaRepository.delete(zapatillaRepository.getReferenceById(idZapatilla));
+    // public void delete(Long idZapatilla) {
+    //     zapatillaRepository.delete(zapatillaRepository.getReferenceById(idZapatilla));
+    // }
+
+    @Transactional
+    public void delete(Long zapatillaId) {
+        Zapatilla zapatilla = zapatillaRepository.findById(zapatillaId)
+                .orElseThrow(() -> new RuntimeException("Zapatilla no encontrada"));
+
+        if (carritoZapatillasRepository.existsByZapatilla(zapatilla)) {
+            carritoZapatillasRepository.deleteByZapatilla(zapatilla);
+        }
+
+        zapatillaRepository.delete(zapatilla);
     }
 
     public void init() {
