@@ -121,6 +121,12 @@ public class HomeController {
         return "_t/frame";
     }
 
+    @GetMapping("/tovip")
+    public String tovip(ModelMap m) {
+        m.put("view", "home/tovip");
+        return "_t/frame";
+    }
+
     @GetMapping("/info")
     public String info(HttpSession s, ModelMap m) {
         String mensaje = s.getAttribute("_mensaje") != null ? (String) s.getAttribute("_mensaje") : "Pulsa para volver a home";
@@ -169,7 +175,11 @@ public class HomeController {
     }
 
     @GetMapping("/signupvip")
-    public String signupvip(ModelMap m) {
+    public String signupvip(HttpSession session, ModelMap m) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario != null) {
+            return "redirect:/tovip";
+        }
         m.put("view", "home/signupvip");
         return "_t/frame";
     }
