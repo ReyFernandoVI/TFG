@@ -61,6 +61,16 @@ public class HomeController {
         return "_t/frame";
     }
 
+    @GetMapping("/vipzone")
+    public String vipzone(HttpSession session, ModelMap m) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null || !Boolean.TRUE.equals(usuario.getVip())) {
+            return "redirect:/login";
+        }
+        m.put("view", "home/vipzone");
+        return "_t/frame";
+    }
+
     @GetMapping("/pricing")
     public String pricing(ModelMap m) {
         m.put("view", "home/pricing");
@@ -99,12 +109,6 @@ public class HomeController {
         return "_t/frame";
     }
 
-    @GetMapping("/vipzone")
-    public String vipzone(ModelMap m) {
-        m.put("view", "home/vipzone");
-        return "_t/frame";
-    }
-
     @GetMapping("/pay")
     public String pay(ModelMap m) {
         m.put("view", "home/pay");
@@ -140,6 +144,7 @@ public class HomeController {
         m.put("view", "home/signup");
         return "_t/frame";
     }
+
     @PostMapping("/signup")
     public String signupPost(
             @RequestParam("nombre") String nombre,

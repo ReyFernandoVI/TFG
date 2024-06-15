@@ -1,55 +1,44 @@
 <div class="container">
-    <h1>Nueva Marca</h1>
-
-    <form id="form-nueva-marca" action="/marca/c" method="post">
-        <div>
-            <label for="id-nombre">Nombre:</label>
-            <input id="id-nombre" type="text" name="nombre" required />
+  <div class="form-container">
+      <h1 class="text-center">Nueva Marca</h1>
+      <form id="form-nueva-marca" action="/marca/c" method="post">
+          <div class="form-group">
+              <label for="id-nombre">Nombre:</label>
+              <input id="id-nombre" type="text" name="nombre" class="form-control" required />
+          </div>
+          <div class="form-group text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-space">Guardar</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Cancelar</button>
         </div>
-       
-        <div>
-            <button type="submit">Guardar</button>
-            <button type="button" onclick="window.location.href='/'">Cancelar</button>
-        </div>
-    </form>
-
-    <script>
-        // Escuchar el evento de cambio en el select de modelos
-        document.getElementById('id-modelo').addEventListener('change', function() {
-            var selectedOption = this.options[this.selectedIndex];
-            var modelName = selectedOption.getAttribute('data-nombre'); // Obtener el nombre del modelo
-
-            // Actualizar el valor del campo Nombre con el nombre del modelo seleccionado
-            document.getElementById('id-nombre').value = modelName;
-        });
-    </script>
+      </form>
+  </div>
 </div>
 <script>
   // Función para validar el formulario
   function validarFormulario(event) {
-    // Evitar que el formulario se envíe automáticamente
-    event.preventDefault();
-    
-    // Obtener los valores de los campos
-    var nombre = document.getElementById('id-nombre').value;
+      // Evitar que el formulario se envíe automáticamente
+      event.preventDefault();
+      
+      // Obtener el valor del nombre
+      var nombre = document.getElementById('id-nombre').value.trim();
+      
+      // Validar que el campo no esté vacío
+      if (nombre === '') {
+          alert('Por favor, ingrese el nombre de la marca.');
+          return;
+      }
 
-    // Validar que los campos no estén vacíos
-    if (nombre.trim() === '') {
-      alert('Por favor, ingrese su nombre.');
-      return;
-    }
+      // Validar formato del nombre usando regex
+      var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+      if (!nombreRegex.test(nombre)) {
+          alert('Por favor, ingrese un nombre válido.');
+          return;
+      }
 
-    //Minimo 2 Caracteres, Maximo 20. puede contener MAYUSCULAS, MINUSCULAS Y NUMEROS
-    var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
-    if (!nombreRegex.test(nombre)) {
-      alert('Por favor, ingrese un nombre válido.');
-      return;
-    }
-
-    // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
-    document.getElementById('registro-form').submit();
+      // Si pasa las validaciones, enviar el formulario
+      document.getElementById('form-nueva-marca').submit();
   }
 
-  // Agregar el evento de escucha al formulario
-  document.getElementById('registro-form').addEventListener('submit', validarFormulario);
+  // Agregar evento de escucha al formulario
+  document.getElementById('form-nueva-marca').addEventListener('submit', validarFormulario);
 </script>

@@ -13,28 +13,34 @@ import org.tfg.spring.tfg.helper.PRG;
 import org.tfg.spring.tfg.service.MarcaService;
 import org.tfg.spring.tfg.service.ModeloService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/modelo")
 @Controller
 public class ModeloController {
 
     @Autowired
     private ModeloService modeloService;
+
     @Autowired
-    private MarcaService  marcaService;
+    private MarcaService marcaService;
 
     @GetMapping("r")
-    public String r(
-            ModelMap m) {
+    public String r(ModelMap m, HttpSession session) {
+        if (!isAdminLoggedIn(session)) {
+            return "redirect:/login";
+        }
         m.put("modelos", modeloService.findAll());
         m.put("marcas", marcaService.findAll());
-        
         m.put("view", "modelo/r");
         return "_t/frame";
     }
 
     @GetMapping("c")
-    public String c(
-            ModelMap m) {
+    public String c(ModelMap m, HttpSession session) {
+        if (!isAdminLoggedIn(session)) {
+            return "redirect:/login";
+        }
         m.put("modelos", modeloService.findAll());
         m.put("marcas", marcaService.findAll());
         m.put("view", "modelo/c");
@@ -43,12 +49,20 @@ public class ModeloController {
 
     @PostMapping("c")
     public String cPost(
-            @RequestParam("nombre") String nombre, @RequestParam("marcaId") Marca marcaId)
-            throws DangerException {
+            @RequestParam("nombre") String nombre,
+            @RequestParam("marcaId") Marca marcaId,
+            HttpSession session) {
+        if (!isAdminLoggedIn(session)) {
+            return "redirect:/login";
+        }
         try {
-            modeloService.save(nombre,marcaId);
+            modeloService.save(nombre, marcaId);
         } catch (Exception e) {
-            PRG.error("El Modelo " + nombre + " ya existe", "/modelo/c");
+            try {
+                PRG.error("Error al guardar el Modelo", "/modelo/c");
+            } catch (DangerException e1) {
+                e1.printStackTrace();
+            }
         }
         return "redirect:/modelo/r";
     }
@@ -56,7 +70,11 @@ public class ModeloController {
     @GetMapping("u")
     public String update(
             @RequestParam("id") Long idModelo,
-            ModelMap m) {
+            ModelMap m,
+            HttpSession session) {
+        if (!isAdminLoggedIn(session)) {
+            return "redirect:/login";
+        }
         m.put("modelo", modeloService.findById(idModelo));
         m.put("view", "modelo/u");
         return "_t/frame";
@@ -65,24 +83,44 @@ public class ModeloController {
     @PostMapping("u")
     public String updatePost(
             @RequestParam("id") Long idModelo,
-            @RequestParam("nombre") String nombre) throws DangerException {
+            @RequestParam("nombre") String nombre,
+            HttpSession session) {
+        if (!isAdminLoggedIn(session)) {
+            return "redirect:/login";
+        }
         try {
             modeloService.update(idModelo, nombre);
         } catch (Exception e) {
-            PRG.error("El Modelo " + nombre + " ya está registrado", "/marca/r");
+            try {
+                PRG.error("Error al actualizar el Modelo", "/modelo/r");
+            } catch (DangerException e1) {
+                e1.printStackTrace();
+            }
         }
         return "redirect:/modelo/r";
     }
 
     @PostMapping("d")
     public String delete(
-            @RequestParam("id") Long idModelo) throws DangerException {
+            @RequestParam("id") Long idModelo,
+            HttpSession session) {
+        if (!isAdminLoggedIn(session)) {
+            return "redirect:/login";
+        }
         try {
             modeloService.delete(idModelo);
         } catch (Exception e) {
-            PRG.error(e.getMessage(), "/modelo/r");
+            try {
+                PRG.error("Error al eliminar el Modelo", "/modelo/r");
+            } catch (DangerException e1) {
+                e1.printStackTrace();
+            }
         }
         return "redirect:/modelo/r";
     }
 
+    private boolean isAdminLoggedIn(HttpSession session) {
+        Object usuario = session.getAttribute("usuario");
+        return usuario != null && Boolean.TRUE.equals(((org.tfg.spring.tfg.domain.Usuario) usuario).getAdmin());
+    }
 }
