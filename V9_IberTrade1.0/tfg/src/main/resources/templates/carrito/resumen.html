@@ -351,31 +351,6 @@
                     };
                 }
 
-                // function eliminarZapatilla() {
-                //     const carritoZapatillasIdElements = document.getElementsByName('carritoZapatillasId');
-                //     const zapatillaIdElement = document.getElementsByName('zapatillaId');
-    
-                //     const carritoZapatillasId = Array.from(carritoZapatillasIdElements).map(element => element.value);
-                //     const zapatillaId = zapatillaIdElement.value;
-    
-                //     const params = new URLSearchParams();
-                //     carritoZapatillasId.forEach(id => params.append('carritoZapatillasId', id));
-                //     params.append('zapatillaId', zapatillaId);
-    
-                //     const xhttp = new XMLHttpRequest();
-                //     xhttp.open('GET', `${API_URL}/delete?${params.toString()}`, true);
-                //     xhttp.send();
-        
-                //     xhttp.onload = function () {
-                //         if ([200, 201].includes(xhttp.status)) {
-                //             alert("Zapatilla Eliminada");
-                //             window.location.href = `${BASE_URL}/resumen`;
-                //         } else {
-                //             alert(xhttp.error);
-                //         }
-                //     }
-                // }
-            
                 function cancelarCompra() {
                     const carritoZapatillasIdElements = document.getElementsByName('carritoZapatillasId');
                     const carritoIdElement = document.getElementsByName('carritoId')[0];

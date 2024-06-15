@@ -51,7 +51,15 @@ public class MarcaService {
                 new Marca("Nike"),
                 new Marca("Adidas"),
                 new Marca("Nb"),
-                new Marca("Yezzy")
+                new Marca("Yezzy"),
+                new Marca("Puma"),
+                new Marca("Asics"),
+                new Marca("Converse"),
+                new Marca("Crocs"),
+                new Marca("Vans"),
+                new Marca("Salomon"),
+                new Marca("Off-White"),
+                new Marca("IberSneaks")
             );
             marcaRepository.saveAll(marcasIni);
         }

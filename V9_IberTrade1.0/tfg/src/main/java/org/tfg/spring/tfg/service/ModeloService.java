@@ -49,13 +49,42 @@ public class ModeloService {
             Marca Nike = marcaRepository.findById(1L).orElse(null); // Asumiendo que Nike tiene ID 1
             Marca Adidas = marcaRepository.findById(2L).orElse(null); // Asumiendo que Adidas tiene ID 2
             Marca nb = marcaRepository.findById(3L).orElse(null); // Asumiendo que Adidas tiene ID 2
-            Marca Yeezy = marcaRepository.findById(4L).orElse(null); // Asumiendo que Adidas tiene ID 2
+            Marca Yeezy = marcaRepository.findById(4L).orElse(null);
+            Marca Puma = marcaRepository.findById(5L).orElse(null); // Asumiendo que Nike tiene ID 1
+            Marca Asics = marcaRepository.findById(6L).orElse(null); // Asumiendo que Adidas tiene ID 2
+            Marca Converse = marcaRepository.findById(7L).orElse(null); // Asumiendo que Adidas tiene ID 2
+            Marca Crocs = marcaRepository.findById(8L).orElse(null); // Asumiendo que Adidas tiene ID 2 // Asumiendo que Adidas tiene ID 2
+            Marca Vans = marcaRepository.findById(9L).orElse(null); // Asumiendo que Nike tiene ID 1
+            Marca Salomon = marcaRepository.findById(10L).orElse(null); // Asumiendo que Adidas tiene ID 2
+            Marca OffWhite = marcaRepository.findById(11L).orElse(null); // Asumiendo que Adidas tiene ID 2
+            Marca IberSneaks = marcaRepository.findById(12L).orElse(null); // Asumiendo que Adidas tiene ID 2
+
 
             List<Modelo> modelosIni = Arrays.asList(
-                new Modelo("AirMax", Nike),
+                new Modelo("AirMax1", Nike),
                 new Modelo("UltraBoost", Adidas),
                 new Modelo("550", nb),
-                new Modelo("Beluga", Yeezy)
+                new Modelo("NBA", Yeezy),
+
+                new Modelo("Casual", Puma),
+                new Modelo("GelLyte", Asics),
+                new Modelo("AllStar", Converse),
+                new Modelo("Cars", Crocs),
+
+                new Modelo("OldSchool", Vans),
+                new Modelo("AllTerrain", Salomon),
+                new Modelo("008", OffWhite),
+                new Modelo("DawStyle", IberSneaks),
+
+                new Modelo("StanSmith", Adidas),
+                new Modelo("Campus", Adidas),
+                new Modelo("Forum", Adidas),
+                new Modelo("Samba", Adidas),
+
+                new Modelo("DunkLow", Nike),
+                new Modelo("Jordan1High", Nike),
+                new Modelo("AirMax90", Nike),
+                new Modelo("Casual50", nb)
                 // Agrega más modelos si es necesario
             );
             modeloRepository.saveAll(modelosIni);
