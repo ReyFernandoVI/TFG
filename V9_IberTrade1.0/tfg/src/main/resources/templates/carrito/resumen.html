@@ -58,12 +58,12 @@
 
         <div class="col-md-4 bordered-div">
             <h4 class="mb-3">Detalles de Compra</h4>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" id="compra-form" novalidate>
                 <div class="row g-2">
 
                     <div class="col-sm-6 bordered-div">
                         <label for="firstName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control form-control-sm" id="nombre" placeholder="" value="" required>
+                        <input type="text" class="form-control form-control-sm" id="nombreCompleto" placeholder="" value="" required>
                         <div class="invalid-feedback">
                             Valid first name is required.
                         </div>
@@ -98,7 +98,7 @@
 
                     <div class="col-md-5 bordered-div">
                         <label for="pais" class="form-label">Pais</label>
-                        <select class="form-select form-select-sm" id="provinciaId" required>
+                        <select class="form-select form-select-sm" id="paisId" required>
                             <option value="">Seleccionar..</option>
                             <option>Spain</option>
                             <option disabled>UK</option>
@@ -206,7 +206,7 @@
 
                     <div class="col-md-6 bordered-div">
                         <label for="cc-name" class="form-label">Titular</label>
-                        <input type="text" class="form-control form-control-sm" id="cc-name" placeholder="" required>
+                        <input type="text" class="form-control form-control-sm" id="nombreTitular" placeholder="" required>
                         <div class="invalid-feedback">
                             Name on card is required
                         </div>
@@ -214,7 +214,7 @@
 
                     <div class="col-md-6 bordered-div">
                         <label for="cc-number" class="form-label">Nº Tarjeta</label>
-                        <input type="text" class="form-control form-control-sm" id="cc-number" placeholder="" required>
+                        <input type="text" class="form-control form-control-sm" id="numeroTarjeta" placeholder="" required>
                         <div class="invalid-feedback">
                             Credit card number required
                         </div>
@@ -222,7 +222,7 @@
 
                     <div class="col-md-3 bordered-div" style="width: 100px;">
                         <label for="cc-expiration" class="form-label">Caducidad</label>
-                        <input type="text" class="form-control form-control-sm" id="cc-expiration" placeholder="" required>
+                        <input type="text" class="form-control form-control-sm" id="caducidad" placeholder="" required>
                         <div class="invalid-feedback">
                             Expiration date required
                         </div>
@@ -230,7 +230,7 @@
 
                     <div class="col-md-3 bordered-div" style="margin-left: 20px; width: 100px;">
                         <label for="cc-cvv" class="form-label">CVV</label>
-                        <input type="text" class="form-control form-control-sm" id="cc-cvv" placeholder="" required>
+                        <input type="text" class="form-control form-control-sm" id="cvv" placeholder="" required>
                         <div class="invalid-feedback">
                             Security code required
                         </div>
@@ -238,7 +238,7 @@
                 </div>
 
                 <!-- <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button> -->
-            </form>
+            <!-- </form> -->
         </div>
 
         <div class="col-md-8" name="tablaCarro">
@@ -290,7 +290,7 @@
             </div>
 
                 <th:block th:if="${null != carritoZapatillas}">
-                    <div class="row justify-content-around">
+                    <div class="row justify-content-around" onsubmit="validarFormulario(event)">
 
                         <div class="col-12 mt-3 bordered-div">
                             <p class="text-center"><strong>Total Cantidad: <span id="totalQuantity">0</span> productos</strong></p>
@@ -298,7 +298,7 @@
                         </div>
 
                         <div class="col-6 bordered-div d-flex justify-content-center align-items-center">
-                            <button type="button" class="btn btn-success btn-sm" onclick="finalizarCompra()">
+                            <button type="button" class="btn btn-success btn-sm" onclick="validarFormulario(event)" id="finalizarCompraBtn">
                                 <span>Finalizar compra</span>
                             </button>
                         </div>
@@ -313,24 +313,147 @@
                 </th:block>
 
                 <script>
+                // Función para validar el formulario
+                function validarFormulario(event) {
+                    // Evitar que el formulario se envíe automáticamente
+                    event.preventDefault();
+
+                    // Obtener los valores de los campos
+                    var nombreCompleto = document.getElementById('nombreCompleto').value;
+                    var nombreUsuario = document.getElementById('nombreUsuario').value;
+                    var dirección = document.getElementById('direccion').value;
+                    var pais = document.getElementById('paisId').value;
+                    var provincia = document.getElementById('provinciaId').value;
+                    var codPostal = document.getElementById('codPostal').value;
+                    var nombreTitular = document.getElementById('nombreTitular').value;
+                    var mail = document.getElementById('mail').value;
+                    var cvv = document.getElementById('cvv').value;
+                    var numeroTarjeta = document.getElementById('numeroTarjeta').value;
+                    var caducidad = document.getElementById('caducidad').value;
+
+                    // Validar que los campos no estén vacíos
+                    if (nombreCompleto.trim() === '') {
+                    alert('Por favor, ingrese su Nombre Completo.');
+                    return;
+                    }
+                    if (nombreUsuario.trim() === '') {
+                    alert('Por favor, ingrese su Nombre de Usuario.');
+                    return;
+                    }
+                    if (mail.trim() === '') {
+                    alert('Por favor, ingrese su Mail.');
+                    return;
+                    }
+                    if (dirección.trim() === '') {
+                    alert('Por favor, ingrese su Direccion.');
+                    return;
+                    }
+                    if (pais.trim() === '') {
+                    alert('Por favor, seleccione un Pais.');
+                    return;
+                    }
+                    if (provincia.trim() === '') {
+                    alert('Por favor, seleccione una Provincia.');
+                    return;
+                    }
+                    if (codPostal.trim() === '') {
+                    alert('Por favor, ingrese su Codigo Postal.');
+                    return;
+                    }
+                    if (nombreTitular.trim() === '') {
+                    alert('Por favor, ingrese su Nombre de Titular.');
+                    return;
+                    }
+                    if (cvv.trim() === '') {
+                    alert('Por favor, ingrese su CVV.');
+                    return;
+                    }
+                    if (numeroTarjeta.trim() === '') {
+                    alert('Por favor, ingrese su Nº de Tarjeta.');
+                    return;
+                    }
+                    if (caducidad.trim() === '') {
+                    alert('Por favor, ingrese su Fecha de caducidad.');
+                    return;
+                    }
+                    
+                    var nomComRegex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+$/;
+                    if (!nomComRegex.test(nombreCompleto)) {
+                    alert('Por favor, ingrese un Nombre válido.');
+                    return;
+                    }
+                    
+                    var nomUsuRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+                    if (!nomUsuRegex.test(nombreUsuario)) {
+                    alert('Por favor, ingrese un Nombre válido.');
+                    return;
+                    }
+
+                    // Validar estructura de correo electrónico
+                    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    if (!emailRegex.test(mail)) {
+                    alert('Por favor, ingrese un correo electrónico válido.');
+                    return;
+                    }
+                    
+                    var direccionRegex = /^(Avda|Avenida|Calle|C\/)\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?,\s\d{1,5},\s\d+[A-Z]$/;
+                    if (!direccionRegex.test(dirección)) {
+                    alert('Por favor, ingrese una direccion válida.');
+                    return;
+                    }
+                    
+                    var codPostalRegex = /^\d{5}$/;
+                    if (!codPostalRegex.test(codPostal)) {
+                    alert('Por favor, ingrese un Codigo Postal válido.');
+                    return;
+                    }
+                    
+                    var nomTitularRegex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+$/;
+                    if (!nomTitularRegex.test(nombreTitular)) {
+                    alert('Por favor, ingrese un Nombre válido.');
+                    return;
+                    }
+
+                    var cvvRegex = /^\d{3}$/;
+                    if (!cvvRegex.test(cvv)) {
+                    alert('Por favor, ingrese un correo CVV válido.');
+                    return;
+                    }
+                    var numTarjetaRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+                    if (!numTarjetaRegex.test(numeroTarjeta)) {
+                    alert('Por favor, ingrese un Numero válido.');
+                    return;
+                    }
+                    var caducidadRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+                    if (!caducidadRegex.test(caducidad)) {
+                    alert('Por favor, ingrese una fecha válida.');
+                    return;
+                    }
+
+                    finalizarCompra();
+                    // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
+                    document.getElementById('finalizarCompraBtn').submit();
+                }
+
+
                 const BASE_URL = window.location.origin;
                 const API_URL = `${BASE_URL}/api/carritos`;
 
                 function finalizarCompra() {
-                    const xhttp = new XMLHttpRequest();
-                    xhttp.open('GET', `${API_URL}/finalize`, true);
-                    xhttp.send();
-            
-                    xhttp.onload = function () {
-                        if ([200, 201].includes(xhttp.status)) {
-                            alert("Compra finalizada correctamente");
-                            window.location.href = `${BASE_URL}/catalogue`;
-                        } else {
-                            alert("Error al finalizar la compra");
-                        }
-                    }
-                }
+                    
+                        const xhttp = new XMLHttpRequest();
+                        xhttp.open('GET', `${API_URL}/finalize`, true);
+                        xhttp.send();
 
+                        xhttp.onload = function () {
+                            if ([200, 201].includes(xhttp.status)) {
+                                alert("Compra finalizada correctamente");
+                                window.location.href = `${BASE_URL}/catalogue`;
+                            } else {
+                                alert("Error al finalizar la compra");
+                            }
+                        }
+                }
 
                 function eliminarZapatilla(carritoZapatillaId, zapatillaId) {
                     const params = new URLSearchParams();
@@ -411,5 +534,6 @@
         </div>
     </div>
 </div>
+
 
 

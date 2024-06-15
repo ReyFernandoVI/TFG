@@ -84,7 +84,9 @@ public class ModeloService {
                 new Modelo("DunkLow", Nike),
                 new Modelo("Jordan1High", Nike),
                 new Modelo("AirMax90", Nike),
-                new Modelo("Casual50", nb)
+                new Modelo("Casual50", nb),
+                new Modelo("Air Force 1", Nike),
+                new Modelo("Blazer", Nike)
                 // Agrega más modelos si es necesario
             );
             modeloRepository.saveAll(modelosIni);

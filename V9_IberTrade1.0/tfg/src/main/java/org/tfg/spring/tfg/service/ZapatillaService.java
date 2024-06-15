@@ -202,8 +202,8 @@ public class ZapatillaService {
             zapatilla8.setModelo(modeloRepository.getReferenceById(8L));
             zapatilla8.setImagen("CrocsCars");
 
-            zapatilla9.setNombre("Skate Rules");
-            zapatilla9.setPrecio(70);
+            zapatilla9.setNombre("Skate Rules X Beetlejuice");
+            zapatilla9.setPrecio(115);
             zapatilla9.setColor("Negro");
             zapatilla9.setTalla("44");
             zapatilla9.setStock(3);
@@ -211,9 +211,9 @@ public class ZapatillaService {
             zapatilla9.setModelo(modeloRepository.getReferenceById(9L));
             zapatilla9.setImagen("Vans2");
 
-            zapatilla10.setNombre("Annapurna");
+            zapatilla10.setNombre("Annapurna's Gods");
             zapatilla10.setPrecio(230);
-            zapatilla10.setColor("Azul");
+            zapatilla10.setColor("Verdes");
             zapatilla10.setTalla("43");
             zapatilla10.setStock(2);
             zapatilla10.setMarcas(marcaRepository.getReferenceById(10L));
