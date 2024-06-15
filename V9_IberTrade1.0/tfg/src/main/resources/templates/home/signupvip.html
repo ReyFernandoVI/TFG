@@ -1,3 +1,4 @@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="b-example-divider"></div>
 
 <div class="container d-flex justify-content-center align-items-center vh-20">
@@ -54,29 +55,29 @@
 
     // Validar que los campos no estén vacíos
     if (nombre.trim() === '') {
-      alert('Por favor, ingrese su nombre.');
+      swal('Por favor, ingrese su nombre.');
       return;
     }
     if (dni.trim() === '') {
-      alert('Por favor, ingrese su DNI.');
+      swal('Por favor, ingrese su DNI.');
       return;
     }
     if (mail.trim() === '') {
-      alert('Por favor, ingrese su correo electrónico.');
+      swal('Por favor, ingrese su correo electrónico.');
       return;
     }
 
     // Validar estructura de correo electrónico
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(mail)) {
-      alert('Por favor, ingrese un correo electrónico válido.');
+      swal('Por favor, ingrese un correo electrónico válido.');
       return;
     }
 
     // Validar requisitos mínimos de contraseña
     var contraseñaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
     if (!contraseñaRegex.test(contraseña)) {
-      alert('La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.');
+      swal('La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.');
       return;
     }
 

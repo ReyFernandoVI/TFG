@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>IberTrade Products</title>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -100,35 +100,48 @@
         <!-- Include your footer content here -->
     </div>
     <script>
-
         const BASE_URL = window.location.origin;
         const API_URL = `${BASE_URL}/api/carritos`;
-
+    
         function addZapatilla(zapatilla) {
             if (!zapatilla) {
                 return;
             }
             const cantidadProducto = document.getElementById("cantidad").value;
             const xhttp = new XMLHttpRequest();
-            xhttp.open('POST', `${API_URL}/update`, true)
-            xhttp.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+            xhttp.open('POST', `${API_URL}/update`, true);
+            xhttp.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
             const data = {
                 zapatilla,
-                cantidad: null !== cantidadProducto && undefined !== cantidadProducto? cantidadProducto: 1
+                cantidad: cantidadProducto !== null && cantidadProducto !== undefined ? cantidadProducto : 1
             };
             xhttp.send(JSON.stringify(data));
-
+    
             xhttp.onload = function () {
-
                 if ([200, 201].includes(xhttp.status)) {
-                    alert("Guardado correctamente");
-                    window.location.href = `${BASE_URL}/catalogue`;
+                    // Mostrar SweetAlert después de la respuesta exitosa
+                    swal({
+                        title: "Zapatilla Añadida al carrito",
+                        text: "Redireccionando al catálogo...",
+                        icon: "success",
+                        button: "OK",
+                    }).then((value) => {
+                        if (value) {
+                            window.location.href = `${BASE_URL}/catalogue`;
+                        }
+                    });
                 } else {
-                    alert("Error al proseguir con la compra");
+                    swal({
+                        title: "Error al Comprar",
+                        text: "Redireccionando al carrito...",
+                        icon: "error",
+                        button: "OK",
+                    });
                 }
-            }
+            };
         }
     </script>
+    
 </body>
 
 </html>

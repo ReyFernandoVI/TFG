@@ -311,6 +311,23 @@
 
                     </div>
                 </th:block>
+                <!-- MODAL ALERTS -->
+                <!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p id="modalMessage"></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
 
                 <script>
                 // Función para validar el formulario
@@ -333,104 +350,104 @@
 
                     // Validar que los campos no estén vacíos
                     if (nombreCompleto.trim() === '') {
-                    alert('Por favor, ingrese su Nombre Completo.');
+                    swal('Por favor, ingrese su Nombre Completo.');
                     return;
                     }
                     if (nombreUsuario.trim() === '') {
-                    alert('Por favor, ingrese su Nombre de Usuario.');
+                    swal('Por favor, ingrese su Nombre de Usuario.');
                     return;
                     }
                     if (mail.trim() === '') {
-                    alert('Por favor, ingrese su Mail.');
+                    swal('Por favor, ingrese su Mail.');
                     return;
                     }
                     if (dirección.trim() === '') {
-                    alert('Por favor, ingrese su Direccion.');
+                    swal('Por favor, ingrese su Direccion.');
                     return;
                     }
                     if (pais.trim() === '') {
-                    alert('Por favor, seleccione un Pais.');
+                    swal('Por favor, seleccione un Pais.');
                     return;
                     }
                     if (provincia.trim() === '') {
-                    alert('Por favor, seleccione una Provincia.');
+                    swal('Por favor, seleccione una Provincia.');
                     return;
                     }
                     if (codPostal.trim() === '') {
-                    alert('Por favor, ingrese su Codigo Postal.');
+                    swal('Por favor, ingrese su Codigo Postal.');
                     return;
                     }
                     if (nombreTitular.trim() === '') {
-                    alert('Por favor, ingrese su Nombre de Titular.');
+                    swal('Por favor, ingrese su Nombre de Titular.');
                     return;
                     }
                     if (cvv.trim() === '') {
-                    alert('Por favor, ingrese su CVV.');
+                    swal('Por favor, ingrese su CVV.');
                     return;
                     }
                     if (numeroTarjeta.trim() === '') {
-                    alert('Por favor, ingrese su Nº de Tarjeta.');
+                    swal('Por favor, ingrese su Nº de Tarjeta.');
                     return;
                     }
                     if (caducidad.trim() === '') {
-                    alert('Por favor, ingrese su Fecha de caducidad.');
+                    swal('Por favor, ingrese su Fecha de caducidad.');
                     return;
                     }
                     
                     var nomComRegex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+$/;
                     if (!nomComRegex.test(nombreCompleto)) {
-                    alert('Por favor, ingrese un Nombre válido.');
+                    swal('Por favor, ingrese un Nombre válido.');
                     return;
                     }
                     
                     var nomUsuRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
                     if (!nomUsuRegex.test(nombreUsuario)) {
-                    alert('Por favor, ingrese un Nombre válido.');
+                    swal('Por favor, ingrese un Nombre válido.');
                     return;
                     }
 
                     // Validar estructura de correo electrónico
                     var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                     if (!emailRegex.test(mail)) {
-                    alert('Por favor, ingrese un correo electrónico válido.');
+                    swal('Por favor, ingrese un correo electrónico válido.');
                     return;
                     }
                     
                     var direccionRegex = /^(Avda|Avenida|Calle|C\/)\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?,\s\d{1,5},\s\d+[A-Z]$/;
                     if (!direccionRegex.test(dirección)) {
-                    alert('Por favor, ingrese una direccion válida.');
+                    swal('Por favor, ingrese una direccion válida.');
                     return;
                     }
                     
                     var codPostalRegex = /^\d{5}$/;
                     if (!codPostalRegex.test(codPostal)) {
-                    alert('Por favor, ingrese un Codigo Postal válido.');
+                    swal('Por favor, ingrese un Codigo Postal válido.');
                     return;
                     }
                     
                     var nomTitularRegex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+$/;
                     if (!nomTitularRegex.test(nombreTitular)) {
-                    alert('Por favor, ingrese un Nombre válido.');
+                    swal('Por favor, ingrese un Nombre válido.');
                     return;
                     }
 
                     var cvvRegex = /^\d{3}$/;
                     if (!cvvRegex.test(cvv)) {
-                    alert('Por favor, ingrese un correo CVV válido.');
+                    swal('Por favor, ingrese un correo CVV válido.');
                     return;
                     }
                     var numTarjetaRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
                     if (!numTarjetaRegex.test(numeroTarjeta)) {
-                    alert('Por favor, ingrese un Numero válido.');
+                    swal('Por favor, ingrese un Numero válido.');
                     return;
                     }
                     var caducidadRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
                     if (!caducidadRegex.test(caducidad)) {
-                    alert('Por favor, ingrese una fecha válida.');
+                    swal('Por favor, ingrese una fecha válida.');
                     return;
                     }
 
-                    finalizarCompra();
+                     finalizarCompra();
                     // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
                     document.getElementById('finalizarCompraBtn').submit();
                 }
@@ -447,12 +464,26 @@
 
                         xhttp.onload = function () {
                             if ([200, 201].includes(xhttp.status)) {
-                                alert("Compra finalizada correctamente");
-                                window.location.href = `${BASE_URL}/catalogue`;
+                                // Mostrar SweetAlert después de la respuesta exitosa
+                                swal({
+                                    title: "Compra realizada correctamente",
+                                    text: "Redireccionando al catálogo...",
+                                    icon: "success",
+                                    button: "OK",
+                                }).then((value) => {
+                                    if (value) {
+                                        window.location.href = `${BASE_URL}/catalogue`;
+                                    }
+                                });
                             } else {
-                                alert("Error al finalizar la compra");
+                                swal({
+                                    title: "Error al Comprar",
+                                    text: "Redireccionando al carrito...",
+                                    icon: "error",
+                                    button: "OK",
+                                });
                             }
-                        }
+                        };
                 }
 
                 function eliminarZapatilla(carritoZapatillaId, zapatillaId) {
@@ -466,11 +497,24 @@
 
                     xhttp.onload = function () {
                         if ([200, 201].includes(xhttp.status)) {
-                            alert("Zapatilla Eliminada");
-                            window.location.href = `${BASE_URL}/comprar`;
+                            swal({
+                                title: "¿Desea Eliminar el Producto?",
+                                text: "Si es asi, pulse CONFIRMAR...",
+                                icon: "warning",
+                                button: "Confirmar",
+                            }).then((value) => {
+                                if (value) {
+                                    window.location.href = `${BASE_URL}/comprar`;
+                                }
+                            });
                         } else {
-                            alert("Error al eliminar zapatilla");
-                        }
+                            swal({
+                                    title: "Error al Eliminar",
+                                    text: "Redireccionando al carrito...",
+                                    icon: "error",
+                                    button: "OK",
+                                });
+                            }
                     };
                 }
 
@@ -491,8 +535,16 @@
         
                     xhttp.onload = function () {
                         if ([200, 201].includes(xhttp.status)) {
-                            alert("Compra cancelada");
-                            window.location.href = `${BASE_URL}/catalogue`;
+                            swal({
+                                title: "¿Desea Eliminar el Carrito?",
+                                text: "Si es asi, pulse CONFIRMAR...",
+                                icon: "warning",
+                                button: "Confirmar",
+                            }).then((value) => {
+                                if (value) {
+                                    window.location.href = `${BASE_URL}/catalogue`;
+                                }
+                            });
                         } else {
                             alert(xhttp.error);
                         }

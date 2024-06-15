@@ -1,3 +1,4 @@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="b-example-divider"></div>
 
 <div class="container d-flex justify-content-center align-items-center vh-20">
@@ -50,43 +51,43 @@
 
     // Validar que los campos no estén vacíos
     if (nombre.trim() === '') {
-      alert('Por favor, ingrese su nombre.');
+      swal('Por favor, ingrese su nombre.');
       return;
     }
     if (dni.trim() === '') {
-      alert('Por favor, ingrese su DNI.');
+      swal('Por favor, ingrese su DNI.');
       return;
     }
     if (mail.trim() === '') {
-      alert('Por favor, ingrese su correo electrónico.');
+      swal('Por favor, ingrese su correo electrónico.');
       return;
     }
 
     //Minimo 2 Caracteres, Maximo 20. puede contener MAYUSCULAS, MINUSCULAS Y NUMEROS
     var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
     if (!nombreRegex.test(nombre)) {
-      alert('Por favor, ingrese un nombre válido.');
+      swal('Por favor, ingrese un nombre válido.');
       return;
     }
 
     // El DNI debe de estar formado por 8 caracteres que estén entre el 0 y el 9, seguidos por un guión "-" y acabados con una letra mayúscula.
     var dniRegex = /(^([0-9]{8,8}\-[A-Z])|^)$/;
     if (!dniRegex.test(dni)) {
-      alert('Por favor, ingrese un dni válido.');
+      swal('Por favor, ingrese un dni válido.');
       return;
     }
 
     // Validar estructura de correo electrónico
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(mail)) {
-      alert('Por favor, ingrese un correo electrónico válido.');
+      swal('Por favor, ingrese un correo electrónico válido.');
       return;
     }
 
     // Validar requisitos mínimos de contraseña
     var contraseñaRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
     if (!contraseñaRegex.test(contraseña)) {
-      alert('La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.');
+      swal('La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.');
       return;
     }
 
