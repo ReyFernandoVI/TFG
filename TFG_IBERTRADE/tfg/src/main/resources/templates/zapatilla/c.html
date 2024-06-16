@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="form-container">
+      <h1 class="text-center">Nueva Zapatilla</h1>
+      <form action="/zapatilla/c" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="id-nombre">Nombre</label>
+          <input id="id-nombre" type="text" name="nombre" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="id-marcas">Seleccione una marca:</label>
+          <select id="id-marcas" name="idMarca" required th:onchange="changeModelo([[(${modelos})]])" class="form-control">
+            <option>--Marcas--</option>
+            <option 
+              th:each="marca:${marcas}"
+              th:text="${marca.nombre}"
+              th:value="${marca.id}">
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="id-modelo">Seleccione un modelo:</label>
+          <select id="id-modelo" name="idModelo" required class="form-control">
+            <option>--Modelos--</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="id-precio">Precio</label>
+          <input id="id-precio" type="text" name="precio" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="id-color">Color</label>
+          <input id="id-color" type="text" name="color" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="id-talla">Talla</label>
+          <input id="id-talla" type="text" name="talla" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="id-stock">Stock</label>
+          <input id="id-stock" type="text" name="stock" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="id-imagen">Imagen</label>
+          <input id="id-imagen" type="file" name="imagenZapatilla" accept=".jpg,.jpeg,.png" class="form-control-file" />
+        </div>
+        <div class="form-buttons text-center mt-4">
+          <input type="submit" class="btn btn-primary btn-space">
+          <button type="button" class="btn btn-secondary" onclick="window.location.href='/zapatilla/r'">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    function changeModelo(allModelos){
+      const marcaSeleccionada = document.getElementById("id-marcas").value;
+      if(!marcaSeleccionada){
+        return;
+      }
+      
+      const modelos = allModelos.filter(m => m.marcas.id === Number(marcaSeleccionada)) ?? []; 
+      const selectModelos = document.getElementById("id-modelo");
+  
+      while (selectModelos.firstChild) {
+        selectModelos.removeChild(selectModelos.lastChild);
+      }
+  
+      for(let modelo of modelos){
+        const option = document.createElement('option');
+        option.value = modelo.id;
+        option.innerHTML = modelo.nombre;
+        selectModelos.appendChild(option);
+      }
+    }
+  </script>

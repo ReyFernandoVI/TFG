@@ -1,0 +1,164 @@
+package org.tfg.spring.tfg.service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.tfg.spring.tfg.domain.Carrito;
+import org.tfg.spring.tfg.domain.CarritoZapatillas;
+import org.tfg.spring.tfg.domain.Usuario;
+import org.tfg.spring.tfg.domain.Zapatilla;
+import org.tfg.spring.tfg.domain.viewmodel.ZapatillaCantidad;
+import org.tfg.spring.tfg.repository.CarritoRepository;
+import org.tfg.spring.tfg.repository.CarritoZapatillasRepository;
+import org.tfg.spring.tfg.repository.ZapatillaRepository;
+
+import jakarta.servlet.http.HttpSession;
+
+@Service
+@Transactional
+public class CarritoService {
+
+    @Autowired
+    private ZapatillaRepository zapatillaRepository;
+
+    @Autowired
+    private CarritoRepository carritoRepository;
+
+    @Autowired
+    private CarritoZapatillasRepository carritoZapatillasRepository;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+
+    public Carrito updateSaveCrarito(ZapatillaCantidad zapatillaCantidad, HttpSession s){
+
+        Carrito carrito = getCarritoIfExist(s);
+        CarritoZapatillas carritoZapatillasToSave = null;
+
+        if(null != carrito){
+
+            List<CarritoZapatillas> zapatillasCarrito = carrito.getCarritoZapatillas();
+
+            for(CarritoZapatillas carritoZapatilla: zapatillasCarrito){
+                if(carritoZapatilla.getZapatilla().getId().equals(zapatillaCantidad.getZapatilla().getId())){
+                    carritoZapatilla.setCantidad(
+                        carritoZapatilla.getCantidad().intValue() + zapatillaCantidad.getCantidad().intValue()
+                    );
+
+                    carritoZapatillasToSave = carritoZapatilla;
+                    break;
+                }
+            }
+
+            if(null != carritoZapatillasToSave){
+                carrito.setCarritoZapatillas(zapatillasCarrito);
+                return carritoRepository.save(carrito);
+            }
+
+
+            carritoZapatillasToSave = new CarritoZapatillas();
+            carritoZapatillasToSave.setCantidad(zapatillaCantidad.getCantidad());
+            carritoZapatillasToSave.setZapatilla(zapatillaCantidad.getZapatilla());
+            carritoZapatillasToSave.setCarrito(carrito);
+            carritoZapatillasToSave = carritoZapatillasRepository.save(carritoZapatillasToSave);
+
+            return carritoZapatillasToSave.getCarrito();
+
+        }
+
+        Usuario usuario = usuarioService.getAuthUser(s);
+
+        if(null == usuario || null == usuario.getId()) return null; 
+
+
+
+        carritoZapatillasToSave = new CarritoZapatillas();
+        carritoZapatillasToSave.setCantidad(zapatillaCantidad.getCantidad());
+        carritoZapatillasToSave.setZapatilla(zapatillaCantidad.getZapatilla());
+        carritoZapatillasToSave = carritoZapatillasRepository.save(carritoZapatillasToSave);
+
+        Carrito newCarrito = new Carrito();
+
+        newCarrito.setUsuario(usuario);
+        newCarrito.setCarritoZapatillas(Arrays.asList(carritoZapatillasToSave));
+        newCarrito.setIsBought(false);
+
+        newCarrito = carritoRepository.save(newCarrito);
+        carritoZapatillasToSave.setCarrito(newCarrito);
+        carritoZapatillasToSave = carritoZapatillasRepository.save(carritoZapatillasToSave);
+        return newCarrito;
+    }
+
+    public void finalizarCompra(HttpSession s){
+    
+        Carrito carrito = getCarritoIfExist(s);
+
+        if(null == carrito) return;
+
+        for (CarritoZapatillas item : carrito.getCarritoZapatillas()) {
+            Zapatilla zapatilla = item.getZapatilla();
+            int cantidadComprada = item.getCantidad();
+            if (zapatilla.getStock() >= cantidadComprada) {
+                zapatilla.setStock(zapatilla.getStock() - cantidadComprada);
+                zapatillaRepository.save(zapatilla);
+            } else {
+                // Manejar caso cuando no hay suficiente stock, lanzar una excepción o similar
+                throw new IllegalArgumentException("No hay suficiente stock para " + zapatilla.getNombre());
+            }
+        }
+
+        carrito.setIsBought(true);
+        carritoRepository.save(carrito);
+        
+    }
+
+    public void cancelarCompra( List<Long> carritoZapatillasId,Long carritoId,HttpSession s){
+        for (Long carrito : carritoZapatillasId) {
+            carritoZapatillasRepository.deleteById(carrito);
+        }
+
+
+        Carrito carrito = getCarritoIfExist(s);
+        if(null == carrito) return;
+        
+        carritoRepository.deleteById(carritoId);
+    }
+
+    public Carrito findCarritoByUsuarioId(HttpSession s){
+        return getCarritoIfExist(s);
+    }
+
+    private Carrito getCarritoIfExist(HttpSession s){
+        Usuario usuario = usuarioService.getAuthUser(s);
+
+        if(null == usuario || null == usuario.getId()) return null; 
+
+        Optional<Carrito> carrito = carritoRepository.findFirstByUsuarioIdAndIsBoughtFalse(usuario.getId());
+
+        return carrito.isPresent()? carrito.get(): null;
+    }
+
+    // public void eliminarZapatillaDelCarrito(Long zapatillaId, HttpSession session) {
+    //     // Aquí implementa la lógica para eliminar la zapatilla del carrito
+    //     // Por ejemplo:
+    //     CarritoZapatillas zapatilla = carritoZapatillasRepository.findById(zapatillaId).orElse(null);
+    //     if (zapatilla != null) {
+    //         carritoZapatillasRepository.delete(zapatilla);
+    //     }
+    // }
+
+    public void eliminarZapatillaDelCarro( List<Long> carritoZapatillasId,Long zapatillaId,HttpSession s){
+        for (Long zapatilla : carritoZapatillasId) {
+            carritoZapatillasRepository.deleteById(zapatilla);
+        }
+        carritoZapatillasRepository.deleteById(zapatillaId);   
+    }
+
+    
+}

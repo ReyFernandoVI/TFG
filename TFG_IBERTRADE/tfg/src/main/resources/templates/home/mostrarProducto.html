@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>IberTrade Products</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/heroic-features.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div>
+        <!-- Include your header content here -->
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">
+            IberTrade <small>Producto</small>
+        </h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/catalogue">Catalogo</a></li>
+            <li class="breadcrumb-item active">Producto</li>
+        </ol>
+
+        <!-- Blog Post -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="#">
+                            <img class="img-fluid rounded" th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}"
+                                alt="Imagen de Zapatilla">
+                        </a>
+                    </div>
+                    <div class="col-lg-6">
+                        <form action="/pay" method="post">
+                            <input type="hidden" th:value="${zapatilla.id}" name="idZapatilla">
+
+                            <h2 class="card-title" th:text="${zapatilla.nombre}">Nombre: </h2>
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h5>Marca: <span th:text="${zapatilla.marcas?.nombre}">Marca</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Modelo: <span th:text="${zapatilla.modelo?.nombre}">Modelo</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Talla: <span th:text="${zapatilla.talla}">Talla</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Color: <span th:text="${zapatilla.color}">Color</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Stock: <span th:text="${zapatilla.stock}">Stock</span></h5>
+                                </li>
+                                <li class="list-group-item">
+                                    <h5>Precio: $<span th:text="${zapatilla.precio}">0.00</span></h5>
+                                </li>
+                                <!--<li class="list-group-item">
+                                    <p>Descripción del Producto</p>
+                                </li>-->
+                                <li class="list-group-item">
+                                    <h6>
+                                        Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
+                                            min="1" max="2" value="1">
+                                    </h6>
+                                </li>
+                            </ul>
+                            <br>
+                            <button type="button" class="btn btn-outline-success me-2"
+                                th:onclick="addZapatilla([[(${zapatilla})]])">
+                                Añadir al Carrito
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                                </svg> 
+                            </button>
+                            <a href="/catalogue" type="button" class="btn btn-outline-danger me-2">Volver</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div>
+        <!-- Include your footer content here -->
+    </div>
+    <script>
+        const BASE_URL = window.location.origin;
+        const API_URL = `${BASE_URL}/api/carritos`;
+    
+        function addZapatilla(zapatilla) {
+            if (!zapatilla) {
+                return;
+            }
+            const cantidadProducto = document.getElementById("cantidad").value;
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('POST', `${API_URL}/update`, true);
+            xhttp.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+            const data = {
+                zapatilla,
+                cantidad: cantidadProducto !== null && cantidadProducto !== undefined ? cantidadProducto : 1
+            };
+            xhttp.send(JSON.stringify(data));
+    
+            xhttp.onload = function () {
+                if ([200, 201].includes(xhttp.status)) {
+                    // Mostrar SweetAlert después de la respuesta exitosa
+                    swal({
+                        title: "Zapatilla Añadida al carrito",
+                        text: "Redireccionando al catálogo...",
+                        icon: "success",
+                        button: "OK",
+                    }).then((value) => {
+                        if (value) {
+                            window.location.href = `${BASE_URL}/catalogue`;
+                        }
+                    });
+                } else {
+                    swal({
+                        title: "Error al Comprar",
+                        text: "Redireccionando al carrito...",
+                        icon: "error",
+                        button: "OK",
+                    });
+                }
+            };
+        }
+    </script>
+    
+</body>
+
+</html>

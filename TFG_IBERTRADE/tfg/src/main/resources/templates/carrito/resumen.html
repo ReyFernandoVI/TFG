@@ -1,0 +1,619 @@
+
+<style>
+        .bordered-div {
+        border: 1px solid #dee2e6; /* Color del borde que coincide con el esquema de colores de Bootstrap */
+        border-radius: 0.25rem; /* Bordes redondeados para suavizar la apariencia */
+        padding: 10px; /* Espacio interno alrededor del contenido */
+        margin-bottom: 20px; /* Espacio entre los divs */
+        background-color: #fff; /* Color de fondo para los divs */
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra suave para resaltar los divs */
+        }
+
+        .bordered-div table {
+            border-collapse: collapse; /* Colapso de bordes para tablas */
+            width: 100%; /* Ancho completo */
+        }
+
+        .bordered-div table th,
+        .bordered-div table td {
+            border: 1px solid #dee2e6; /* Color del borde de las celdas */
+            padding: 8px; /* Espaciado interno de las celdas */
+        }
+
+        .bordered-div table thead th {
+            background-color: #f8f9fa; /* Color de fondo para las celdas del encabezado */
+            border-color: #dee2e6; /* Color del borde del encabezado */
+        }
+
+        .bordered-div table tbody td {
+            vertical-align: middle; /* Alineación vertical del contenido de las celdas */
+        }
+
+        .bordered-div .alert {
+            border: 1px solid #ffc107; /* Borde para la alerta */
+            background-color: #fff3cd; /* Color de fondo para la alerta */
+            color: #664d03; /* Color de texto para la alerta */
+            padding: 10px; /* Espaciado interno */
+            margin-bottom: 20px; /* Espacio inferior */
+        }
+
+        .bordered-div button {
+            margin-top: 10px; /* Espacio superior para los botones */
+        }
+
+        .hide-scroll {
+        max-height: 100%;
+        overflow: hidden;
+        }
+
+        .margen-izquierdo {
+        margin-left: 10px; /* Puedes ajustar el valor según tu diseño */
+        }
+
+</style>
+
+<div class="container">
+    <div class="row">
+        <!-- Columna Izquierda: Formulario de dirección de facturación -->
+
+        <div class="col-md-4 bordered-div">
+            <h4 class="mb-3">Detalles de Compra</h4>
+            <form class="needs-validation" id="compra-form" novalidate>
+                <div class="row g-2">
+
+                    <div class="col-sm-6 bordered-div">
+                        <label for="firstName" class="form-label">Nombre</label>
+                        <input type="text" class="form-control form-control-sm" id="nombreCompleto" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-12 bordered-div">
+                        <label for="username" class="form-label">Usuario</label>
+                        <div class="input-group input-group-sm has-validation">
+                            <span class="input-group-text">@</span>
+                            <input type="text" class="form-control form-control-sm" id="nombreUsuario" placeholder="Username" required>
+                            <div class="invalid-feedback">
+                                Your username is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 bordered-div">
+                        <label for="email" class="form-label">Mail <span class="text-body-secondary">(Optional)</span></label>
+                        <input type="email" class="form-control form-control-sm" id="mail" placeholder="you@example.com">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+
+                    <div class="col-12 bordered-div">
+                        <label for="address" class="form-label">Dirección</label>
+                        <input type="text" class="form-control form-control-sm" id="direccion" placeholder="1234 Main St" required>
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 bordered-div">
+                        <label for="pais" class="form-label">Pais</label>
+                        <select class="form-select form-select-sm" id="paisId" required>
+                            <option value="">Seleccionar..</option>
+                            <option>Spain</option>
+                            <option disabled>UK</option>
+                            <option disabled>France</option>
+                            <option disabled>Portugal</option>
+                            <option disabled>Germany</option>
+                            <option disabled>China</option>
+                            <option disabled>USA</option>
+                            <option disabled>Italy</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid country.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 bordered-div">
+                        <label for="provincia" class="form-label">Provincia</label>
+                        <select class="form-select form-select-sm" id="provinciaId" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="A Coruña">A Coruña</option>
+                                <option value="Álava">Álava</option>
+                                <option value="Albacete">Albacete</option>
+                                <option value="Alicante">Alicante</option>
+                                <option value="Almería">Almería</option>
+                                <option value="Asturias">Asturias</option>
+                                <option value="Ávila">Ávila</option>
+                                <option value="Badajoz">Badajoz</option>
+                                <option value="Baleares">Baleares</option>
+                                <option value="Barcelona">Barcelona</option>
+                                <option value="Burgos">Burgos</option>
+                                <option value="Cáceres">Cáceres</option>
+                                <option value="Cádiz">Cádiz</option>
+                                <option value="Cantabria">Cantabria</option>
+                                <option value="Castellón">Castellón</option>
+                                <option value="Ciudad Real">Ciudad Real</option>
+                                <option value="Córdoba">Córdoba</option>
+                                <option value="Cuenca">Cuenca</option>
+                                <option value="Girona">Girona</option>
+                                <option value="Granada">Granada</option>
+                                <option value="Guadalajara">Guadalajara</option>
+                                <option value="Gipuzkoa">Gipuzkoa</option>
+                                <option value="Huelva">Huelva</option>
+                                <option value="Huesca">Huesca</option>
+                                <option value="Jaén">Jaén</option>
+                                <option value="La Rioja">La Rioja</option>
+                                <option value="Las Palmas">Las Palmas</option>
+                                <option value="León">León</option>
+                                <option value="Lérida">Lérida</option>
+                                <option value="Lugo">Lugo</option>
+                                <option value="Madrid">Madrid</option>
+                                <option value="Málaga">Málaga</option>
+                                <option value="Murcia">Murcia</option>
+                                <option value="Navarra">Navarra</option>
+                                <option value="Ourense">Ourense</option>
+                                <option value="Palencia">Palencia</option>
+                                <option value="Pontevedra">Pontevedra</option>
+                                <option value="Salamanca">Salamanca</option>
+                                <option value="Segovia">Segovia</option>
+                                <option value="Sevilla">Sevilla</option>
+                                <option value="Soria">Soria</option>
+                                <option value="Tarragona">Tarragona</option>
+                                <option value="Santa Cruz de Tenerife">Santa Cruz de Tenerife</option>
+                                <option value="Teruel">Teruel</option>
+                                <option value="Toledo">Toledo</option>
+                                <option value="Valencia">Valencia</option>
+                                <option value="Valladolid">Valladolid</option>
+                                <option value="Vizcaya">Vizcaya</option>
+                                <option value="Zamora">Zamora</option>
+                                <option value="Zaragoza">Zaragoza</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please provide a valid state.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 bordered-div">
+                        <label for="zip" class="form-label">CP</label>
+                        <input type="text" class="form-control form-control-sm" id="codPostal" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-2">
+
+                <h4 class="mb-3">Metodo de Pago</h4>
+
+                <div class="my-2 d-flex justify-content-between bordered-div">
+                    <div class="form-check form-check-sm">
+                        <label class="form-check-label" for="credit">T.Credito</label>
+                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                    </div>
+                    <div class="form-check form-check-sm">
+                        <label class="form-check-label" for="debit">T.Debito</label>
+                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                    </div>
+                    <div class="form-check form-check-sm">
+                        <label class="form-check-label" for="paypal">PayPal</label>
+                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                    </div>
+                </div>
+
+                <div class="row gy-2 justify-content-center align-items-center">
+
+                    <div class="col-md-6 bordered-div">
+                        <label for="cc-name" class="form-label">Titular</label>
+                        <input type="text" class="form-control form-control-sm" id="nombreTitular" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Name on card is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 bordered-div">
+                        <label for="cc-number" class="form-label">Nº Tarjeta</label>
+                        <input type="text" class="form-control form-control-sm" id="numeroTarjeta" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Credit card number required
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 bordered-div" style="width: 100px;">
+                        <label for="cc-expiration" class="form-label">Caducidad</label>
+                        <input type="text" class="form-control form-control-sm" id="caducidad" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Expiration date required
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 bordered-div" style="margin-left: 20px; width: 100px;">
+                        <label for="cc-cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control form-control-sm" id="cvv" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Security code required
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button> -->
+            <!-- </form> -->
+        </div>
+
+        <div class="col-md-8" name="tablaCarro">
+            <div class="table-responsive bordered-div hide-scroll">
+                <table class="table table-striped table-sm bordered-div margen-izquierdo" th:if="${null != carritoZapatillas}" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Precio Ud</th>
+                            <th>Cantidad</th>
+                            <th>Precio Total €</th>
+                            <th>Imagen</th>
+                            <th>Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="carrito-table-body">
+                        <tr th:each="carritoZapatilla : ${carritoZapatillas}">
+                            <input type="hidden" th:value="${carritoZapatilla.id}" name="carritoZapatillasId">
+                            <input type="hidden" th:value="${carritoZapatilla.carrito?.id}" name="carritoId">
+                            <input type="hidden" th:value="${carritoZapatilla.zapatilla?.id}" name="zapatillaId">
+                
+                            <td th:text="${carritoZapatilla.zapatilla.nombre}"></td>
+                            <td th:text="${carritoZapatilla.zapatilla.marcas?.nombre}"></td>
+                            <td th:text="${carritoZapatilla.zapatilla.modelo?.nombre}"></td>
+                            <td class="precio" th:text="${carritoZapatilla.zapatilla.precio}"></td>
+                            <td class="cantidad" th:text="${carritoZapatilla.cantidad}"></td>
+                            <td class="precio-total"></td>
+                            <td>
+                                <form action="zapatilla/r" enctype="multipart/form-data">
+                                    <img th:src="@{'/img/' + ${carritoZapatilla.zapatilla.imagen} + '.png'}" width="50">
+                                </form>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm" th:onclick="'eliminarZapatilla(\'' + ${carritoZapatilla.id} + '\', \'' + ${carritoZapatilla.zapatilla.id} + '\')'">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+
+            <div th:unless="${null != carritoZapatillas}" class="alert alert-warning">
+                <span>NO HAY NINGUN PRODUCTO EN EL CARRITO</span>
+            </div>
+
+                <th:block th:if="${null != carritoZapatillas}">
+                    <div class="row justify-content-around" onsubmit="validarFormulario(event)">
+
+                        <div class="col-12 mt-3 bordered-div">
+                            <p class="text-center"><strong>Total Cantidad: <span id="totalQuantity">0</span> productos</strong></p>
+                            <p class="text-center"><strong>Total Precio: <span id="totalPrice">0</span> €</strong></p>
+                            <p class="text-center" th:if="${session.usuario != null && session.usuario.vip}"><strong>Descuento 10% UsuarioVIP</strong><p class="text-center"><strong>Total Precio: <span id="totalPriceVip">0</span> €</strong></p></p>
+                        </div>
+
+                        <div class="col-6 bordered-div d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-success btn-sm" onclick="validarFormulario(event)" id="finalizarCompraBtn">
+                                <span>Finalizar compra</span>
+                            </button>
+                        </div>
+
+                        <div class="col-6 bordered-div d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="cancelarCompra()">
+                                <span>Cancelar compra</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </th:block>
+                <!-- MODAL ALERTS -->
+                <!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p id="modalMessage"></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+
+                <script>
+                // Función para validar el formulario
+                function validarFormulario(event) {
+                    // Evitar que el formulario se envíe automáticamente
+                    event.preventDefault();
+
+                    // Obtener los valores de los campos
+                    var nombreCompleto = document.getElementById('nombreCompleto').value;
+                    var nombreUsuario = document.getElementById('nombreUsuario').value;
+                    var dirección = document.getElementById('direccion').value;
+                    var pais = document.getElementById('paisId').value;
+                    var provincia = document.getElementById('provinciaId').value;
+                    var codPostal = document.getElementById('codPostal').value;
+                    var nombreTitular = document.getElementById('nombreTitular').value;
+                    var mail = document.getElementById('mail').value;
+                    var cvv = document.getElementById('cvv').value;
+                    var numeroTarjeta = document.getElementById('numeroTarjeta').value;
+                    var caducidad = document.getElementById('caducidad').value;
+
+                    // Validar que los campos no estén vacíos
+                    if (nombreCompleto.trim() === '') {
+                    swal('Por favor, ingrese su Nombre Completo.');
+                    return;
+                    }
+                    if (nombreUsuario.trim() === '') {
+                    swal('Por favor, ingrese su Nombre de Usuario.');
+                    return;
+                    }
+                    if (mail.trim() === '') {
+                    swal('Por favor, ingrese su Mail.');
+                    return;
+                    }
+                    if (dirección.trim() === '') {
+                    swal('Por favor, ingrese su Direccion.');
+                    return;
+                    }
+                    if (pais.trim() === '') {
+                    swal('Por favor, seleccione un Pais.');
+                    return;
+                    }
+                    if (provincia.trim() === '') {
+                    swal('Por favor, seleccione una Provincia.');
+                    return;
+                    }
+                    if (codPostal.trim() === '') {
+                    swal('Por favor, ingrese su Codigo Postal.');
+                    return;
+                    }
+                    if (nombreTitular.trim() === '') {
+                    swal('Por favor, ingrese su Nombre de Titular.');
+                    return;
+                    }
+                    if (cvv.trim() === '') {
+                    swal('Por favor, ingrese su CVV.');
+                    return;
+                    }
+                    if (numeroTarjeta.trim() === '') {
+                    swal('Por favor, ingrese su Nº de Tarjeta.');
+                    return;
+                    }
+                    if (caducidad.trim() === '') {
+                    swal('Por favor, ingrese su Fecha de caducidad.');
+                    return;
+                    }
+                    
+                    var nomComRegex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+$/;
+                    if (!nomComRegex.test(nombreCompleto)) {
+                    swal('Por favor, ingrese un Nombre válido.');
+                    return;
+                    }
+                    
+                    var nomUsuRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+                    if (!nomUsuRegex.test(nombreUsuario)) {
+                    swal('Por favor, ingrese un Nombre válido.');
+                    return;
+                    }
+
+                    // Validar estructura de correo electrónico
+                    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    if (!emailRegex.test(mail)) {
+                    swal('Por favor, ingrese un correo electrónico válido.');
+                    return;
+                    }
+                    
+                    var direccionRegex = /^(Avda|Avenida|Calle|C\/)\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?,\s\d{1,5},\s\d+[A-Z]$/;
+                    if (!direccionRegex.test(dirección)) {
+                    swal('Por favor, ingrese una direccion válida.');
+                    return;
+                    }
+                    
+                    var codPostalRegex = /^\d{5}$/;
+                    if (!codPostalRegex.test(codPostal)) {
+                    swal('Por favor, ingrese un Codigo Postal válido.');
+                    return;
+                    }
+                    
+                    var nomTitularRegex = /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+$/;
+                    if (!nomTitularRegex.test(nombreTitular)) {
+                    swal('Por favor, ingrese un Nombre válido.');
+                    return;
+                    }
+
+                    var cvvRegex = /^\d{3}$/;
+                    if (!cvvRegex.test(cvv)) {
+                    swal('Por favor, ingrese un correo CVV válido.');
+                    return;
+                    }
+                    var numTarjetaRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+                    if (!numTarjetaRegex.test(numeroTarjeta)) {
+                    swal('Por favor, ingrese un Numero válido.');
+                    return;
+                    }
+                    var caducidadRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+                    if (!caducidadRegex.test(caducidad)) {
+                    swal('Por favor, ingrese una fecha válida.');
+                    return;
+                    }
+
+                     finalizarCompra();
+                    // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
+                    document.getElementById('finalizarCompraBtn').submit();
+                }
+
+
+                const BASE_URL = window.location.origin;
+                const API_URL = `${BASE_URL}/api/carritos`;
+
+                function finalizarCompra() {
+                    
+                        const xhttp = new XMLHttpRequest();
+                        xhttp.open('GET', `${API_URL}/finalize`, true);
+                        xhttp.send();
+
+                        xhttp.onload = function () {
+                            if ([200, 201].includes(xhttp.status)) {
+                                // Mostrar SweetAlert después de la respuesta exitosa
+                                swal({
+                                    title: "Compra realizada correctamente",
+                                    text: "Redireccionando al catálogo...",
+                                    icon: "success",
+                                    button: "OK",
+                                }).then((value) => {
+                                    if (value) {
+                                        window.location.href = `${BASE_URL}/catalogue`;
+                                    }
+                                });
+                            } else {
+                                swal({
+                                    title: "Error al Comprar",
+                                    text: "Redireccionando al carrito...",
+                                    icon: "error",
+                                    button: "OK",
+                                });
+                            }
+                        };
+                }
+
+                function eliminarZapatilla(carritoZapatillaId, zapatillaId) {
+                    const params = new URLSearchParams();
+                    params.append('carritoZapatillasId', carritoZapatillaId);
+                    params.append('zapatillaId', zapatillaId);
+
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.open('GET', `${API_URL}/delete?${params.toString()}`, true);
+                    xhttp.send();
+
+                    xhttp.onload = function () {
+                        if ([200, 201].includes(xhttp.status)) {
+                            swal({
+                                title: "¿Desea Eliminar el Producto?",
+                                text: "Si es asi, pulse CONFIRMAR...",
+                                icon: "warning",
+                                button: "Confirmar",
+                            }).then((value) => {
+                                if (value) {
+                                    window.location.href = `${BASE_URL}/comprar`;
+                                }
+                            });
+                        } else {
+                            swal({
+                                    title: "Error al Eliminar",
+                                    text: "Redireccionando al carrito...",
+                                    icon: "error",
+                                    button: "OK",
+                                });
+                            }
+                    };
+                }
+
+                function cancelarCompra() {
+                    const carritoZapatillasIdElements = document.getElementsByName('carritoZapatillasId');
+                    const carritoIdElement = document.getElementsByName('carritoId')[0];
+    
+                    const carritoZapatillasId = Array.from(carritoZapatillasIdElements).map(element => element.value);
+                    const carritoId = carritoIdElement.value;
+    
+                    const params = new URLSearchParams();
+                    carritoZapatillasId.forEach(id => params.append('carritoZapatillasId', id));
+                    params.append('carritoId', carritoId);
+    
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.open('GET', `${API_URL}/cancel?${params.toString()}`, true);
+                    xhttp.send();
+        
+                    xhttp.onload = function () {
+                        if ([200, 201].includes(xhttp.status)) {
+                            swal({
+                                title: "¿Desea Eliminar el Carrito?",
+                                text: "Si es asi, pulse CONFIRMAR...",
+                                icon: "warning",
+                                button: "Confirmar",
+                            }).then((value) => {
+                                if (value) {
+                                    window.location.href = `${BASE_URL}/catalogue`;
+                                }
+                            });
+                        } else {
+                            alert(xhttp.error);
+                        }
+                    }
+                }
+
+                // Calcular el precio total y la cantidad total
+                function calcularTotales() {
+                    const rows = document.querySelectorAll('#carrito-table-body tr');
+                    let totalPrice = 0;
+                    let totalQuantity = 0;
+            
+                    rows.forEach(row => {
+                        const precioElement = row.querySelector('.precio');
+                        const cantidadElement = row.querySelector('.cantidad');
+                        const precioTotalElement = row.querySelector('.precio-total');
+                        const precio = parseFloat(precioElement.textContent);
+                        const cantidad = parseInt(cantidadElement.textContent);
+            
+                        const precioTotal = precio * cantidad;
+                        precioTotalElement.textContent = precioTotal.toFixed(2);
+            
+                        totalPrice += precioTotal;
+                        totalQuantity += cantidad;
+                    });
+            
+                    document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+                    document.getElementById('totalQuantity').textContent = totalQuantity;
+                }
+                function totalVip() {
+    const rows = document.querySelectorAll('#carrito-table-body tr');
+    let totalPrice = 0;
+    let totalQuantity = 0;
+
+    rows.forEach(row => {
+        const precioElement = row.querySelector('.precio');
+        const cantidadElement = row.querySelector('.cantidad');
+        const precioTotalElement = row.querySelector('.precio-total');
+        const precio = parseFloat(precioElement.textContent);
+        const cantidad = parseInt(cantidadElement.textContent);
+
+        const precioTotal = precio * cantidad;
+        precioTotalElement.textContent = precioTotal.toFixed(2);
+
+        totalPrice += precioTotal;
+        totalQuantity += cantidad;
+    });
+
+    const descuento = totalPrice * 0.10;
+    const totalConDescuento = totalPrice - descuento;
+
+    document.getElementById('totalPriceVip').textContent = totalConDescuento.toFixed(2);
+    document.getElementById('totalQuantity').textContent = totalQuantity;
+}
+
+            
+                // Ejecutar la función para calcular los totales al cargar la página
+                document.addEventListener('DOMContentLoaded', () => {
+                    calcularTotales();
+                    totalVip();
+                });
+            
+                
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

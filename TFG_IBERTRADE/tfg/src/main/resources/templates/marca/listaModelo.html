@@ -1,0 +1,24 @@
+<div class="container">
+    <h1>Marca del Modelo: <span th:text="${marca.nombre}"></span></h1>
+    
+    <!-- Verificar si la marca y sus modelos no son nulos -->
+    <table th:if="${marca != null and marca.modelos != null}" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre del Modelo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterar sobre cada modelo de la marca -->
+            <tr th:each="modelo : ${marca.modelos}">
+                <td th:text="${modelo.nombre}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Botones con margen superior añadido -->
+    <div class="form-group text-center mt-4">
+        <button type="submit" class="btn btn-primary btn-space">Guardar</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='/marca/r'">Cancelar</button>
+    </div>
+</div>

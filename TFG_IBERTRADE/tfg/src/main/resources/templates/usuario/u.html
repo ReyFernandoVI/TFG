@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="form-container">
+    <h1 class="text-center">Editar usuario</h1>
+    <form id="registro-form" action="/usuario/u" method="post">
+      <div class="form-group">
+        <label for="id-nombre">Nombre</label>
+        <input id="id-nombre" type="text" name="nombre" autofocus="autofocus" th:value="${usuario.nombre}" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="id-dni">Dni</label>
+        <input id="id-dni" type="text" name="dni" autofocus="autofocus" th:value="${usuario.dni}" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="id-mail">Correo electrónico</label> <!-- Agregado -->
+        <input id="id-mail" type="email" name="mail" th:value="${usuario.mail}" class="form-control"/> <!-- Agregado -->
+      </div>
+      <input type="hidden" name="id" th:value="${usuario.id}"/>
+      <div class="form-buttons text-center">
+        <input type="submit" class="btn btn-primary btn-space">
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='/usuario/r'">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Función para validar el formulario
+  function validarFormulario(event) {
+    // Evitar que el formulario se envíe automáticamente
+    event.preventDefault();
+    
+    // Obtener los valores de los campos
+    var nombre = document.getElementById('id-nombre').value;
+    var dni = document.getElementById('id-dni').value;
+    var mail = document.getElementById('id-mail').value;
+
+    // Validar que los campos no estén vacíos
+    if (nombre.trim() === '') {
+      alert('Por favor, ingrese su nombre.');
+      return;
+    }
+    if (dni.trim() === '') {
+      alert('Por favor, ingrese su DNI.');
+      return;
+    }
+    if (mail.trim() === '') {
+      alert('Por favor, ingrese su correo electrónico.');
+      return;
+    }
+
+    // Minimo 2 Caracteres, Maximo 20. puede contener MAYUSCULAS, MINUSCULAS Y NUMEROS
+    var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+    if (!nombreRegex.test(nombre)) {
+      alert('Por favor, ingrese un nombre válido.');
+      return;
+    }
+
+    // El DNI debe de estar formado por 8 caracteres que estén entre el 0 y el 9, seguidos por un guión "-" y acabados con una letra mayúscula.
+    var dniRegex = /(^([0-9]{8,8}\-[A-Z])|^)$/;
+    if (!dniRegex.test(dni)) {
+      alert('Por favor, ingrese un dni válido.');
+      return;
+    }
+
+    // Validar estructura de correo electrónico
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(mail)) {
+      alert('Por favor, ingrese un correo electrónico válido.');
+      return;
+    }
+
+    // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
+    document.getElementById('registro-form').submit();
+  }
+
+  // Agregar el evento de escucha al formulario
+  document.getElementById('registro-form').addEventListener('submit', validarFormulario);
+</script>

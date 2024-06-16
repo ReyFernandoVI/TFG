@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="form-container">
+      <h1 class="text-center">Nuevo Modelo</h1>
+      <form action="/modelo/c" method="post" id="registro-form">
+          <div class="form-group">
+              <label for="id-nombre">Nombre</label>
+              <input id="id-nombre" type="text" name="nombre" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label for="id-marcas">Selecciona una marca:</label>
+              <select id="id-marcas" name="marcaId" required class="form-control">
+                  <option th:each="marca:${marcas}" th:text="${marca.nombre}" th:value="${marca.id}"></option>
+              </select>
+          </div>
+          <div class="form-buttons text-center mt-4">
+              <input type="submit" class="btn btn-primary btn-space" value="Guardar Modelo" />
+              <button type="button" class="btn btn-secondary" onclick="window.location.href='/modelo/r'">Cancelar</button>
+          </div>
+      </form>
+  </div>
+</div>
+
+<script>
+  // Función para validar el formulario
+  function validarFormulario(event) {
+      // Evitar que el formulario se envíe automáticamente
+      event.preventDefault();
+      
+      // Obtener los valores de los campos
+      var nombre = document.getElementById('id-nombre').value;
+  
+      // Validar que los campos no estén vacíos
+      if (nombre.trim() === '') {
+          alert('Por favor, ingrese el nombre del modelo.');
+          return;
+      }
+  
+      // Validar formato de nombre según regex
+      var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+      if (!nombreRegex.test(nombre)) {
+          alert('Por favor, ingrese un nombre válido.');
+          return;
+      }
+  
+      // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
+      document.getElementById('registro-form').submit();
+  }
+  
+  // Agregar el evento de escucha al formulario
+  document.getElementById('registro-form').addEventListener('submit', validarFormulario);
+</script>

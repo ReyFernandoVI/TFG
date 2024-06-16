@@ -1,0 +1,204 @@
+<style>
+  .sold-out {
+        opacity: 0.5;
+        pointer-events: none;
+        position: relative;
+    }
+    .sold-out::after {
+        content: 'Sold Out';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+        font-weight: bold;
+        color: red;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+    }
+  /* Carousel base class */
+  .carousel {
+    margin-bottom: 4rem;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+  }
+  
+  /* Declare heights because of positioning of img element */
+  .carousel-item {
+    height: 26rem;
+  }
+  
+  /* MARKETING CONTENT
+  -------------------------------------------------- */
+  
+  /* Center align the text within the three columns below the carousel */
+  .marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  /* rtl:begin:ignore */
+  .marketing .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+  }
+  /* rtl:end:ignore */
+  
+  /* Featurettes
+  ------------------------- */
+  
+  .featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  }
+  
+  /* Thin out the marketing headings */
+  /* rtl:begin:remove */
+  .featurette-heading {
+    letter-spacing: -.05rem;
+  }
+
+  .card {
+  box-sizing: border-box;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+  min-height: 100px;
+}
+
+.card:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+  
+  /* rtl:end:remove */
+  
+  /* RESPONSIVE CSS
+  -------------------------------------------------- */
+  
+  @media (min-width: 40em) {
+    /* Bump up size of carousel content */
+    .carousel-caption p {
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+      line-height: 1.4;
+    }
+  
+    .featurette-heading {
+      font-size: 50px;
+    }
+  }
+  
+  @media (min-width: 62em) {
+    .featurette-heading {
+      margin-top: 7rem;
+    }
+  }
+  
+</style>
+
+<div class="b-example-divider"></div>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="carousel-container mb-6">
+          <!-- Carousel -->
+          <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <!-- Carousel items -->
+              <div class="carousel-item active">
+                <img src="/img/carrusel1.jpg" class="d-block w-60" alt="Description of second image">
+                <!--<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>-->
+                <div class="container">
+                  <div class="carousel-caption text-start">
+                    <h1>Compra online.</h1>
+                    <p class="opacity-75">Compra accesible y fácil, como si estuvieses en nuestra tienda.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="/img/carrusel2.jpg" class="d-block w-100" alt="Description of second image">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Los mejores precios.</h1>
+                        <p>Nuestro equipo conseguirá por tí los mejores precios para tus zapatillas favoritas.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/img/carrusel3.jpg" class="d-block w-100" alt="Description of third image">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Ofertas para los usuarios VIP.</h1>
+                        <p>Los precios serán aún más bajos para nuestros usuarios VIP.</p>
+                    </div>
+                </div>
+            </div>
+              <!-- Add more carousel items as needed -->
+            </div>
+            <!-- Carousel navigation buttons -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div><!-- /.col-lg-12 -->
+    </div><!-- /.row -->
+
+    <!-- Marketing messaging and featurettes -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="container marketing">
+          <div class="row g-4">
+            <!-- Iterar sobre las zapatillas y mostrar cada una -->
+          
+            <div th:each="zapatilla : ${zapatillas}" class="col-lg-4">
+              <div class="card h-100" th:classappend="${zapatilla.stock == 0 or zapatilla.stock == null} ? 'sold-out' : ''">
+                  <img class="card-img-top" th:src="@{'/img/' + ${zapatilla.imagen} + '.png'}" alt="Card image cap">
+                  <div class="card-body d-flex flex-column">
+                      <h5 class="card-title" th:text="${zapatilla.nombre}">Nombre de la zapatilla</h5>
+                      <p class="card-text flex-grow-1" th:text="'Marca: ' + ${zapatilla.marcas?.nombre} + ', Modelo: ' + ${zapatilla.modelo?.nombre} + ', Precio: ' + ${zapatilla.precio} + '€, Color: ' + ${zapatilla.color} + ', Talla: ' + ${zapatilla.talla} + ', Stock: ' + ${zapatilla.stock}"></p>
+                      
+                      <div class="mt-auto">
+                          <a th:if="${zapatilla.stock == 0 or zapatilla.stock == null}" class="btn btn-danger mb-2 disabled">Sin Stock</a>
+                          <a th:unless="${zapatilla.stock == 0 or zapatilla.stock == null}" th:href="@{/mostrarProducto(id=${zapatilla.id})}" class="btn btn-primary mb-2">Ver Producto</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            
+            <!-- Add more marketing content as needed -->
+          </div><!-- /.row -->
+        </div><!-- /.container marketing -->
+      </div><!-- /.col-lg-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</main>

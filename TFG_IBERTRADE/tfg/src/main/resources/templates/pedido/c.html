@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="form-container">
+        <h1 class="text-center">Nuevo Pedido</h1>
+        <form action="/pedido/c" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="id-fechCompra">Fecha Compra</label>
+                <input id="id-fechCompra" type="date" name="fechCompra" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="id-nombreZapatilla">Nombre Zapatilla</label>
+                <input id="id-nombreZapatilla" type="text" name="nombreZapatilla" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="id-marcas">Seleccione una marca:</label>
+                <select id="id-marcas" name="marcaZapatilla" class="form-control">
+                    <option value="">--Marcas--</option>
+                    <option th:each="marca : ${marcas}" th:text="${marca.nombre}" th:value="${marca.nombre}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id-modelo">Seleccione un modelo:</label>
+                <select id="id-modelo" name="modeloZapatilla" required class="form-control">
+                    <option value="">--Modelos--</option>
+                    <option th:each="modelo : ${modelos}" th:text="${modelo.nombre}" th:value="${modelo.nombre}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id-precioUnidad">Precio Unidad (€)</label>
+                <input id="id-precioUnidad" type="number" step="0.01" name="precioUnidad" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="id-color">Color</label>
+                <input id="id-color" type="text" name="color" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="id-talla">Talla</label>
+                <input id="id-talla" type="text" name="talla" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="id-imagen">Imagen</label>
+                <input id="id-imagen" type="file" name="imagenZapatilla" accept=".jpg,.jpeg,.png" class="form-control-file" />
+            </div>
+            <div class="form-group">
+                <label for="id-cantidadZapatilla">Cantidad Zapatillas</label>
+                <div class="quantity-controls">
+                    <input id="id-cantidadZapatilla" type="number" step="1" name="cantidadZapatilla" value="1" min="1" class="form-control" />
+                    <button type="button" class="btn btn-outline-secondary" onclick="increment()">+</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="decrement()">-</button>
+                </div>
+            </div>
+            <div class="form-buttons text-center mt-4">
+                <input type="submit" value="Guardar Pedido" class="btn btn-primary btn-space" />
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/pedido/r'">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function increment() {
+        const input = document.getElementById('id-cantidadZapatilla');
+        input.value = parseInt(input.value) + 1;
+    }
+
+    function decrement() {
+        const input = document.getElementById('id-cantidadZapatilla');
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+</script>

@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>Editar Marca</h1>
+
+  <form id="registro-form" action="/marca/u" method="post">
+
+      <div class="form-group">
+          <label for="id-nombre">Nombre</label>
+          <input id="id-nombre" type="text" class="form-control" name="nombre" th:value="${marca.nombre}" required />
+      </div>
+
+      <input type="hidden" name="idMarca" th:value="${marca.id}" />
+
+      <div class="form-group text-center mt-4">
+          <button type="submit" class="btn btn-primary btn-space">Guardar</button>
+          <button type="button" class="btn btn-secondary" onclick="window.location.href='/marca/r'">Cancelar</button>
+      </div>
+  </form>
+</div>
+
+<script>
+  // Función para validar el formulario
+  function validarFormulario(event) {
+      // Evitar que el formulario se envíe automáticamente
+      event.preventDefault();
+      
+      // Obtener los valores de los campos
+      var nombre = document.getElementById('id-nombre').value;
+  
+      // Validar que los campos no estén vacíos
+      if (nombre.trim() === '') {
+          alert('Por favor, ingrese el nombre de la marca.');
+          return;
+      }
+  
+      // Validar el nombre con una expresión regular
+      var nombreRegex = /^(([A-Z]|[a-z]|[ÑÇÁÉÍÓÚñçáéíóú]|[0-9])-?\s?){2,20}$/;
+      if (!nombreRegex.test(nombre)) {
+          alert('Por favor, ingrese un nombre válido (2-20 caracteres).');
+          return;
+      }
+  
+      // Si todos los campos están llenos y las validaciones pasaron, enviar el formulario
+      document.getElementById('registro-form').submit();
+  }
+
+  // Agregar el evento de escucha al formulario
+  document.getElementById('registro-form').addEventListener('submit', validarFormulario);
+</script>
