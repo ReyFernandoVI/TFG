@@ -1,4 +1,22 @@
 <div class="b-example-divider"></div>
+<style>
+  #clickme {
+    cursor: pointer
+  }
+  .form-control {
+    position: relative;
+    width: 100%;
+    padding-right: 40px;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+</style>
 
 <div class="container d-flex justify-content-center align-items-center vh-20">
     <main class="form-signin bg-body rounded shadow-sm">
@@ -6,15 +24,18 @@
             <img class="mb-4" src="/img/logoP.png" alt="" width="100" height="100">
             <h3 class="mb-3">Introduce tus credenciales</h3>
 
-            <div class="form-floating">
+            <div class="mb-3 form-floating">
                 <input type="text" class="form-control" id="id-nombre" placeholder="Nombre Usuario" name="nombre">
                 <label for="id-nombre">Nombre Usuario</label>
             </div>
             
-            <div class="form-floating">
-                <input type="password" class="form-control" id="id-contraseña" placeholder="Contraseña" name="contraseña">
-                <label for="id-contraseña">Contraseña</label>
-            </div>
+            <div class="mb-3 form-floating">
+              <input type="password" class="form-control" id="id-contraseña" placeholder="Contraseña" name="contraseña">
+              <svg class="toggle-password" id="clickme" width="28" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                  <path d="M569.354 231.631C512.97 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-102.556 0-192.091-54.701-240-136 44.157-74.933 123.677-127.27 216.162-135.007C273.958 131.078 280 144.83 280 160c0 30.928-25.072 56-56 56s-56-25.072-56-56l.001-.042C157.794 179.043 152 200.844 152 224c0 75.111 60.889 136 136 136s136-60.889 136-136c0-31.031-10.4-59.629-27.895-82.515C451.704 164.638 498.009 205.106 528 256c-47.908 81.299-137.444 136-240 136z"/>
+              </svg>
+              <label for="id-contraseña">Contraseña</label>
+          </div>
 
             <button class="btn btn-primary w-100 py-2" type="submit">Iniciar sesión</button>
             <p class="mt-5 mb-3 text-body-secondary" style="width: 40vh;">&copy; 2023–2024</p>
@@ -63,6 +84,16 @@
     // Agregar el evento de escucha al formulario
     document.getElementById('registro-form').addEventListener('submit', validarFormulario);
   </script>
+  <script>
+    const togglePassword = document.querySelector('.toggle-password');
+        const passwordField = document.querySelector('#id-contraseña');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+        });
+  </script>
+ 
 
 
 

@@ -57,12 +57,12 @@
         <!-- Columna Izquierda: Formulario de dirección de facturación -->
 
         <div class="col-md-4 bordered-div">
-            <h4 class="mb-3">Detalles de Compra</h4>
+            <h4 class="mb-3">Datos de Compra</h4>
             <form class="needs-validation" id="compra-form" novalidate>
                 <div class="row g-2">
 
-                    <div class="col-sm-6 bordered-div">
-                        <label for="firstName" class="form-label">Nombre</label>
+                    <div class="col-12 bordered-div">
+                        <label for="firstName" class="form-label">Nombre y Apellidos</label>
                         <input type="text" class="form-control form-control-sm" id="nombreCompleto" placeholder="" value="" required>
                         <div class="invalid-feedback">
                             Valid first name is required.
@@ -100,14 +100,7 @@
                         <label for="pais" class="form-label">Pais</label>
                         <select class="form-select form-select-sm" id="paisId" required>
                             <option value="">Seleccionar..</option>
-                            <option>Spain</option>
-                            <option disabled>UK</option>
-                            <option disabled>France</option>
-                            <option disabled>Portugal</option>
-                            <option disabled>Germany</option>
-                            <option disabled>China</option>
-                            <option disabled>USA</option>
-                            <option disabled>Italy</option>
+                            <option>España</option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a valid country.
@@ -220,7 +213,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 bordered-div" style="width: 100px;">
+                    <div class="col-md-6 bordered-div" style="width: 100px;">
                         <label for="cc-expiration" class="form-label">Caducidad</label>
                         <input type="text" class="form-control form-control-sm" id="caducidad" placeholder="" required>
                         <div class="invalid-feedback">
@@ -228,7 +221,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 bordered-div" style="margin-left: 20px; width: 100px;">
+                    <div class="col-md-6 bordered-div" style="margin-left: 20px;">
                         <label for="cc-cvv" class="form-label">CVV</label>
                         <input type="text" class="form-control form-control-sm" id="cvv" placeholder="" required>
                         <div class="invalid-feedback">
@@ -243,7 +236,7 @@
 
         <div class="col-md-8" name="tablaCarro">
             <div class="table-responsive bordered-div hide-scroll">
-                <table class="table table-striped table-sm bordered-div margen-izquierdo" th:if="${null != carritoZapatillas}" style="width: 100%;">
+                <table class="table table-striped table-sm bordered-div justify-content-center align-items-center" th:if="${null != carritoZapatillas}" style="width: 100%;">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -256,7 +249,7 @@
                             <th>Borrar</th>
                         </tr>
                     </thead>
-                    <tbody id="carrito-table-body">
+                    <tbody id="carrito-table-body" class="justify-content-center align-items-center">
                         <tr th:each="carritoZapatilla : ${carritoZapatillas}">
                             <input type="hidden" th:value="${carritoZapatilla.id}" name="carritoZapatillasId">
                             <input type="hidden" th:value="${carritoZapatilla.carrito?.id}" name="carritoId">
@@ -312,24 +305,7 @@
 
                     </div>
                 </th:block>
-                <!-- MODAL ALERTS -->
-                <!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Mensaje</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <p id="modalMessage"></p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-
+    
                 <script>
                 // Función para validar el formulario
                 function validarFormulario(event) {
@@ -356,10 +332,6 @@
                     }
                     if (nombreUsuario.trim() === '') {
                     swal('Por favor, ingrese su Nombre de Usuario.');
-                    return;
-                    }
-                    if (mail.trim() === '') {
-                    swal('Por favor, ingrese su Mail.');
                     return;
                     }
                     if (dirección.trim() === '') {
@@ -414,7 +386,8 @@
                     return;
                     }
                     
-                    var direccionRegex = /^(Avda|Avenida|Calle|C\/)\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?,\s\d{1,5},\s\d+[A-Z]$/;
+                    ///^(Avda|Avenida|Calle|C\/)\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?,\s\d{1,5},\s\d+[A-Z]$/;
+                    var direccionRegex = /^[a-zA-Z0-9\s,.'-]{3,}$/;
                     if (!direccionRegex.test(dirección)) {
                     swal('Por favor, ingrese una direccion válida.');
                     return;

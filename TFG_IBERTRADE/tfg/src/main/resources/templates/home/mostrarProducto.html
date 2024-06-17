@@ -74,7 +74,7 @@
                                 <li class="list-group-item">
                                     <h6>
                                         Cantidad: <input type="number" id="cantidad" name="cantidad" autocomplete="off"
-                                            min="1" max="2" value="1">
+                                            min="1" th:max="${zapatilla.stock}" value="1">
                                     </h6>
                                 </li>
                             </ul>
@@ -107,6 +107,27 @@
             if (!zapatilla) {
                 return;
             }
+    
+            // Verificar aquí la autenticación del usuario
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+            
+            if (!isLoggedIn) {
+                swal({
+                        title: "¿No has iniciado sesion?",
+                        text: "Redireccionando al login...",
+                        icon: "warning",
+                        button: "OK",
+                    }).then((value) => {
+                        if (value) {
+                            window.location.href = `${BASE_URL}/login`;
+                        }
+                    });
+                // Si no está autenticado, redirigir al login
+                window.location.href = `${BASE_URL}/login`;
+                return;
+            }
+    
+            // Si está autenticado, proceder a añadir la zapatilla al carrito
             const cantidadProducto = document.getElementById("cantidad").value;
             const xhttp = new XMLHttpRequest();
             xhttp.open('POST', `${API_URL}/update`, true);

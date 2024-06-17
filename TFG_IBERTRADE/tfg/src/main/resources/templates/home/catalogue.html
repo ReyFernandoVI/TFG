@@ -87,6 +87,12 @@
 .card:active {
   transform: scale(0.95) rotateZ(1.7deg);
 }
+
+.carousel-caption {
+  background-color: rgba(211, 211, 211, 0.6); /* gris claro con 70% de opacidad */
+  padding: 10px;
+  border-radius: 5px;
+}
   
   /* rtl:end:remove */
   
@@ -99,6 +105,11 @@
       margin-bottom: 1.25rem;
       font-size: 1.25rem;
       line-height: 1.4;
+      color: black;
+      font-weight: bold;
+    }
+    .carousel-caption h1 {
+      color: black;
     }
   
     .featurette-heading {
@@ -130,12 +141,11 @@
             <div class="carousel-inner">
               <!-- Carousel items -->
               <div class="carousel-item active">
-                <img src="/img/carrusel1.jpg" class="d-block w-60" alt="Description of second image">
-                <!--<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>-->
+                <img src="/img/carrusel1.jpg" class="d-block w-60" alt="Description of first image">
                 <div class="container">
                   <div class="carousel-caption text-start">
                     <h1>Compra online.</h1>
-                    <p class="opacity-75">Compra accesible y fácil, como si estuvieses en nuestra tienda.</p>
+                    <p>Compra accesible y fácil, como si estuvieses en nuestra tienda.</p>
                   </div>
                 </div>
               </div>
@@ -144,7 +154,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Los mejores precios.</h1>
-                        <p>Nuestro equipo conseguirá por tí los mejores precios para tus zapatillas favoritas.</p>
+                        <p>Nuestro equipo conseguirá por ti los mejores precios para tus zapatillas favoritas.</p>
                     </div>
                 </div>
             </div>
@@ -171,7 +181,7 @@
           </div>
         </div>
       </div><!-- /.col-lg-12 -->
-    </div><!-- /.row -->
+    </div>
 
     <!-- Marketing messaging and featurettes -->
     <div class="row">
