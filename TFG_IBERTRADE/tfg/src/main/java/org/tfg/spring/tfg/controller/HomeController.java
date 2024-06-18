@@ -1,6 +1,7 @@
 package org.tfg.spring.tfg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -102,10 +103,11 @@ public class HomeController {
     }
 
     @GetMapping("/catalogue")
-    public String catalogue(ModelMap m) {
-        String palabraClave = ""; // Aquí puedes proporcionar una palabra clave válida para la búsqueda de
+    public String catalogue(@Param("PalabraClave") String palabraClave,ModelMap m) {
+        // String palabraClave = ""; // Aquí puedes proporcionar una palabra clave válida para la búsqueda de
                                   // zapatillas
         m.put("zapatillas", zapatillaService.findAll(palabraClave));
+        m.put("palabraClave", palabraClave);
         m.put("view", "home/catalogue");
         return "_t/frame";
     }

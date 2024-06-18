@@ -286,9 +286,9 @@
                     <div class="row justify-content-around" onsubmit="validarFormulario(event)">
 
                         <div class="col-12 mt-3 bordered-div">
-                            <p class="text-center"><strong>Total Cantidad: <span id="totalQuantity">0</span> productos</strong></p>
-                            <p class="text-center"><strong>Total Precio: <span id="totalPrice">0</span> €</strong></p>
-                            <p class="text-center" th:if="${session.usuario != null && session.usuario.vip}"><strong>Descuento 10% UsuarioVIP</strong><p class="text-center"><strong>Total Precio: <span id="totalPriceVip">0</span> €</strong></p></p>
+                            <p class="text-center"><strong>Cantidad Total: <span id="totalQuantity">0</span> productos</strong></p>
+                            <p class="text-center"><strong>Precio Total: <span id="totalPrice">0</span> €</strong></p>
+                            <p class="text-center" th:if="${session.usuario != null && session.usuario.vip}" style="color: darkgreen;"><strong>Descuento 10% UsuarioVIP</strong><p class="text-center"><strong style="color: darkgreen;">Precio Total: <span id="totalPriceVip" style="color: darkgreen;">0</span> €</strong></p></p>
                         </div>
 
                         <div class="col-6 bordered-div d-flex justify-content-center align-items-center">
@@ -380,11 +380,11 @@
                     }
 
                     // Validar estructura de correo electrónico
-                    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    /*var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                     if (!emailRegex.test(mail)) {
                     swal('Por favor, ingrese un correo electrónico válido.');
                     return;
-                    }
+                    }*/
                     
                     ///^(Avda|Avenida|Calle|C\/)\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?,\s\d{1,5},\s\d+[A-Z]$/;
                     var direccionRegex = /^[a-zA-Z0-9\s,.'-]{3,}$/;
